@@ -148,26 +148,56 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<button\r\n  [type]=\"type\"\r\n  [disabled]=\"disabled\"\r\n  [ngClass]=\"variant\"\r\n>\r\n  {{ label }}\r\n</button>\r\n"
+            "templateData": "<button\r\n  [type] = \"type\"\r\n  [disabled] = \"disabled\"\r\n  [ngClass] = \"variant\"\r\n>\r\n  {{ label }}\r\n</button>\r\n"
         },
         {
-            "name": "Icon",
-            "id": "component-Icon-3344f4159c02283885847486da034fe22cb350f923fb58041141284efd29b5756082e5cc3a00aa26558e1de36cb4c61bbbd9dff0468144db2796e1433fd92882",
-            "file": "src/app/components/atoms/icon/icon.ts",
+            "name": "IconComponent",
+            "id": "component-IconComponent-80fd5dd3ec5e05c0e4e8eeac61c875d5479d4e97fb0ed6f2edb118fcd114d65ffe19be2bc835064c8337cb4d56f0327c958a7579fb4f134d626cf671e801f141",
+            "file": "src/app/components/atoms/icon/icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
             "selector": "app-icon",
-            "styleUrls": [],
+            "styleUrls": [
+                "./icon.component.scss"
+            ],
             "styles": [],
             "templateUrl": [
-                "./icon.html"
+                "./icon.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "colour",
+                    "defaultValue": "'#000'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'1rem'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
             "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [],
@@ -175,37 +205,67 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": false,
-            "imports": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-icon',\r\n  imports: [],\r\n  templateUrl: './icon.html',\r\n  styleUrl: './icon.scss'\r\n})\r\nexport class Icon {\r\n\r\n}\r\n",
-            "styleUrl": "./icon.scss",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-icon',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.scss'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name: string = '';\r\n  @Input() size: string = '1rem';\r\n  @Input() colour: string = '#000';\r\n}\r\n",
             "assetsDirs": [],
-            "styleUrlsData": "",
+            "styleUrlsData": [
+                {
+                    "data": ".material-icons {\r\n  vertical-align: middle;\r\n  -webkit-user-select: none; // iOS Safari\r\n  user-select: none;\r\n}\r\n",
+                    "styleUrl": "./icon.component.scss"
+                }
+            ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>icon works!</p>\r\n"
+            "templateData": "<i class=\"material-icons\" [style.fontSize]=\"size\" [style.color]=\"colour\">\r\n  {{ name }}\r\n</i>\r\n"
         },
         {
-            "name": "Tab",
-            "id": "component-Tab-44374bc44f509630b2eb1b0011481fc589abcbaae526baf4a30c78358e2d0fb6882771461ed1f1ea3ccd8e839d4f7fe0c813659365b9cd1191574707082084aa",
-            "file": "src/app/components/atoms/tab/tab.ts",
+            "name": "TabComponent",
+            "id": "component-TabComponent-4a1913328b74bdea3413237acd2d974a36280b7c45439354a3cf8c48ac1f59d6535bba10f32baee819e9f136e0815da7e9e7d8d15b417de91fa658c4cea5e142",
+            "file": "src/app/components/atoms/tab/tab.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
             "selector": "app-tab",
-            "styleUrls": [],
+            "styleUrls": [
+                "./tab.component.scss"
+            ],
             "styles": [],
             "templateUrl": [
-                "./tab.html"
+                "./tab.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "active",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
             "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [],
@@ -218,13 +278,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tab',\r\n  imports: [],\r\n  templateUrl: './tab.html',\r\n  styleUrl: './tab.scss'\r\n})\r\nexport class Tab {\r\n\r\n}\r\n",
-            "styleUrl": "./tab.scss",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tab',\r\n  templateUrl: './tab.component.html',\r\n  styleUrls: ['./tab.component.scss'],\r\n})\r\nexport class TabComponent {\r\n  @Input() label: string = '';\r\n  @Input() active: boolean = false;\r\n}\r\n",
             "assetsDirs": [],
-            "styleUrlsData": "",
+            "styleUrlsData": [
+                {
+                    "data": ".tab {\r\n  padding: 0.5rem 1rem;\r\n  cursor: pointer;\r\n  border-bottom: 2px solid transparent;\r\n  font-weight: 500;\r\n  transition: border-color 0.3s, color 0.3s;\r\n\r\n  &:hover {\r\n    color: #007bff;\r\n  }\r\n\r\n  &.active {\r\n    border-bottom-color: #007bff;\r\n    color: #007bff;\r\n    font-weight: 600;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./tab.component.scss"
+                }
+            ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>tab works!</p>\r\n"
+            "templateData": "<div class=\"tab\" [class.active]=\"active\">\r\n  {{ label }}\r\n</div>\r\n"
         },
         {
             "name": "TableCell",
@@ -372,21 +436,21 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/atoms/icon/icon.ts",
+                "filePath": "src/app/components/atoms/icon/icon.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "Icon",
+                "name": "IconComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/atoms/tab/tab.ts",
+                "filePath": "src/app/components/atoms/tab/tab.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "Tab",
+                "name": "TabComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
