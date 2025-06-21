@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
-import { CommonModule } from '@angular/common';
+
 
 const meta: Meta<ButtonComponent> = {
   title: 'Atoms/Button',
