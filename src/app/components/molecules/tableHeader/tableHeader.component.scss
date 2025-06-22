@@ -10,16 +10,30 @@
 
     &.checkbox-cell {
       width: 48px;
+      vertical-align: middle;
     }
 
-    &.state-cell,
+    &.state-cell {
+      vertical-align: middle;
+      text-align: left;
+      padding: 0;
+      width: 128px;
+    }
     &.action-cell {
       width: 150px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    &.file-number-cell {
+      width: 128px;
+      text-align: left;
+      vertical-align: middle;
     }
 
     &.sortable {
       cursor: pointer;
       padding-right: 10rem;
+      vertical-align: middle;
     }
 
     .th-content {

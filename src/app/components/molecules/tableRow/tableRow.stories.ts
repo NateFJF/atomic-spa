@@ -21,11 +21,16 @@ type Story = StoryObj<TableRowComponent>;
 export const Default: Story = {
   args: {
     selected: false,
-    state: "Fraud",
+    state: 'Refund Request',
     fileNumber: 1284,
   },
   argTypes: {
     selectedChange: { action: 'selectedChange' },
     consult: { action: 'consult' },
   },
+
+
+
 };
+
+
