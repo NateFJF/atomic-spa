@@ -1,0 +1,20 @@
+.action-bar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  app-button {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  // Ensure consistent pill look for Filters
+  app-button {
+    padding: 0.4rem 1rem;
+    background-color: white;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+  }
+}
