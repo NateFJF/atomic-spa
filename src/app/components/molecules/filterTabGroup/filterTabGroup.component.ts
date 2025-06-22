@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterTabButtonComponent } from '../filterTabButton/filterTabButton.component';
+import { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';
 
 export interface FilterTab {
   label: string;
@@ -11,8 +11,8 @@ export interface FilterTab {
   selector: 'app-tab-group',
   standalone: true,
   imports: [CommonModule, FilterTabButtonComponent],
-  templateUrl: './tabGroup.component.html',
-  styleUrls: ['./tabGroup.component.scss'],
+  templateUrl: './filterTabGroup.component.html',
+  styleUrls: ['./filterTabGroup.component.scss'],
 })
 export class TabGroupComponent {
   @Input() tabs: FilterTab[] = [];

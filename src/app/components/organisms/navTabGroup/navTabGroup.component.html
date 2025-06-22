@@ -1,0 +1,9 @@
+<nav class="nav-tab-group">
+  <app-nav-tab
+    *ngFor="let tab of tabs"
+    [label]="tab.label"
+    [icon]="tab.icon"
+    [route]="tab.route"
+    [active]="tab.active"
+  />
+</nav>

@@ -1,0 +1,11 @@
+<div class="filter-action-group">
+  <app-tab-group
+    [tabs]="tabs"
+    (tabChange)="handleTabChange($event)"
+  />
+
+  <app-action-bar
+    (exportClicked)="handleExport()"
+    (filterClicked)="handleFilter()"
+  />
+</div>

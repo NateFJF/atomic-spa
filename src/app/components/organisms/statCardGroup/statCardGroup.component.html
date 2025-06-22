@@ -1,0 +1,8 @@
+<div class="stat-card-group">
+  <app-stat-card
+    *ngFor="let card of cards"
+    [count]="card.count"
+    [label]="card.label"
+    [icon]="card.icon"
+  />
+</div>

@@ -1,10 +1,10 @@
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { TabGroupComponent } from './tabGroup.component';
-import { FilterTabButtonComponent } from '../filterTabButton/filterTabButton.component';
+import { TabGroupComponent } from './filterTabGroup.component';
+import { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';
 import { ButtonComponent } from '../../atoms/button/button.component';
 
 const meta: Meta<TabGroupComponent> = {
-  title: 'Molecules/TabGroup',
+  title: 'Molecules/FilterTabGroup',
   component: TabGroupComponent,
   decorators: [
     moduleMetadata({
