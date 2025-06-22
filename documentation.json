@@ -291,23 +291,44 @@
             "templateData": "<div class=\"tab\" [class.active]=\"active\">\r\n  {{ label }}\r\n</div>\r\n"
         },
         {
-            "name": "TableCell",
-            "id": "component-TableCell-92c100dc3b1ca269172dcbc5279a23d5c03fdabf970f0770b802ec8887290a87f4a38e5f96dfae0a581b58f825e68d2779269867d848625c57a39ca0c6d1eb7c",
-            "file": "src/app/components/atoms/table-cell/table-cell.ts",
+            "name": "TableCellComponent",
+            "id": "component-TableCellComponent-934f53c782cd7eed962104c0585e5fc2db2e4a133635147fd2b0ac725b246be8d461a78ad40bd16715fbd25c6888abeb78152ad36e7f5e9b83f893bfdf2763b5",
+            "file": "src/app/components/atoms/table-cell/table-cell.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
             "selector": "app-table-cell",
-            "styleUrls": [],
+            "styleUrls": [
+                "./table-cell.component.scss"
+            ],
             "styles": [],
             "templateUrl": [
-                "./table-cell.html"
+                "./table-cell.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "align",
+                    "defaultValue": "'left'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"left\" | \"center\" | \"right\"",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string | number",
+                    "decorators": []
+                }
+            ],
             "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [],
@@ -315,18 +336,27 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": false,
-            "imports": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-table-cell',\r\n  imports: [],\r\n  templateUrl: './table-cell.html',\r\n  styleUrl: './table-cell.scss'\r\n})\r\nexport class TableCell {\r\n\r\n}\r\n",
-            "styleUrl": "./table-cell.scss",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-table-cell',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './table-cell.component.html',\r\n  styleUrls: ['./table-cell.component.scss'],\r\n})\r\nexport class TableCellComponent {\r\n  @Input() value: string | number = '';\r\n  @Input() align: 'left' | 'center' | 'right' = 'left';\r\n}\r\n",
             "assetsDirs": [],
-            "styleUrlsData": "",
+            "styleUrlsData": [
+                {
+                    "data": "td {\r\n  padding: 0.75rem 1rem;\r\n  font-size: 0.95rem;\r\n  border-bottom: 1px solid #e0e0e0;\r\n\r\n  &.left {\r\n    text-align: left;\r\n  }\r\n\r\n  &.center {\r\n    text-align: center;\r\n  }\r\n\r\n  &.right {\r\n    text-align: right;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./table-cell.component.scss"
+                }
+            ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>table-cell works!</p>\r\n"
+            "templateData": "<td [ngClass]=\"align\">\r\n  {{ value }}\r\n</td>\r\n"
         },
         {
             "name": "Text",
@@ -454,12 +484,12 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/atoms/table-cell/table-cell.ts",
+                "filePath": "src/app/components/atoms/table-cell/table-cell.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "TableCell",
+                "name": "TableCellComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {

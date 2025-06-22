@@ -1,18 +1,18 @@
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { Text } from './text';
+// import { TableCell } from './table-cell.component';
 
-// describe('Text', () => {
-//   let component: Text;
-//   let fixture: ComponentFixture<Text>;
+// describe('TableCell', () => {
+//   let component: TableCell;
+//   let fixture: ComponentFixture<TableCell>;
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       imports: [Text]
+//       imports: [TableCell]
 //     })
 //     .compileComponents();
 
-//     fixture = TestBed.createComponent(Text);
+//     fixture = TestBed.createComponent(TableCell);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
