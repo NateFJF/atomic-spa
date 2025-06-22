@@ -1,0 +1,30 @@
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #6c757d;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+
+  &.active {
+    color: #af15fd;
+    border-bottom: 2px solid #af15fd;
+  }
+
+  &:hover {
+    color: #af15fd;
+  }
+
+  app-icon,
+  app-text {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  app-text {
+    font-size: 0.95rem;
+  }
+}
