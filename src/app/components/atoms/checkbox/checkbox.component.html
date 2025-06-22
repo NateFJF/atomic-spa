@@ -1,10 +1,18 @@
-<label class="checkbox-wrapper">
+<label class="checkbox-wrapper" [for]="'customCheckbox'">
   <input
+    id="customCheckbox"
     type="checkbox"
     [checked]="checked"
     [disabled]="disabled"
     (change)="toggleCheck()"
-    title="Toggle option"
+    title="Toggle checkbox"
   />
-  <span class="custom-checkbox"></span>
+  <span class="custom-checkbox" [style.borderColor]="colour">
+    <span
+      class="checkmark"
+      *ngIf="checked"
+      [style.borderColor]="colour"
+      [style.transform]="'rotate(45deg)'"
+    ></span>
+  </span>
 </label>

@@ -1,0 +1,29 @@
+<tr class="table-header-row">
+  <th class="checkbox-cell">
+    <app-checkbox
+    [checked]="allChecked"
+    (checkedChange)="handleToggleAll($event)"
+    />
+  </th>
+
+  <th class="state-cell">
+    <app-text content="State" weight="medium" size="sm" />
+  </th>
+
+  <th class="sortable" (click)="toggleSort('fileNumber')">
+    <div class="th-content">
+      <app-text content="File number" weight="medium" size="sm" />
+      <app-icon
+        *ngIf="sortKey === 'fileNumber'"
+        [name]="sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'"
+        size="16px"
+      />
+    </div>
+  </th>
+
+  <th class="divider-col" aria-hidden="true"></th>
+
+  <th class="action-cell">
+    <app-text content="Action" weight="medium" size="sm" />
+  </th>
+</tr>

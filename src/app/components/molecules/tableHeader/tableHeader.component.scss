@@ -1,0 +1,37 @@
+.table-header-row {
+  th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 2px solid #e0e0e0;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &.checkbox-cell {
+      width: 48px;
+    }
+
+    &.state-cell,
+    &.action-cell {
+      width: 150px;
+    }
+
+    &.sortable {
+      cursor: pointer;
+      padding-right: 10rem;
+    }
+
+    .th-content {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    &.divider-col {
+      width: 1px;
+      padding: 0;
+      background-color: #e0e0e0;
+    }
+  }
+}

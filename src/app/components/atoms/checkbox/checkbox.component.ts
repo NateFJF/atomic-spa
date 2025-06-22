@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class CheckboxComponent {
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
+  @Input() colour: string = '#af15fd';
   @Output() checkedChange = new EventEmitter<boolean>();
 
   toggleCheck() {
