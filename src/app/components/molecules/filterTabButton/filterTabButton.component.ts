@@ -1,0 +1,26 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../../atoms/button/button.component';
+
+@Component({
+  selector: 'app-filter-tab-button',
+  standalone: true,
+  imports: [CommonModule, ButtonComponent],
+  templateUrl: './filterTabButton.component.html',
+  styleUrls: ['./filterTabButton.component.scss'],
+})
+export class FilterTabButtonComponent {
+  @Input() label: string = '';
+  @Input() count: number = 0;
+  @Input() active: boolean = false;
+
+  @Output() selected = new EventEmitter<void>();
+
+  handleClick(): void {
+    this.selected.emit();
+  }
+
+  get displayText(): string {
+    return `${this.label} (${this.count})`;
+  }
+}

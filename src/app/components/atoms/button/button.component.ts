@@ -16,5 +16,7 @@ export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';
   @Input() icon?: string; // Material icon name
   @Input() iconPosition: 'start' | 'end' = 'start'; // default is front
+  @Input() borderRadius: string = '0px'; // Default square
+
 
 }

@@ -1,0 +1,29 @@
+:host {
+  display: inline-block;
+
+  app-button {
+    padding: 0.35rem 0.3rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    border-width: 2px;
+    background-color: white;
+
+    &.primary {
+      border-color: #af15fd;
+      color: #af15fd;
+
+      &:hover {
+        background-color: rgba(175, 21, 253, 0.1);
+      }
+    }
+
+    &.secondary {
+      border-color: #ddd;
+      color: #555;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+}

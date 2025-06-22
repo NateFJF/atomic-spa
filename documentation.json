@@ -1,6 +1,42 @@
 {
     "pipes": [],
-    "interfaces": [],
+    "interfaces": [
+        {
+            "name": "FilterTab",
+            "id": "interface-FilterTab-33302887bf821c5c86cc1931a24f03d8a900382de7af8a8dec0644cf87b5d0ddd639e696724ef2c4e011049146cf2db6c55db09964f9c18549da03b3a0efe136",
+            "file": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent],\n  templateUrl: './tabGroup.component.html',\n  styleUrls: ['./tabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = ''; // currently active tab\n  @Output() tabSelected = new EventEmitter<string>();\n\n  onSelectTab(label: string): void {\n    this.tabSelected.emit(label);\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "count",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        }
+    ],
     "injectables": [],
     "guards": [],
     "interceptors": [],
@@ -134,7 +170,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-a45c04c26bd1afcc456a4d3d15797bebdb5974fe4eccffce8cd6bfdbddbd27c09703e1cf4637344e49908adc30990ebaaa5e46b483381e7c7de709a4552043d1",
+            "id": "component-ButtonComponent-e97c8a1055eada83583743d6a9e5675b70e14ea0a87deb4a5feeeaaf89d46061e00852bcce149e2886d2c983dfe2f78ebce837db184378637868c2d68ba94ae4",
             "file": "src/app/components/atoms/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -153,6 +189,15 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "borderRadius",
+                    "defaultValue": "'0px'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "disabled",
                     "defaultValue": "false",
                     "deprecated": false,
@@ -167,6 +212,15 @@
                     "deprecationMessage": "",
                     "line": 17,
                     "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "iconPosition",
+                    "defaultValue": "'start'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "\"start\" | \"end\"",
                     "decorators": []
                 },
                 {
@@ -218,17 +272,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { IconComponent } from '../icon/icon.component';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  standalone: true,\r\n  imports: [CommonModule, IconComponent],\r\n  templateUrl: './button.component.html',\r\n  styleUrls: ['./button.component.scss'],\r\n})\r\nexport class ButtonComponent {\r\n  @Input() label: string = 'Button';\r\n  @Input() type: 'button' | 'submit' | 'reset' = 'button';\r\n  @Input() disabled: boolean = false;\r\n  @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';\r\n  @Input() icon?: string; // Material icon name (e.g., \"download\")\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { IconComponent } from '../icon/icon.component';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  standalone: true,\r\n  imports: [CommonModule, IconComponent],\r\n  templateUrl: './button.component.html',\r\n  styleUrls: ['./button.component.scss'],\r\n})\r\nexport class ButtonComponent {\r\n  @Input() label: string = 'Button';\r\n  @Input() type: 'button' | 'submit' | 'reset' = 'button';\r\n  @Input() disabled: boolean = false;\r\n  @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';\r\n  @Input() icon?: string; // Material icon name\r\n  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front\r\n  @Input() borderRadius: string = '0px'; // Default square\r\n\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "button {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.4rem;\r\n\r\n  app-icon {\r\n    vertical-align: middle;\r\n  }\r\n}\r\n",
+                    "data": "button {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-weight: 600;\r\n  font-size: 0.95rem;\r\n  padding: 0.4rem 0.9rem;\r\n  cursor: pointer;\r\n  background-color: white;\r\n  border: 2px solid;\r\n  border-radius: 0px;\r\n  transition: background-color 0.2s, color 0.2s, border-color 0.2s;\r\n\r\n  &.primary {\r\n    border-color: #af15fd;\r\n    color: #af15fd;\r\n\r\n    &:hover {\r\n      background-color: rgba(175, 21, 253, 0.1);\r\n    }\r\n  }\r\n\r\n  &.secondary {\r\n    border-color: #6c757d;\r\n    color: #6c757d;\r\n\r\n    &:hover {\r\n      background-color: rgba(108, 117, 125, 0.1);\r\n    }\r\n  }\r\n\r\n  &.danger {\r\n    border-color: #dc3545;\r\n    color: #dc3545;\r\n\r\n    &:hover {\r\n      background-color: rgba(220, 53, 69, 0.1);\r\n    }\r\n  }\r\n\r\n  &:disabled {\r\n    opacity: 0.6;\r\n    cursor: not-allowed;\r\n    background-color: #f9f9f9;\r\n    color: #ccc;\r\n    border-color: #ccc;\r\n  }\r\n\r\n  app-icon {\r\n    color: inherit; // This makes the icon the same colour as the text\r\n  }\r\n}\r\n",
                     "styleUrl": "./button.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<button\r\n  [type] = \"type\"\r\n  [disabled] = \"disabled\"\r\n  [ngClass] = \"variant\"\r\n>\r\n  {{ label }}\r\n</button>\r\n"
+            "templateData": "<button\r\n  [type]=\"type\"\r\n  [disabled]=\"disabled\"\r\n  [ngClass]=\"variant\"\r\n  [style.borderRadius]=\"borderRadius\"\r\n>\r\n  <ng-container *ngIf=\"icon && iconPosition === 'start'\">\r\n    <app-icon [name]=\"icon\" size=\"20px\" />\r\n  </ng-container>\r\n\r\n  <span>{{ label }}</span>\r\n\r\n  <ng-container *ngIf=\"icon && iconPosition === 'end'\">\r\n    <app-icon [name]=\"icon\" size=\"20px\" />\r\n  </ng-container>\r\n</button>\r\n"
         },
         {
             "name": "CheckboxComponent",
@@ -319,8 +373,120 @@
             "templateData": "<label class=\"checkbox-wrapper\">\n  <input\n    type=\"checkbox\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    (change)=\"toggleCheck()\"\n    title=\"Toggle option\"\n  />\n  <span class=\"custom-checkbox\"></span>\n</label>\n"
         },
         {
+            "name": "FilterTabButtonComponent",
+            "id": "component-FilterTabButtonComponent-2ec47d853856c3b7325d30f8f95baa9263cf24a52d897c1f45807013d255fe3e036ea27f61af3a173c263bf245ce69a8d067dc00cc221b594ae580bab1cffa48",
+            "file": "src/app/components/molecules/filterTabButton/filterTabButton.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-filter-tab-button",
+            "styleUrls": [
+                "./filterTabButton.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./filterTabButton.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "active",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "count",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "selected",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "handleClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-filter-tab-button',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './filterTabButton.component.html',\n  styleUrls: ['./filterTabButton.component.scss'],\n})\nexport class FilterTabButtonComponent {\n  @Input() label: string = '';\n  @Input() count: number = 0;\n  @Input() active: boolean = false;\n\n  @Output() selected = new EventEmitter<void>();\n\n  handleClick(): void {\n    this.selected.emit();\n  }\n\n  get displayText(): string {\n    return `${this.label} (${this.count})`;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: inline-block;\r\n  margin-right: 0.5rem;\r\n\r\n  app-button {\r\n    padding: 0.35rem 1.2rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n    background-color: white;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "styleUrl": "./filterTabButton.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "displayText": {
+                    "name": "displayText",
+                    "getSignature": {
+                        "name": "displayText",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 23
+                    }
+                }
+            },
+            "templateData": "<app-button\n  [label]=\"displayText\"\n  [variant]=\"active ? 'primary' : 'secondary'\"\n  [borderRadius]=\"'9999px'\"\n  (click)=\"handleClick()\"\n/>\n"
+        },
+        {
             "name": "IconComponent",
-            "id": "component-IconComponent-4a2b55457398741df6c65df3d0b4f449a72400e9759bb0ff1a3f77695050f32bd77a70f43ec25a0a25ed2d6b0b9f4f0163cb95c9acb3a71893154009126828b3",
+            "id": "component-IconComponent-968e8b224827f71998ce8ebd6e02f660130c16a63588eba3a8b82d508886a917eda13012dd296b6cf551ec8575792f5c9201d6aa4d60ab55da4ec064b0fa200e",
             "file": "src/app/components/atoms/icon/icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -340,7 +506,7 @@
             "inputsClass": [
                 {
                     "name": "colour",
-                    "defaultValue": "''",
+                    "defaultValue": "'inherit'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 15,
@@ -358,7 +524,7 @@
                 },
                 {
                     "name": "size",
-                    "defaultValue": "'24px'",
+                    "defaultValue": "'20px'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 14,
@@ -387,7 +553,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-icon',\r\n  standalone: true,\r\n  imports: [CommonModule, MatIconModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.scss'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name: string = '';\r\n  @Input() size: string = '24px';\r\n  @Input() colour: string = '';\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-icon',\r\n  standalone: true,\r\n  imports: [CommonModule, MatIconModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.scss'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name: string = '';\r\n  @Input() size: string = '20px';\r\n  @Input() colour: string = 'inherit';\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -397,113 +563,88 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<mat-icon\r\n  [style.fontSize]=\"size\"\r\n  [style.color]=\"colour\"\r\n>\r\n  {{ name }}\r\n</mat-icon>\r\n"
+            "templateData": "<mat-icon [style.fontSize]=\"size\" [style.color]=\"colour\">\r\n  {{ name }}\r\n</mat-icon>\r\n"
         },
         {
-            "name": "TabComponent",
-            "id": "component-TabComponent-4a1913328b74bdea3413237acd2d974a36280b7c45439354a3cf8c48ac1f59d6535bba10f32baee819e9f136e0815da7e9e7d8d15b417de91fa658c4cea5e142",
-            "file": "src/app/components/atoms/tab/tab.component.ts",
+            "name": "TabGroupComponent",
+            "id": "component-TabGroupComponent-33302887bf821c5c86cc1931a24f03d8a900382de7af8a8dec0644cf87b5d0ddd639e696724ef2c4e011049146cf2db6c55db09964f9c18549da03b3a0efe136",
+            "file": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-tab",
+            "selector": "app-tab-group",
             "styleUrls": [
-                "./tab.component.scss"
+                "./tabGroup.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./tab.component.html"
+                "./tabGroup.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "active",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 10,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "label",
+                    "name": "selectedTab",
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-tab',\r\n  templateUrl: './tab.component.html',\r\n  styleUrls: ['./tab.component.scss'],\r\n})\r\nexport class TabComponent {\r\n  @Input() label: string = '';\r\n  @Input() active: boolean = false;\r\n}\r\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".tab {\r\n  padding: 0.5rem 1rem;\r\n  cursor: pointer;\r\n  border-bottom: 2px solid transparent;\r\n  font-weight: 500;\r\n  transition: border-color 0.3s, color 0.3s;\r\n\r\n  &:hover {\r\n    color: #007bff;\r\n  }\r\n\r\n  &.active {\r\n    border-bottom-color: #007bff;\r\n    color: #007bff;\r\n    font-weight: 600;\r\n  }\r\n}\r\n",
-                    "styleUrl": "./tab.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "extends": [],
-            "templateData": "<div class=\"tab\" [class.active]=\"active\">\r\n  {{ label }}\r\n</div>\r\n"
-        },
-        {
-            "name": "TableCellComponent",
-            "id": "component-TableCellComponent-934f53c782cd7eed962104c0585e5fc2db2e4a133635147fd2b0ac725b246be8d461a78ad40bd16715fbd25c6888abeb78152ad36e7f5e9b83f893bfdf2763b5",
-            "file": "src/app/components/atoms/table-cell/table-cell.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-table-cell",
-            "styleUrls": [
-                "./table-cell.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./table-cell.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "align",
-                    "defaultValue": "'left'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "\"left\" | \"center\" | \"right\"",
-                    "decorators": []
                 },
                 {
-                    "name": "value",
-                    "defaultValue": "''",
+                    "name": "tabs",
+                    "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
-                    "type": "string | number",
+                    "line": 18,
+                    "type": "FilterTab[]",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "tabSelected",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "onSelectTab",
+                    "args": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -513,22 +654,26 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FilterTabButtonComponent",
+                    "type": "component"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-table-cell',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './table-cell.component.html',\r\n  styleUrls: ['./table-cell.component.scss'],\r\n})\r\nexport class TableCellComponent {\r\n  @Input() value: string | number = '';\r\n  @Input() align: 'left' | 'center' | 'right' = 'left';\r\n}\r\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent],\n  templateUrl: './tabGroup.component.html',\n  styleUrls: ['./tabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = ''; // currently active tab\n  @Output() tabSelected = new EventEmitter<string>();\n\n  onSelectTab(label: string): void {\n    this.tabSelected.emit(label);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "td {\r\n  padding: 0.75rem 1rem;\r\n  font-size: 0.95rem;\r\n  border-bottom: 1px solid #e0e0e0;\r\n\r\n  &.left {\r\n    text-align: left;\r\n  }\r\n\r\n  &.center {\r\n    text-align: center;\r\n  }\r\n\r\n  &.right {\r\n    text-align: right;\r\n  }\r\n}\r\n",
-                    "styleUrl": "./table-cell.component.scss"
+                    "data": ".tab-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  column-gap: 0.5rem;\r\n  row-gap: 0.4rem;\r\n}\r\n",
+                    "styleUrl": "./tabGroup.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<td [ngClass]=\"align\">\r\n  {{ value }}\r\n</td>\r\n"
+            "templateData": "<div class=\"tab-group\">\n  <app-filter-tab-button\n    *ngFor=\"let tab of tabs\"\n    [label]=\"tab.label\"\n    [count]=\"tab.count\"\n    [active]=\"selectedTab === tab.label\"\n    (selected)=\"onSelectTab(tab.label)\"\n  />\n</div>\n"
         },
         {
             "name": "TextComponent",
@@ -691,7 +836,7 @@
                 "linktype": "component",
                 "name": "ButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -713,30 +858,39 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/atoms/tab/tab.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "TabComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/atoms/table-cell/table-cell.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "TableCellComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
                 "filePath": "src/app/components/atoms/text/text.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "TextComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/filterTabButton/filterTabButton.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FilterTabButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TabGroupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "FilterTab",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             }
         ]

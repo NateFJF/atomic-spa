@@ -1,0 +1,9 @@
+<div class="tab-group">
+  <app-filter-tab-button
+    *ngFor="let tab of tabs"
+    [label]="tab.label"
+    [count]="tab.count"
+    [active]="selectedTab === tab.label"
+    (selected)="onSelectTab(tab.label)"
+  />
+</div>

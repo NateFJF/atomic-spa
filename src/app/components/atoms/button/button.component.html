@@ -1,11 +1,16 @@
-<button [type]="type" [disabled]="disabled" [ngClass]="variant">
-  <ng-container *ngIf="iconPosition === 'start'">
-    <app-icon *ngIf="icon" [name]="icon" size="20px"></app-icon>
+<button
+  [type]="type"
+  [disabled]="disabled"
+  [ngClass]="variant"
+  [style.borderRadius]="borderRadius"
+>
+  <ng-container *ngIf="icon && iconPosition === 'start'">
+    <app-icon [name]="icon" size="20px" />
   </ng-container>
 
   <span>{{ label }}</span>
 
-  <ng-container *ngIf="iconPosition === 'end'">
-    <app-icon *ngIf="icon" [name]="icon" size="20px"></app-icon>
+  <ng-container *ngIf="icon && iconPosition === 'end'">
+    <app-icon [name]="icon" size="20px" />
   </ng-container>
 </button>
