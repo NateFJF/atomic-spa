@@ -1,34 +1,45 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
-
+import { IconComponent } from '../icon/icon.component';
 
 const meta: Meta<ButtonComponent> = {
   title: 'Atoms/Button',
   component: ButtonComponent,
-  tags: ['autodocs'],
+  decorators: [
+    moduleMetadata({
+      imports: [IconComponent],
+    }),
+  ],
 };
 
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    label: 'Primary Button',
+    label: 'Click Me',
     variant: 'primary',
   },
 };
 
-export const Secondary: Story = {
+export const WithIconStart: Story = {
+  name: 'With Icon (Start)',
   args: {
-    label: 'Secondary Button',
-    variant: 'secondary',
+    label: 'Export',
+    icon: 'download',
+    iconPosition: 'start', // default, but explicitly shown
+    variant: 'primary',
+    type: 'button',
   },
 };
 
-export const Disabled: Story = {
+export const WithIconEnd: Story = {
+  name: 'With Icon (End)',
   args: {
-    label: 'Disabled Button',
-    variant: 'danger',
-    disabled: true,
+    label: 'Next',
+    icon: 'arrow_forward',
+    iconPosition: 'end',
+    variant: 'primary',
+    type: 'button',
   },
 };

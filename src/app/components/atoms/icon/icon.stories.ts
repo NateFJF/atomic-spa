@@ -12,24 +12,40 @@ type Story = StoryObj<IconComponent>;
 
 export const Default: Story = {
   args: {
-    name: 'download', // use an actual icon name from your setup
+    name: 'download',
     size: '24px',
-    colour: '#007bff',
+    colour: '#333',
   },
 };
 
-export const LargeRedIcon: Story = {
+export const Warning: Story = {
   args: {
     name: 'warning',
-    size: '40px',
-    colour: 'red',
+    size: "30px",
+    colour: '#f39c12',
   },
 };
 
-export const SmallGreyIcon: Story = {
+export const Success: Story = {
+  args: {
+    name: "download",
+    size: '24px',
+    colour: '#28a745',
+  },
+};
+
+export const Error: Story = {
+  args: {
+    name: 'error',
+    size: '24px',
+    colour: '#dc3545',
+  },
+};
+
+export const TinyGrey: Story = {
   args: {
     name: 'info',
-    size: '16px',
+    size: '14px',
     colour: 'grey',
   },
 };
