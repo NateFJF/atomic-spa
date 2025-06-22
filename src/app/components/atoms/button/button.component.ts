@@ -17,6 +17,7 @@ export class ButtonComponent {
   @Input() icon?: string; // Material icon name
   @Input() iconPosition: 'start' | 'end' = 'start'; // default is front
   @Input() borderRadius: string = '0px'; // Default square
+  @Input() borderless: boolean = false; // Default is not borderless (with border)
 
 
 }

@@ -38,6 +38,7 @@ button {
     }
   }
 
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -48,5 +49,22 @@ button {
 
   app-icon {
     color: inherit; // This makes the icon the same colour as the text
+  }
+}
+
+button.borderless {
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0; // optional: tighten spacing
+  box-shadow: none;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05); // subtle hover feedback
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    background-color: transparent;
+    cursor: not-allowed;
   }
 }

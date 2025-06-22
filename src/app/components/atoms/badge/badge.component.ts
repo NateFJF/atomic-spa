@@ -11,4 +11,6 @@ import { CommonModule } from '@angular/common';
 export class BadgeComponent {
   @Input() label: string = '';
   @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';
+  @Input() fontSize: string = '0.875rem';
+  @Input() fontWeight: string = '500';
 }

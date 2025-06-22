@@ -4,8 +4,8 @@
   }
 
   .custom-checkbox {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border: 2px solid;
     border-radius: 4px;
     display: inline-block;
@@ -13,12 +13,12 @@
 
     .checkmark {
       position: absolute;
-      top: 0;
-      left: 4px;
-      width: 4px;
-      height: 8px;
+      top: 2px;
+      left: 6px;
+      width: 5px;
+      height: 12px;
       border: solid;
-      border-width: 0 2px 2px 0;
+      border-width: 0 3px 3px 0;
       color: inherit;
       content: '';
     }

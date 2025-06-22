@@ -1,0 +1,40 @@
+.table-row {
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    &.checkbox-cell {
+      width: 48px;
+      text-align: center;
+      padding: 0;
+      vertical-align: middle;
+    }
+
+    &.state-cell {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    &.action-cell {
+      width: 150px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    &.file-number-cell {
+      padding-right: 10rem;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    &.divider-cell {
+      width: 1px;
+      background-color: #e0e0e0;
+      padding: 0;
+    }
+  }
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+}

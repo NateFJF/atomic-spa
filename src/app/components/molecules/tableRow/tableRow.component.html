@@ -1,0 +1,28 @@
+<tr class="table-row">
+  <td class="checkbox-cell">
+    <app-checkbox
+      [checked]="selected"
+      (checkedChange)="toggleSelect($event)"
+      [colour]="'#af15fd'"
+    />
+  </td>
+
+  <td class="state-cell">
+    <app-badge
+    [label]="state"
+    [variant]="getBadgeVariant(state)"
+    fontSize="1rem"
+    fontWeight="600"
+  />
+  </td>
+
+  <td class="file-number-cell">
+    <app-text [content]="fileNumber.toString()" />
+  </td>
+
+  <td class="divider-cell" aria-hidden="true"></td>
+
+  <td class="action-cell">
+    <app-button label="Consult" variant="primary" [borderless]="true" (click)="handleConsult()" />
+  </td>
+</tr>

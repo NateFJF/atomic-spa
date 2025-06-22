@@ -1,7 +1,7 @@
 <button
   [type]="type"
   [disabled]="disabled"
-  [ngClass]="variant"
+  [ngClass]="[variant, borderless ? 'borderless' : '']"
   [style.borderRadius]="borderRadius"
 >
   <ng-container *ngIf="icon && iconPosition === 'start'">
