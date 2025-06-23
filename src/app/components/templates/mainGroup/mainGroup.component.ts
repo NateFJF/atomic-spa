@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NavTabGroupComponent } from '../../organisms/navTabGroup/navTabGroup.component';
 import { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGroup.component';
 import { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';
 import { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';
@@ -13,7 +12,6 @@ import { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.compon
   standalone: true,
   imports: [
     CommonModule,
-    NavTabGroupComponent,
     StatCardGroupComponent,
     FilterActionGroupComponent,
     TableHeaderComponent,

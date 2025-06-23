@@ -12,8 +12,8 @@ import { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.compon
 })
 export class MainPageComponent {
   readonly tableData = signal<TableRowData[]>([
-    { id: 1, state: 'Pre-payment', fileNumber: '1', selected: false },
-    { id: 2, state: 'Pre-payment', fileNumber: '3', selected: false },
+    { id: 1, state: 'Fraud', fileNumber: '1', selected: false },
+    { id: 2, state: 'Refund Request', fileNumber: '3', selected: false },
     { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },
     { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },
     { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },

@@ -1,0 +1,13 @@
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 1rem;
+
+}
+
+app-nav-tab-group {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
