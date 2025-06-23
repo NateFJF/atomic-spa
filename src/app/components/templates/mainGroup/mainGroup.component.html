@@ -10,22 +10,21 @@
     />
 
   <div class="table-section">
-    <table>
-      <thead>
-        <app-table-header
-          [allChecked]="allChecked"
-          [sortKey]="sortKey"
-          [sortDirection]="sortDirection"
-          (toggleAll)="toggleAll.emit($event)"
-          (sortChange)="sortChange.emit($event)"
-        />
-      </thead>
-      <tbody>
-        <app-table-row-group
-          [rows]="tableData"
-          (rowSelected)="rowSelected.emit($event)"
-        />
-      </tbody>
-    </table>
+  <app-table-header
+    [sortKey]="sortKey"
+    [sortDirection]="sortDirection"
+    [allChecked]="allChecked"
+    (sortChange)="sortChange.emit($event)"
+    (toggleAll)="toggleAll.emit($event)"
+  />
+
+  <div class="table-row-scroll-wrapper">
+    <app-table-row-group
+      [rows]="tableData"
+      (rowSelected)="rowSelected.emit($event)"
+
+    />
   </div>
+</div>
+
 </div>

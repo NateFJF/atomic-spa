@@ -14,6 +14,12 @@
   background: white;
 }
 
+.table-row-scroll-wrapper {
+  max-height: calc(100vh - 25rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 
 app-stat-card-group {
   display: flex;
@@ -28,6 +34,7 @@ app-stat-card-group {
 app-filter-action-bar {
   padding-bottom: 2rem;
 }
+
 
 // app-nav-tab-group {
 //   border: 1px dashed red; //Debug
