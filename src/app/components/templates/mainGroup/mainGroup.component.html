@@ -7,6 +7,7 @@
     [tabs]="filterTabs"
     [selectedTab]="selectedTab"
     (tabChanged)="filterTabChange.emit($event)"
+    (exportClicked)="exportClicked.emit()"
     />
 
   <div class="table-section">

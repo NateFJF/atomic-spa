@@ -29,11 +29,13 @@ export class MainGroupTemplateComponent {
   @Input() sortDirection: 'asc' | 'desc' = 'asc';
   @Input() selectedTab: string = '';
 
-  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();
+
 
   @Input() allChecked: boolean = false;
 
   @Output() toggleAll = new EventEmitter<boolean>();
+  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();
   @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();
   @Output() filterTabChange = new EventEmitter<string>();
+  @Output() exportClicked = new EventEmitter<void>();
 }

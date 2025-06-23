@@ -30,7 +30,7 @@ export class MainPageComponent {
   // Sorting
   readonly sortKey = signal<SortableKey>('fileNumber');
   readonly sortDirection = signal<'asc' | 'desc'>('asc');
-  selectedTab: string = "total";
+  selectedTab: string = 'total';
 
   // Filtering
   readonly selectedFilter = signal<string>('total');
@@ -43,7 +43,9 @@ export class MainPageComponent {
     // Filter
     let rows = this.tableData();
     if (selected !== 'total') {
-      rows = rows.filter(row => row.state.toLowerCase() === selected.toLowerCase());
+      rows = rows.filter(
+        (row) => row.state.toLowerCase() === selected.toLowerCase()
+      );
     }
 
     // Then Sort
@@ -53,40 +55,43 @@ export class MainPageComponent {
 
       const isNumeric = !isNaN(+aVal) && !isNaN(+bVal);
       return isNumeric
-        ? direction === 'asc' ? +aVal - +bVal : +bVal - +aVal
+        ? direction === 'asc'
+          ? +aVal - +bVal
+          : +bVal - +aVal
         : direction === 'asc'
-          ? String(aVal).localeCompare(String(bVal))
-          : String(bVal).localeCompare(String(aVal));
+        ? String(aVal).localeCompare(String(bVal))
+        : String(bVal).localeCompare(String(aVal));
     });
   });
 
   // Row selection
   readonly allChecked = computed(
-    () => this.tableData().length > 0 && this.tableData().every(row => row.selected)
+    () =>
+      this.tableData().length > 0 &&
+      this.tableData().every((row) => row.selected)
   );
 
   onRowSelected(change: { id: string | number; selected: boolean }) {
-    this.tableData.update(rows =>
-      rows.map(row =>
+    this.tableData.update((rows) =>
+      rows.map((row) =>
         row.id === change.id ? { ...row, selected: change.selected } : row
       )
     );
   }
 
   onToggleAll(checked: boolean) {
-    this.tableData.update(rows =>
-      rows.map(row => ({ ...row, selected: checked }))
+    this.tableData.update((rows) =>
+      rows.map((row) => ({ ...row, selected: checked }))
     );
   }
 
   // Handlers
   onSortChange(change: { key: string; direction: 'asc' | 'desc' }) {
-  if (['fileNumber', 'id', 'state'].includes(change.key)) {
-    this.sortKey.set(change.key as 'fileNumber' | 'state' | 'id');
-    this.sortDirection.set(change.direction);
+    if (['fileNumber', 'id', 'state'].includes(change.key)) {
+      this.sortKey.set(change.key as 'fileNumber' | 'state' | 'id');
+      this.sortDirection.set(change.direction);
+    }
   }
-}
-
 
   onFilterChange(state: string) {
     this.selectedFilter.set(state);
@@ -101,24 +106,62 @@ export class MainPageComponent {
     { count: 850, label: 'Unpaid waiting', icon: 'logout' },
   ];
 
-  readonly filterTabs = computed(() => {
-  const data = this.tableData();
-  const counts: Record<string, number> = {};
+  // CSV Export
 
-  for (const row of data) {
-    const key = row.state.toLowerCase();
-    counts[key] = (counts[key] || 0) + 1;
+  onExportToCSV(): void {
+    const rows = this.visibleTableData();
+    const csvRows = [
+      ['State', 'File number'], // Header
+      ...rows.map((row) => [row.state, row.fileNumber]),
+    ];
+
+    const csvContent = csvRows.map((e) => e.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'table-data.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
-  return [
-    { label: 'Total', count: data.length, state: 'total' },
-    { label: 'Identity', count: counts['identity'] ?? 0, state: 'identity' },
-    { label: 'Pre-payment', count: counts['pre-payment'] ?? 0, state: 'pre-payment' },
-    { label: 'Post-payment', count: counts['post-payment'] ?? 0, state: 'post-payment' },
-    { label: 'Refund request', count: counts['refund request'] ?? 0, state: 'refund request' },
-    { label: 'Fraud', count: counts['fraud'] ?? 0, state: 'fraud' },
-    { label: 'Validated', count: counts['validated'] ?? 0, state: 'validated' },
+  // Filter tabs
 
-  ];
-});
+  readonly filterTabs = computed(() => {
+    const data = this.tableData();
+    const counts: Record<string, number> = {};
+
+    for (const row of data) {
+      const key = row.state.toLowerCase();
+      counts[key] = (counts[key] || 0) + 1;
+    }
+
+    return [
+      { label: 'Total', count: data.length, state: 'total' },
+      { label: 'Identity', count: counts['identity'] ?? 0, state: 'identity' },
+      {
+        label: 'Pre-payment',
+        count: counts['pre-payment'] ?? 0,
+        state: 'pre-payment',
+      },
+      {
+        label: 'Post-payment',
+        count: counts['post-payment'] ?? 0,
+        state: 'post-payment',
+      },
+      {
+        label: 'Refund request',
+        count: counts['refund request'] ?? 0,
+        state: 'refund request',
+      },
+      { label: 'Fraud', count: counts['fraud'] ?? 0, state: 'fraud' },
+      {
+        label: 'Validated',
+        count: counts['validated'] ?? 0,
+        state: 'validated',
+      },
+    ];
+  });
 }
