@@ -1,4 +1,8 @@
 .table-header-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+
   th {
     padding: 0.75rem 1rem;
     text-align: left;
@@ -7,45 +11,43 @@
     border-bottom: 2px solid #e0e0e0;
     -webkit-user-select: none;
     user-select: none;
+    vertical-align: middle;
 
     &.checkbox-cell {
-      width: 48px;
-      vertical-align: middle;
+      width: 60px;
+      text-align: center;
+      padding: 0;
     }
 
     &.state-cell {
-      vertical-align: middle;
+      width: 140px;
       text-align: left;
-      padding: 0;
-      width: 128px;
     }
-    &.action-cell {
-      width: 150px;
-      text-align: left;
-      vertical-align: middle;
-    }
+
     &.file-number-cell {
-      width: 128px;
+      width: auto;
       text-align: left;
-      vertical-align: middle;
-    }
-
-    &.sortable {
-      cursor: pointer;
-      padding-right: 10rem;
-      vertical-align: middle;
-    }
-
-    .th-content {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
     }
 
     &.divider-col {
       width: 1px;
       padding: 0;
       background-color: #e0e0e0;
+    }
+
+    &.action-cell {
+      width: 150px;
+      text-align: left;
+    }
+
+    &.sortable {
+      cursor: pointer;
+    }
+
+    .th-content {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
   }
 }

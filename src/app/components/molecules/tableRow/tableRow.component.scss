@@ -1,38 +1,40 @@
 .table-row {
+  display: table;
+  width: 100%;
+
   td {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &.checkbox-cell {
-      width: 48px;
+      width: 60px;
       text-align: center;
       padding: 0;
-      vertical-align: middle;
     }
 
     &.state-cell {
+      width: 140px;
       text-align: center;
-      vertical-align: middle;
-      width: 128px;
-    }
-
-    &.action-cell {
-      width: 150px;
-      text-align: center;
-      vertical-align: middle;
     }
 
     &.file-number-cell {
-      padding-right: 10rem;
       text-align: left;
-      vertical-align: middle;
-      width: 128px;
+      width: auto; // allow it to grow
     }
 
     &.divider-cell {
       width: 1px;
       background-color: #e0e0e0;
       padding: 0;
+    }
+
+    &.action-cell {
+      width: 150px;
+      text-align: center;
     }
   }
 

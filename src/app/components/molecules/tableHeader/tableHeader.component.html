@@ -7,12 +7,12 @@
   </th>
 
   <th class="state-cell">
-    <app-text content="State" weight="medium" size="sm" />
+    <app-text content="State" weight="medium" size="md" />
   </th>
 
   <th class="sortable" (click)="toggleSort('fileNumber')">
     <div class="th-content">
-      <app-text content="File number" weight="medium" size="sm" />
+      <app-text content="File number" weight="medium" size="md" />
       <app-icon
         *ngIf="sortKey === 'fileNumber'"
         [name]="sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'"
