@@ -3,7 +3,10 @@
 
   <app-stat-card-group [cards]="statCards" />
 
-  <app-filter-action-group [tabs]="filterTabs" />
+  <app-filter-action-group
+    [tabs]="filterTabs"
+    (tabChanged)="filterTabChange.emit($event)"
+    />
 
   <div class="table-section">
     <table>

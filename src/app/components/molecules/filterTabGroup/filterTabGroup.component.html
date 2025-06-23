@@ -3,7 +3,7 @@
     *ngFor="let tab of tabs"
     [label]="tab.label"
     [count]="tab.count"
-    [active]="isActive(tab.label)"
-    (selected)="selectTab(tab.label)"
+    [active]="selectedTab === tab.state"
+    (selected)="onSelectTab(tab.state)"
   />
 </div>

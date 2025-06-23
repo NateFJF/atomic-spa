@@ -3,12 +3,14 @@
 
     [statCards]="statCards"
     [filterTabs]="filterTabs"
-    [tableData]="sortedTableData()"
+    [tableData]="visibleTableData()"
     [sortKey]="sortKey()"
     [sortDirection]="sortDirection()"
     (sortChange)="onSortChange($event)"
     [allChecked]="allChecked()"
     (toggleAll)="onToggleAll($event)"
     (rowSelected)="onRowSelected($event)"
+    (filterTabChange)="onFilterChange($event)"
+    [selectedTab]="selectedFilter()"
   />
 </div>

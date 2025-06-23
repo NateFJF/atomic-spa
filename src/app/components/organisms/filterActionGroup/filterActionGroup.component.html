@@ -1,7 +1,9 @@
 <div class="filter-action-group">
   <app-tab-group
     [tabs]="tabs"
+    [selectedTab]="selectedTab"
     (tabSelected)="handleTabChange($event)"
+
   />
 
   <app-action-bar

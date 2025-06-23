@@ -19,6 +19,8 @@ export interface FilterTab {
 })
 export class FilterActionGroupComponent {
   @Input() tabs: FilterTab[] = [];
+  @Input() selectedTab: string = ''; // <-- ADD THIS
+
 
   @Output() tabChanged = new EventEmitter<string>();
   @Output() exportClicked = new EventEmitter<void>();

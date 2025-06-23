@@ -19,12 +19,12 @@ type Story = StoryObj<TabGroupComponent>;
 export const Default: Story = {
   args: {
     tabs: [
-      { label: 'Total', count: 164 },
-      { label: 'Identity', count: 15 },
-      { label: 'Post-payment', count: 35 },
-      { label: 'Refund Request', count: 22 },
-      { label: 'Fraud', count: 8 },
-      { label: 'Validated', count: 49 },
+      { label: 'Total', count: 164, state: 'total' },
+      { label: 'Identity', count: 15, state: 'identity' },
+      { label: 'Post-payment', count: 35, state: 'post-payment' },
+      { label: 'Refund Request', count: 22, state: 'refund request' },
+      { label: 'Fraud', count: 8, state: 'fraud' },
+      { label: 'Validated', count: 49, state: 'validated' },
     ],
   },
 };
