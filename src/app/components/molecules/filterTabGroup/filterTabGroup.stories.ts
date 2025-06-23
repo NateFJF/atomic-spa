@@ -26,6 +26,5 @@ export const Default: Story = {
       { label: 'Fraud', count: 8 },
       { label: 'Validated', count: 49 },
     ],
-    selectedTab: 'Total',
   },
 };

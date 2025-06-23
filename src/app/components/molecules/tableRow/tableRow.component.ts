@@ -22,11 +22,11 @@ export class TableRowComponent {
   @Input() selected: boolean = false;
   @Input() state: string = '';
   @Input() fileNumber: number | string = '';
-  @Output() selectedChange = new EventEmitter<boolean>();
+  @Output() selectChange = new EventEmitter<boolean>();
   @Output() consult = new EventEmitter<void>();
 
   toggleSelect(checked: boolean): void {
-    this.selectedChange.emit(checked);
+    this.selectChange.emit(checked);
   }
 
   handleConsult(): void {

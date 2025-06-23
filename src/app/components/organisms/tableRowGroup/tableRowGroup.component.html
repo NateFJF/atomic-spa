@@ -3,7 +3,7 @@
     *ngFor="let row of rows"
     [state]="row.state"
     [fileNumber]="row.fileNumber"
-    [selected]="row.selected"
+    [selected]="row.selected ?? false"
     (selectChange)="handleSelectChange(row.id, $event)"
     (consult)="handleConsultClick(row.id)"
   />

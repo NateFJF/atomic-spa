@@ -6,7 +6,6 @@ import { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGr
 import { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';
 import { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';
 import { TableRowGroupComponent } from '../../organisms/tableRowGroup/tableRowGroup.component';
-import { NavTabComponent } from '../../molecules/navTab/navTab.component';
 
 @Component({
   selector: 'app-main-group-template',
@@ -14,7 +13,6 @@ import { NavTabComponent } from '../../molecules/navTab/navTab.component';
   imports: [
     CommonModule,
     NavTabGroupComponent,
-    NavTabComponent,
     StatCardGroupComponent,
     FilterActionGroupComponent,
     TableHeaderComponent,

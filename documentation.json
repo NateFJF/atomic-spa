@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "FilterTab",
-            "id": "interface-FilterTab-33302887bf821c5c86cc1931a24f03d8a900382de7af8a8dec0644cf87b5d0ddd639e696724ef2c4e011049146cf2db6c55db09964f9c18549da03b3a0efe136",
-            "file": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
+            "id": "interface-FilterTab-c52361acedb37a22315a2ddf6bbceafd3cf94e64c1594615cd4b0e1f92d479d5eda84ea4984a3d40c7a7ebd1e3d4e75999c60c10fadfa3bec6d4854cfc7ea7da",
+            "file": "src/app/components/molecules/filterTabGroup/filterTabGroup.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent],\n  templateUrl: './tabGroup.component.html',\n  styleUrls: ['./tabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = ''; // currently active tab\n  @Output() tabSelected = new EventEmitter<string>();\n\n  onSelectTab(label: string): void {\n    this.tabSelected.emit(label);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, signal, WritableSignal, computed } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent],\n  templateUrl: './filterTabGroup.component.html',\n  styleUrls: ['./filterTabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n\n  // signal to track the selected tab label\n  selectedTab: WritableSignal<string> = signal(''); // signal-based\n\n  @Output() tabSelected = new EventEmitter<string>();\n\n  selectTab(label: string): void {\n    this.selectedTab.set(label);\n    this.tabSelected.emit(label);\n  }\n\n  isActive(label: string): boolean {\n    return this.selectedTab() === label;\n  }\n}\n",
             "properties": [
                 {
                     "name": "count",
@@ -35,6 +35,219 @@
             "kind": 171,
             "methods": [],
             "extends": []
+        },
+        {
+            "name": "FilterTab",
+            "id": "interface-FilterTab-75009c90815b884a0e28d9aab5e49943d3319c9592c614cbf620d563a27f7b23e73dc8681e8096a327841430a52751c9792ee7fdf659bea5babf53fb6ab187ee-1",
+            "file": "src/app/components/organisms/filterActionGroup/filterActionGroup.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TabGroupComponent } from '../../molecules/filterTabGroup/filterTabGroup.component';\nimport { ActionBarComponent } from '../../molecules/actionBar/actionBar.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-filter-action-group',\n  standalone: true,\n  imports: [CommonModule, TabGroupComponent, ActionBarComponent],\n  templateUrl: './filterActionGroup.component.html',\n  styleUrls: ['./filterActionGroup.component.scss'],\n})\nexport class FilterActionGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n\n  @Output() tabChanged = new EventEmitter<string>();\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  handleTabChange(tab: string) {\n    this.tabChanged.emit(tab);\n  }\n\n  handleExport() {\n    this.exportClicked.emit();\n  }\n\n  handleFilter() {\n    this.filterClicked.emit();\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "active",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "count",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "state",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": [],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "FilterTab-1"
+        },
+        {
+            "name": "NavTabItem",
+            "id": "interface-NavTabItem-5a3f236bba8b3fe2676627dece4ebbacbbd85270f9cc1be025635cba8242a792f694d09659b6e48a2a21f49259fba8911b4ccf9dd5d8331fed7dc230e2ea2606",
+            "file": "src/app/components/organisms/navTabGroup/navTabGroup.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NavTabComponent } from '../../molecules/navTab/navTab.component';\n\nexport interface NavTabItem {\n  label: string;\n  icon: string;\n  route: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-nav-tab-group',\n  standalone: true,\n  imports: [CommonModule, NavTabComponent],\n  templateUrl: './navTabGroup.component.html',\n  styleUrls: ['./navTabGroup.component.scss'],\n})\nexport class NavTabGroupComponent {\n  @Input() tabs: NavTabItem[] = [];\n}\n",
+            "properties": [
+                {
+                    "name": "active",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "route",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "StatCardItem",
+            "id": "interface-StatCardItem-132c7cce5907fbc1ae9c76fad76709dd8f45c4ddad5d45de80493ab0386503224cf698f096b69f1e66674fd4157f0708c47a79c6dbf91e24de77c6190440f6a1",
+            "file": "src/app/components/organisms/statCardGroup/statCardGroup.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StatCardComponent } from '../../molecules/statCard/statCard.component';\n\nexport interface StatCardItem {\n  count: number | string;\n  label: string;\n  icon: string;\n}\n\n@Component({\n  selector: 'app-stat-card-group',\n  standalone: true,\n  imports: [CommonModule, StatCardComponent],\n  templateUrl: './statCardGroup.component.html',\n  styleUrls: ['./statCardGroup.component.scss'],\n})\nexport class StatCardGroupComponent {\n  @Input() cards: StatCardItem[] = [];\n}\n",
+            "properties": [
+                {
+                    "name": "count",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "TableRowData",
+            "id": "interface-TableRowData-30aa7958f38102f869c10c3ee9e3b3613f202401be72ab092d0a6ae158c92fe6fff93505ca75872bb055e66fc1d6354c1975c45b1c6a085001fa4e94da7329b7",
+            "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, value: any) {\n  const checked = value as boolean;\n  this.rowSelected.emit({ id, selected: checked });\n}\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "fileNumber",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "selected",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "state",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
         }
     ],
     "injectables": [],
@@ -44,8 +257,99 @@
     "directives": [],
     "components": [
         {
-            "name": "App",
-            "id": "component-App-f2944b1565eb74e4b3326f9407d1596cb6f6ef9547d847a4744afa00f3ec2998505487fc68e0ef89d7bdce84a9374759baae9afa38819419c19a420b6cbf8c2f",
+            "name": "ActionBarComponent",
+            "id": "component-ActionBarComponent-db1ef616cf3e971d5ae1678a56e35477b422e91e96f4fd75f751fff3aaf653861e6c0b3af1ab1c24752232a703b1ef24a48a4560540e473e9caa114b5182bd3a",
+            "file": "src/app/components/molecules/actionBar/actionBar.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-action-bar",
+            "styleUrls": [
+                "./actionBar.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./actionBar.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "exportClicked",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "filterClicked",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onExportClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onFilterClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-action-bar',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './actionBar.component.html',\n  styleUrls: ['./actionBar.component.scss'],\n})\nexport class ActionBarComponent {\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  onExportClick() {\n    this.exportClicked.emit();\n  }\n\n  onFilterClick() {\n    this.filterClicked.emit();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".action-bar {\r\n  display: flex;\r\n  gap: 0.5rem; // more natural spacing between buttons\r\n  align-items: center;\r\n\r\n  app-button {\r\n    //padding: 0.4rem 0.2rem;\r\n    display: flex;\r\n    align-items: center;\r\n    //transition: background-color 0.2s;\r\n\r\n    // This ensures icons follow text colour\r\n    app-icon, mat-icon {\r\n      color: inherit;\r\n    }\r\n  }\r\n}\r\n",
+                    "styleUrl": "./actionBar.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"action-bar\">\n  <app-button\n    label=\"Filters\"\n    icon=\"filter_list\"\n    iconPosition=\"end\"\n    variant=\"secondary\"\n    (click)=\"onFilterClick()\"\n    borderRadius=\"9999px\"\n    width=\"auto\"\n    height=\"35px\"\n    fontSize=\"14px\"\n\n  />\n\n  <app-button\n    label=\"Export\"\n    icon=\"download\"\n    iconPosition=\"start\"\n    variant=\"primary\"\n    (click)=\"onExportClick()\"\n    borderRadius=\"8px\"\n    width=\"auto\"\n    height=\"35px\"\n    fontSize=\"14px\"\n  />\n</div>\n"
+        },
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-ca1de2f7d71e8f1f8d956e6b0e1a54e0a71cb1fad6c2ae3515acc69a58b76f7621a05c24f2b766bc304261529f2cf64a17b0d9669a81f6f6be8cc82918ce8589",
             "file": "src/app/app.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -55,54 +359,37 @@
             "selector": "app-root",
             "styleUrls": [],
             "styles": [],
-            "templateUrl": [
-                "./app.html"
-            ],
+            "template": "<app-main-page />",
+            "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "title",
-                    "defaultValue": "'atomic-spa'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 11,
-                    "modifierKind": [
-                        124
-                    ]
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": false,
+            "standalone": true,
             "imports": [
                 {
-                    "name": "RouterOutlet"
+                    "name": "MainPageComponent",
+                    "type": "component"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [RouterOutlet],\r\n  templateUrl: './app.html',\r\n  styleUrl: './app.scss'\r\n})\r\nexport class App {\r\n  protected title = 'atomic-spa';\r\n}\r\n",
-            "styleUrl": "./app.scss",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { MainPageComponent } from './components/pages/mainPage/mainPage.component';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  standalone: true,\r\n  imports: [MainPageComponent],\r\n  template: '<app-main-page />',\r\n})\r\nexport class AppComponent {}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->\r\n<!-- * * * * * * * to get started with your project! * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n\r\n<style>\r\n  :host {\r\n    --bright-blue: oklch(51.01% 0.274 263.83);\r\n    --electric-violet: oklch(53.18% 0.28 296.97);\r\n    --french-violet: oklch(47.66% 0.246 305.88);\r\n    --vivid-pink: oklch(69.02% 0.277 332.77);\r\n    --hot-red: oklch(61.42% 0.238 15.34);\r\n    --orange-red: oklch(63.32% 0.24 31.68);\r\n\r\n    --gray-900: oklch(19.37% 0.006 300.98);\r\n    --gray-700: oklch(36.98% 0.014 302.71);\r\n    --gray-400: oklch(70.9% 0.015 304.04);\r\n\r\n    --red-to-pink-to-purple-vertical-gradient: linear-gradient(\r\n      180deg,\r\n      var(--orange-red) 0%,\r\n      var(--vivid-pink) 50%,\r\n      var(--electric-violet) 100%\r\n    );\r\n\r\n    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(\r\n      90deg,\r\n      var(--orange-red) 0%,\r\n      var(--vivid-pink) 50%,\r\n      var(--electric-violet) 100%\r\n    );\r\n\r\n    --pill-accent: var(--bright-blue);\r\n\r\n    font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\r\n      Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\r\n      \"Segoe UI Symbol\";\r\n    box-sizing: border-box;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n  }\r\n\r\n  h1 {\r\n    font-size: 3.125rem;\r\n    color: var(--gray-900);\r\n    font-weight: 500;\r\n    line-height: 100%;\r\n    letter-spacing: -0.125rem;\r\n    margin: 0;\r\n    font-family: \"Inter Tight\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\r\n      Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\r\n      \"Segoe UI Symbol\";\r\n  }\r\n\r\n  p {\r\n    margin: 0;\r\n    color: var(--gray-700);\r\n  }\r\n\r\n  main {\r\n    width: 100%;\r\n    min-height: 100%;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    padding: 1rem;\r\n    box-sizing: inherit;\r\n    position: relative;\r\n  }\r\n\r\n  .angular-logo {\r\n    max-width: 9.2rem;\r\n  }\r\n\r\n  .content {\r\n    display: flex;\r\n    justify-content: space-around;\r\n    width: 100%;\r\n    max-width: 700px;\r\n    margin-bottom: 3rem;\r\n  }\r\n\r\n  .content h1 {\r\n    margin-top: 1.75rem;\r\n  }\r\n\r\n  .content p {\r\n    margin-top: 1.5rem;\r\n  }\r\n\r\n  .divider {\r\n    width: 1px;\r\n    background: var(--red-to-pink-to-purple-vertical-gradient);\r\n    margin-inline: 0.5rem;\r\n  }\r\n\r\n  .pill-group {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: start;\r\n    flex-wrap: wrap;\r\n    gap: 1.25rem;\r\n  }\r\n\r\n  .pill {\r\n    display: flex;\r\n    align-items: center;\r\n    --pill-accent: var(--bright-blue);\r\n    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);\r\n    color: var(--pill-accent);\r\n    padding-inline: 0.75rem;\r\n    padding-block: 0.375rem;\r\n    border-radius: 2.75rem;\r\n    border: 0;\r\n    transition: background 0.3s ease;\r\n    font-family: var(--inter-font);\r\n    font-size: 0.875rem;\r\n    font-style: normal;\r\n    font-weight: 500;\r\n    line-height: 1.4rem;\r\n    letter-spacing: -0.00875rem;\r\n    text-decoration: none;\r\n  }\r\n\r\n  .pill:hover {\r\n    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);\r\n  }\r\n\r\n  .pill-group .pill:nth-child(6n + 1) {\r\n    --pill-accent: var(--bright-blue);\r\n  }\r\n  .pill-group .pill:nth-child(6n + 2) {\r\n    --pill-accent: var(--french-violet);\r\n  }\r\n  .pill-group .pill:nth-child(6n + 3),\r\n  .pill-group .pill:nth-child(6n + 4),\r\n  .pill-group .pill:nth-child(6n + 5) {\r\n    --pill-accent: var(--hot-red);\r\n  }\r\n\r\n  .pill-group svg {\r\n    margin-inline-start: 0.25rem;\r\n  }\r\n\r\n  .social-links {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 0.73rem;\r\n    margin-top: 1.5rem;\r\n  }\r\n\r\n  .social-links path {\r\n    transition: fill 0.3s ease;\r\n    fill: var(--gray-400);\r\n  }\r\n\r\n  .social-links a:hover svg path {\r\n    fill: var(--gray-900);\r\n  }\r\n\r\n  @media screen and (max-width: 650px) {\r\n    .content {\r\n      flex-direction: column;\r\n      width: max-content;\r\n    }\r\n\r\n    .divider {\r\n      height: 1px;\r\n      width: 100%;\r\n      background: var(--red-to-pink-to-purple-horizontal-gradient);\r\n      margin-block: 1.5rem;\r\n    }\r\n  }\r\n</style>\r\n\r\n<main class=\"main\">\r\n  <div class=\"content\">\r\n    <div class=\"left-side\">\r\n      <svg\r\n        xmlns=\"http://www.w3.org/2000/svg\"\r\n        viewBox=\"0 0 982 239\"\r\n        fill=\"none\"\r\n        class=\"angular-logo\"\r\n      >\r\n        <g clip-path=\"url(#a)\">\r\n          <path\r\n            fill=\"url(#b)\"\r\n            d=\"M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z\"\r\n          />\r\n          <path\r\n            fill=\"url(#c)\"\r\n            d=\"M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z\"\r\n          />\r\n        </g>\r\n        <defs>\r\n          <radialGradient\r\n            id=\"c\"\r\n            cx=\"0\"\r\n            cy=\"0\"\r\n            r=\"1\"\r\n            gradientTransform=\"rotate(118.122 171.182 60.81) scale(205.794)\"\r\n            gradientUnits=\"userSpaceOnUse\"\r\n          >\r\n            <stop stop-color=\"#FF41F8\" />\r\n            <stop offset=\".707\" stop-color=\"#FF41F8\" stop-opacity=\".5\" />\r\n            <stop offset=\"1\" stop-color=\"#FF41F8\" stop-opacity=\"0\" />\r\n          </radialGradient>\r\n          <linearGradient\r\n            id=\"b\"\r\n            x1=\"0\"\r\n            x2=\"982\"\r\n            y1=\"192\"\r\n            y2=\"192\"\r\n            gradientUnits=\"userSpaceOnUse\"\r\n          >\r\n            <stop stop-color=\"#F0060B\" />\r\n            <stop offset=\"0\" stop-color=\"#F0070C\" />\r\n            <stop offset=\".526\" stop-color=\"#CC26D5\" />\r\n            <stop offset=\"1\" stop-color=\"#7702FF\" />\r\n          </linearGradient>\r\n          <clipPath id=\"a\"><path fill=\"#fff\" d=\"M0 0h982v239H0z\" /></clipPath>\r\n        </defs>\r\n      </svg>\r\n      <h1>Hello, {{ title }}</h1>\r\n      <p>Congratulations! Your app is running. 🎉</p>\r\n    </div>\r\n    <div class=\"divider\" role=\"separator\" aria-label=\"Divider\"></div>\r\n    <div class=\"right-side\">\r\n      <div class=\"pill-group\">\r\n        @for (item of [\r\n          { title: 'Explore the Docs', link: 'https://angular.dev' },\r\n          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },\r\n          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },\r\n          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },\r\n          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },\r\n        ]; track item.title) {\r\n          <a\r\n            class=\"pill\"\r\n            [href]=\"item.link\"\r\n            target=\"_blank\"\r\n            rel=\"noopener\"\r\n          >\r\n            <span>{{ item.title }}</span>\r\n            <svg\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              height=\"14\"\r\n              viewBox=\"0 -960 960 960\"\r\n              width=\"14\"\r\n              fill=\"currentColor\"\r\n            >\r\n              <path\r\n                d=\"M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z\"\r\n              />\r\n            </svg>\r\n          </a>\r\n        }\r\n      </div>\r\n      <div class=\"social-links\">\r\n        <a\r\n          href=\"https://github.com/angular/angular\"\r\n          aria-label=\"Github\"\r\n          target=\"_blank\"\r\n          rel=\"noopener\"\r\n        >\r\n          <svg\r\n            width=\"25\"\r\n            height=\"24\"\r\n            viewBox=\"0 0 25 24\"\r\n            fill=\"none\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            alt=\"Github\"\r\n          >\r\n            <path\r\n              d=\"M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z\"\r\n            />\r\n          </svg>\r\n        </a>\r\n        <a\r\n          href=\"https://twitter.com/angular\"\r\n          aria-label=\"Twitter\"\r\n          target=\"_blank\"\r\n          rel=\"noopener\"\r\n        >\r\n          <svg\r\n            width=\"24\"\r\n            height=\"24\"\r\n            viewBox=\"0 0 24 24\"\r\n            fill=\"none\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            alt=\"Twitter\"\r\n          >\r\n            <path\r\n              d=\"M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z\"\r\n            />\r\n          </svg>\r\n        </a>\r\n        <a\r\n          href=\"https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw\"\r\n          aria-label=\"Youtube\"\r\n          target=\"_blank\"\r\n          rel=\"noopener\"\r\n        >\r\n          <svg\r\n            width=\"29\"\r\n            height=\"20\"\r\n            viewBox=\"0 0 29 20\"\r\n            fill=\"none\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            alt=\"Youtube\"\r\n          >\r\n            <path\r\n              fill-rule=\"evenodd\"\r\n              clip-rule=\"evenodd\"\r\n              d=\"M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z\"\r\n            />\r\n          </svg>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</main>\r\n\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n\r\n\r\n<router-outlet />\r\n"
+            "extends": []
         },
         {
             "name": "BadgeComponent",
-            "id": "component-BadgeComponent-5cd7c4c00f725dd28ba7dfaccbc9d47efb6d09cd6d86b783896a6b9e99f5e4f640d1bf052393325017337a831788a0ea811e4683cd6dc6529a4a9d7392ad279c",
+            "id": "component-BadgeComponent-2c6090387035c7fd59270a0cd9d97c93f68845bb588aa74d32dbd4e2f7d8acae1abd8f5734d7b8a3b8b78f1af5561362557d7e30f09fbb098953383f7fde7d77",
             "file": "src/app/components/atoms/badge/badge.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -121,6 +408,33 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "fontSize",
+                    "defaultValue": "'0.875rem'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "fontWeight",
+                    "defaultValue": "'500'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "height",
+                    "defaultValue": "'20px'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "label",
                     "defaultValue": "''",
                     "deprecated": false,
@@ -136,6 +450,15 @@
                     "deprecationMessage": "",
                     "line": 13,
                     "type": "\"default\" | \"info\" | \"success\" | \"warning\" | \"danger\"",
+                    "decorators": []
+                },
+                {
+                    "name": "width",
+                    "defaultValue": "'auto'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
                     "decorators": []
                 }
             ],
@@ -156,21 +479,21 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-badge',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './badge.component.html',\n  styleUrls: ['./badge.component.scss'],\n})\nexport class BadgeComponent {\n  @Input() label: string = '';\n  @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-badge',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './badge.component.html',\n  styleUrls: ['./badge.component.scss'],\n})\nexport class BadgeComponent {\n  @Input() label: string = '';\n  @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';\n  @Input() fontSize: string = '0.875rem';\n  @Input() fontWeight: string = '500';\n  @Input() height: string = '20px'; // Default height\n  @Input() width: string = 'auto'; // Default width\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".badge {\r\n  display: inline-block;\r\n  padding: 0.25rem 0.75rem;\r\n  border-radius: 0;\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  text-align: center;\r\n  white-space: nowrap;\r\n\r\n  &.default {\r\n    background-color: #e0e0e0;\r\n    color: #333;\r\n    border: 1px solid #333;\r\n  }\r\n\r\n  &.info {\r\n    background-color: #d0e7ff;\r\n    color: #0056b3;\r\n    border: 1px solid #0056b3;\r\n  }\r\n\r\n  &.success {\r\n    background-color: #d4edda;\r\n    color: #155724;\r\n    border: 1px solid #155724;\r\n  }\r\n\r\n  &.warning {\r\n    background-color: #fff3cd;\r\n    color: #856404;\r\n    border: 1px solid #856404;\r\n  }\r\n\r\n  &.danger {\r\n    background-color: #f8d7da;\r\n    color: #721c24;\r\n    border: 1px solid #721c24;\r\n  }\r\n}\r\n",
+                    "data": ".badge {\r\n  display: inline-flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  border-radius: 6px;\r\n  text-align: center;\r\n  white-space: nowrap;\r\n  box-sizing: border-box;\r\n  padding: 0 0.75rem; // Horizontal padding only, height is controlled via input\r\n\r\n  &.default {\r\n    background-color: #e0e0e0;\r\n    color: #333;\r\n    border: 1px solid #333;\r\n  }\r\n\r\n  &.info {\r\n    background-color: #d0e7ff;\r\n    color: #0056b3;\r\n    border: 1px solid #0056b3;\r\n  }\r\n\r\n  &.success {\r\n    background-color: #d4edda;\r\n    color: #155724;\r\n    border: 1px solid #155724;\r\n  }\r\n\r\n  &.warning {\r\n    background-color: #fff3cd;\r\n    color: #856404;\r\n    border: 1px solid #856404;\r\n  }\r\n\r\n  &.danger {\r\n    background-color: #f8d7da;\r\n    color: #721c24;\r\n    border: 1px solid #721c24;\r\n  }\r\n}\r\n",
                     "styleUrl": "./badge.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<span class=\"badge\" [ngClass]=\"variant\">\n  {{ label }}\n</span>\n"
+            "templateData": "<span\n  class=\"badge\"\n  [ngClass]=\"variant\"\n  [style.fontSize]=\"fontSize\"\n  [style.fontWeight]=\"fontWeight\"\n  [style.height]=\"height\"\n  [style.width]=\"width\"\n>\n  {{ label }}\n</span>\n"
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-e97c8a1055eada83583743d6a9e5675b70e14ea0a87deb4a5feeeaaf89d46061e00852bcce149e2886d2c983dfe2f78ebce837db184378637868c2d68ba94ae4",
+            "id": "component-ButtonComponent-a906cbef31ddd726a8f32401b4aa3e528199f23af81a0e5b0597164256545510e649548c8808b446512093a805931c33741832b8def78ad399ececbb650fb68b",
             "file": "src/app/components/atoms/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -189,6 +512,15 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "borderless",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
                     "name": "borderRadius",
                     "defaultValue": "'0px'",
                     "deprecated": false,
@@ -204,6 +536,24 @@
                     "deprecationMessage": "",
                     "line": 15,
                     "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "fontSize",
+                    "defaultValue": "'1rem'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "height",
+                    "defaultValue": "'auto'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "string",
                     "decorators": []
                 },
                 {
@@ -249,6 +599,15 @@
                     "line": 16,
                     "type": "\"primary\" | \"secondary\" | \"danger\"",
                     "decorators": []
+                },
+                {
+                    "name": "width",
+                    "defaultValue": "'auto'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "string",
+                    "decorators": []
                 }
             ],
             "outputsClass": [],
@@ -272,21 +631,21 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { IconComponent } from '../icon/icon.component';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  standalone: true,\r\n  imports: [CommonModule, IconComponent],\r\n  templateUrl: './button.component.html',\r\n  styleUrls: ['./button.component.scss'],\r\n})\r\nexport class ButtonComponent {\r\n  @Input() label: string = 'Button';\r\n  @Input() type: 'button' | 'submit' | 'reset' = 'button';\r\n  @Input() disabled: boolean = false;\r\n  @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';\r\n  @Input() icon?: string; // Material icon name\r\n  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front\r\n  @Input() borderRadius: string = '0px'; // Default square\r\n\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { IconComponent } from '../icon/icon.component';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  standalone: true,\r\n  imports: [CommonModule, IconComponent],\r\n  templateUrl: './button.component.html',\r\n  styleUrls: ['./button.component.scss'],\r\n})\r\nexport class ButtonComponent {\r\n  @Input() label: string = 'Button';\r\n  @Input() type: 'button' | 'submit' | 'reset' = 'button';\r\n  @Input() disabled: boolean = false;\r\n  @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';\r\n  @Input() icon?: string; // Material icon name\r\n  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front\r\n  @Input() borderRadius: string = '0px'; // Default square\r\n  @Input() borderless: boolean = false; // Default is not borderless (with border)\r\n  @Input() width: string = 'auto'; // Default is auto width\r\n  @Input() height: string = 'auto'; // Default is auto height\r\n  @Input() fontSize: string = '1rem'; // Default font size\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "button {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  font-weight: 600;\r\n  font-size: 0.95rem;\r\n  padding: 0.4rem 0.9rem;\r\n  cursor: pointer;\r\n  background-color: white;\r\n  border: 2px solid;\r\n  border-radius: 0px;\r\n  transition: background-color 0.2s, color 0.2s, border-color 0.2s;\r\n\r\n  &.primary {\r\n    border-color: #af15fd;\r\n    color: #af15fd;\r\n\r\n    &:hover {\r\n      background-color: rgba(175, 21, 253, 0.1);\r\n    }\r\n  }\r\n\r\n  &.secondary {\r\n    border-color: #6c757d;\r\n    color: #6c757d;\r\n\r\n    &:hover {\r\n      background-color: rgba(108, 117, 125, 0.1);\r\n    }\r\n  }\r\n\r\n  &.danger {\r\n    border-color: #dc3545;\r\n    color: #dc3545;\r\n\r\n    &:hover {\r\n      background-color: rgba(220, 53, 69, 0.1);\r\n    }\r\n  }\r\n\r\n  &:disabled {\r\n    opacity: 0.6;\r\n    cursor: not-allowed;\r\n    background-color: #f9f9f9;\r\n    color: #ccc;\r\n    border-color: #ccc;\r\n  }\r\n\r\n  app-icon {\r\n    color: inherit; // This makes the icon the same colour as the text\r\n  }\r\n}\r\n",
+                    "data": "button {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  gap: 0.5rem;\r\n  font-weight: 600;\r\n  padding: 0.4rem 0.9rem;\r\n  cursor: pointer;\r\n  background-color: white;\r\n  border: 2px solid;\r\n  border-radius: 0px;\r\n  transition: background-color 0.2s, color 0.2s, border-color 0.2s;\r\n\r\n  &.primary {\r\n    border-color: #af15fd;\r\n    color: #af15fd;\r\n\r\n    &:hover {\r\n      background-color: rgba(175, 21, 253, 0.1);\r\n    }\r\n  }\r\n\r\n  &.secondary {\r\n    border-color: #6c757d;\r\n    color: #6c757d;\r\n\r\n    &:hover {\r\n      background-color: rgba(108, 117, 125, 0.1);\r\n    }\r\n  }\r\n\r\n  &.danger {\r\n    border-color: #dc3545;\r\n    color: #dc3545;\r\n\r\n    &:hover {\r\n      background-color: rgba(220, 53, 69, 0.1);\r\n    }\r\n  }\r\n\r\n  &:disabled {\r\n    opacity: 0.6;\r\n    cursor: not-allowed;\r\n    background-color: #f9f9f9;\r\n    color: #ccc;\r\n    border-color: #ccc;\r\n  }\r\n\r\n  app-icon {\r\n    color: inherit;\r\n  }\r\n}\r\n\r\nbutton.borderless {\r\n  border: none !important;\r\n  background-color: transparent !important;\r\n  padding: 0;\r\n  box-shadow: none;\r\n\r\n  &:hover {\r\n    background-color: rgba(0, 0, 0, 0.05);\r\n  }\r\n\r\n  &:disabled {\r\n    opacity: 0.5;\r\n    background-color: transparent;\r\n    cursor: not-allowed;\r\n  }\r\n}\r\n",
                     "styleUrl": "./button.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<button\r\n  [type]=\"type\"\r\n  [disabled]=\"disabled\"\r\n  [ngClass]=\"variant\"\r\n  [style.borderRadius]=\"borderRadius\"\r\n>\r\n  <ng-container *ngIf=\"icon && iconPosition === 'start'\">\r\n    <app-icon [name]=\"icon\" size=\"20px\" />\r\n  </ng-container>\r\n\r\n  <span>{{ label }}</span>\r\n\r\n  <ng-container *ngIf=\"icon && iconPosition === 'end'\">\r\n    <app-icon [name]=\"icon\" size=\"20px\" />\r\n  </ng-container>\r\n</button>\r\n"
+            "templateData": "<button\r\n  [type]=\"type\"\r\n  [disabled]=\"disabled\"\r\n  [ngClass]=\"[variant, borderless ? 'borderless' : '']\"\r\n  [style.borderRadius]=\"borderRadius\"\r\n  [style.width]=\"width\"\r\n  [style.height]=\"height\"\r\n  [style.fontSize]=\"fontSize\"\r\n>\r\n  <ng-container *ngIf=\"icon && iconPosition === 'start'\">\r\n    <app-icon [name]=\"icon\" size=\"20px\" />\r\n  </ng-container>\r\n\r\n  <span>{{ label }}</span>\r\n\r\n  <ng-container *ngIf=\"icon && iconPosition === 'end'\">\r\n    <app-icon [name]=\"icon\" size=\"20px\" />\r\n  </ng-container>\r\n</button>\r\n"
         },
         {
             "name": "CheckboxComponent",
-            "id": "component-CheckboxComponent-3c42d2c8765a341cccb2a664b6e6d3d99dd534c52cd890c0f5d0e84ac1ad86afcf54d38892cb17bfffcd299c9866f673c775ef2124d17206f47938b49beb222a",
+            "id": "component-CheckboxComponent-696bcf6fa0f162e723d876a91bd24060917f3b901f3fc6988699d5bc6e04aaf1ccdfdde650f51d1a2b10f3e4719aed23cbe78f77e0012b955e8e139a38d476db",
             "file": "src/app/components/atoms/checkbox/checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -314,6 +673,15 @@
                     "decorators": []
                 },
                 {
+                    "name": "colour",
+                    "defaultValue": "'#af15fd'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "disabled",
                     "defaultValue": "false",
                     "deprecated": false,
@@ -329,7 +697,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "EventEmitter"
                 }
             ],
@@ -341,7 +709,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 17,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -360,22 +728,163 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss'],\n})\nexport class CheckboxComponent {\n  @Input() checked: boolean = false;\n  @Input() disabled: boolean = false;\n  @Output() checkedChange = new EventEmitter<boolean>();\n\n  toggleCheck() {\n    if (!this.disabled) {\n      this.checked = !this.checked;\n      this.checkedChange.emit(this.checked);\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss'],\n})\nexport class CheckboxComponent {\n  @Input() checked: boolean = false;\n  @Input() disabled: boolean = false;\n  @Input() colour: string = '#af15fd';\n  @Output() checkedChange = new EventEmitter<boolean>();\n\n  toggleCheck() {\n    if (!this.disabled) {\n      this.checked = !this.checked;\n      this.checkedChange.emit(this.checked);\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".checkbox-wrapper {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  cursor: pointer;\r\n\r\n  input {\r\n    display: none;\r\n  }\r\n\r\n  .custom-checkbox {\r\n    width: 16px;\r\n    height: 16px;\r\n    border: 2px solid #999;\r\n    border-radius: 4px;\r\n    display: inline-block;\r\n    position: relative;\r\n\r\n    &::after {\r\n      content: '';\r\n      position: absolute;\r\n      top: 1px;\r\n      left: 4px;\r\n      width: 4px;\r\n      height: 8px;\r\n      border: solid #333;\r\n      border-width: 0 2px 2px 0;\r\n      transform: rotate(45deg);\r\n      opacity: 0;\r\n      transition: opacity 0.2s;\r\n    }\r\n  }\r\n\r\n  input:checked + .custom-checkbox::after {\r\n    opacity: 1;\r\n  }\r\n\r\n  input:disabled + .custom-checkbox {\r\n    opacity: 0.4;\r\n    cursor: not-allowed;\r\n  }\r\n}\r\n",
+                    "data": ".checkbox-wrapper {\r\n  input {\r\n    display: none;\r\n  }\r\n\r\n  .custom-checkbox {\r\n    width: 20px;\r\n    height: 20px;\r\n    border: 2px solid;\r\n    border-radius: 4px;\r\n    display: inline-block;\r\n    position: relative;\r\n\r\n    .checkmark {\r\n      position: absolute;\r\n      top: 1px;\r\n      left: 6px;\r\n      width: 5px;\r\n      height: 12px;\r\n      border: solid;\r\n      border-width: 0 3px 3px 0;\r\n      color: inherit;\r\n      content: '';\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./checkbox.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<label class=\"checkbox-wrapper\">\n  <input\n    type=\"checkbox\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    (change)=\"toggleCheck()\"\n    title=\"Toggle option\"\n  />\n  <span class=\"custom-checkbox\"></span>\n</label>\n"
+            "templateData": "<label class=\"checkbox-wrapper\" [for]=\"'customCheckbox'\">\n  <input\n    id=\"customCheckbox\"\n    type=\"checkbox\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    (change)=\"toggleCheck()\"\n    title=\"Toggle checkbox\"\n  />\n  <span class=\"custom-checkbox\" [style.borderColor]=\"colour\">\n    <span\n      class=\"checkmark\"\n      *ngIf=\"checked\"\n      [style.borderColor]=\"colour\"\n      [style.transform]=\"'rotate(45deg)'\"\n    ></span>\n  </span>\n</label>\n"
+        },
+        {
+            "name": "FilterActionGroupComponent",
+            "id": "component-FilterActionGroupComponent-75009c90815b884a0e28d9aab5e49943d3319c9592c614cbf620d563a27f7b23e73dc8681e8096a327841430a52751c9792ee7fdf659bea5babf53fb6ab187ee",
+            "file": "src/app/components/organisms/filterActionGroup/filterActionGroup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-filter-action-group",
+            "styleUrls": [
+                "./filterActionGroup.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./filterActionGroup.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "tabs",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "FilterTab[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "exportClicked",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "filterClicked",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "tabChanged",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "handleExport",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "handleFilter",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "handleTabChange",
+                    "args": [
+                        {
+                            "name": "tab",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "tab",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TabGroupComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "ActionBarComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TabGroupComponent } from '../../molecules/filterTabGroup/filterTabGroup.component';\nimport { ActionBarComponent } from '../../molecules/actionBar/actionBar.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-filter-action-group',\n  standalone: true,\n  imports: [CommonModule, TabGroupComponent, ActionBarComponent],\n  templateUrl: './filterActionGroup.component.html',\n  styleUrls: ['./filterActionGroup.component.scss'],\n})\nexport class FilterActionGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n\n  @Output() tabChanged = new EventEmitter<string>();\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  handleTabChange(tab: string) {\n    this.tabChanged.emit(tab);\n  }\n\n  handleExport() {\n    this.exportClicked.emit();\n  }\n\n  handleFilter() {\n    this.filterClicked.emit();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".filter-action-group {\r\n  display: flex;\r\n  justify-content:  space-between;\r\n  align-items: center;\r\n  flex-wrap: wrap;\r\n  gap: 1rem;\r\n\r\n}\r\n",
+                    "styleUrl": "./filterActionGroup.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"filter-action-group\">\n  <app-tab-group\n    [tabs]=\"tabs\"\n    (tabSelected)=\"handleTabChange($event)\"\n  />\n\n  <app-action-bar\n    (exportClicked)=\"handleExport()\"\n    (filterClicked)=\"handleFilter()\"\n  />\n</div>\n"
         },
         {
             "name": "FilterTabButtonComponent",
-            "id": "component-FilterTabButtonComponent-2ec47d853856c3b7325d30f8f95baa9263cf24a52d897c1f45807013d255fe3e036ea27f61af3a173c263bf245ce69a8d067dc00cc221b594ae580bab1cffa48",
-            "file": "src/app/components/molecules/filterTabButton/filterTabButton.component.ts",
+            "id": "component-FilterTabButtonComponent-5dcf800d283cf7724187dc43f91c3a0bc9aa180b8ef22befcc947587c9c60365f1504080df3b41b5394930aa2dbd215a58185ce4130bc95f6ae531bc6358b179",
+            "file": "src/app/components/atoms/filterTabButton/filterTabButton.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -461,11 +970,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-filter-tab-button',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './filterTabButton.component.html',\n  styleUrls: ['./filterTabButton.component.scss'],\n})\nexport class FilterTabButtonComponent {\n  @Input() label: string = '';\n  @Input() count: number = 0;\n  @Input() active: boolean = false;\n\n  @Output() selected = new EventEmitter<void>();\n\n  handleClick(): void {\n    this.selected.emit();\n  }\n\n  get displayText(): string {\n    return `${this.label} (${this.count})`;\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../button/button.component';\n\n@Component({\n  selector: 'app-filter-tab-button',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './filterTabButton.component.html',\n  styleUrls: ['./filterTabButton.component.scss'],\n})\nexport class FilterTabButtonComponent {\n  @Input() label: string = '';\n  @Input() count: number = 0;\n  @Input() active: boolean = false;\n\n  @Output() selected = new EventEmitter<void>();\n\n  handleClick(): void {\n    this.selected.emit();\n  }\n\n  get displayText(): string {\n    return `${this.label} (${this.count})`;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: inline-block;\r\n  margin-right: 0.5rem;\r\n\r\n  app-button {\r\n    padding: 0.35rem 1.2rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n    background-color: white;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ":host {\r\n  display: inline-block;\r\n\r\n  app-button {\r\n    padding: 0.35rem 0.3rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n    background-color: white;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./filterTabButton.component.scss"
                 }
             ],
@@ -482,7 +991,7 @@
                     }
                 }
             },
-            "templateData": "<app-button\n  [label]=\"displayText\"\n  [variant]=\"active ? 'primary' : 'secondary'\"\n  [borderRadius]=\"'9999px'\"\n  (click)=\"handleClick()\"\n/>\n"
+            "templateData": "<app-button\n  [label]=\"displayText\"\n  [variant]=\"active ? 'primary' : 'secondary'\"\n  [borderRadius]=\"'9999px'\"\n  (click)=\"handleClick()\"\n  width=\"auto\"\n  height=\"35px\"\n  fontSize=\"14px\"\n/>\n"
         },
         {
             "name": "IconComponent",
@@ -557,7 +1066,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "mat-icon {\r\n  vertical-align: middle;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n",
+                    "data": "mat-icon {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  vertical-align: middle;\r\n  font-size: inherit;\r\n  height: 1em;\r\n  width: 1em;\r\n  line-height: 1;\r\n}\r\n",
                     "styleUrl": "./icon.component.scss"
                 }
             ],
@@ -566,9 +1075,522 @@
             "templateData": "<mat-icon [style.fontSize]=\"size\" [style.color]=\"colour\">\r\n  {{ name }}\r\n</mat-icon>\r\n"
         },
         {
+            "name": "MainGroupTemplateComponent",
+            "id": "component-MainGroupTemplateComponent-03ff7f925a6b984d7231f7f1d7b4d6a1814c60ebe2fe7a5c571650a7e02b421937445b806d39282c04e94480cf3c993d4822149991679b4f31a151c46d039a31",
+            "file": "src/app/components/templates/mainGroup/mainGroup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-main-group-template",
+            "styleUrls": [
+                "./mainGroup.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./mainGroup.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "filterTabs",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 27,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "navTabs",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "statCards",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "tableData",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "any[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NavTabGroupComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "StatCardGroupComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "FilterActionGroupComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TableHeaderComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TableRowGroupComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { NavTabGroupComponent } from '../../organisms/navTabGroup/navTabGroup.component';\nimport { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGroup.component';\nimport { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';\nimport { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';\nimport { TableRowGroupComponent } from '../../organisms/tableRowGroup/tableRowGroup.component';\n\n@Component({\n  selector: 'app-main-group-template',\n  standalone: true,\n  imports: [\n    CommonModule,\n    NavTabGroupComponent,\n    StatCardGroupComponent,\n    FilterActionGroupComponent,\n    TableHeaderComponent,\n    TableRowGroupComponent\n  ],\n  templateUrl: './mainGroup.component.html',\n  styleUrls: ['./mainGroup.component.scss']\n})\nexport class MainGroupTemplateComponent {\n  @Input() navTabs: any[] = [];\n  @Input() statCards: any[] = [];\n  @Input() filterTabs: any[] = [];\n  @Input() tableData: any[] = [];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".main-template {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n  padding: 1rem;\r\n  background: #f5f5f5;\r\n}\r\n\r\n.table-section {\r\n  border: 1px solid #ccc;\r\n  border-radius: 6px;\r\n  overflow-x: auto;\r\n  background: white;\r\n}\r\n\r\n\r\napp-stat-card-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n  padding-bottom: 1rem;\r\n  padding-top: 1rem;\r\n}\r\n\r\napp-filter-action-bar {\r\n  padding-bottom: 2rem;\r\n}\r\n\r\n// app-nav-tab-group {\r\n//   border: 1px dashed red; //Debug\r\n//   min-height: 3rem;\r\n// }\r\n",
+                    "styleUrl": "./mainGroup.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"main-template\">\n  <app-nav-tab-group [tabs]=\"navTabs\" />\n\n  <app-stat-card-group [cards]=\"statCards\" />\n\n  <app-filter-action-group [tabs]=\"filterTabs\" />\n\n  <div class=\"table-section\">\n    <app-table-header />\n    <app-table-row-group [rows]=\"tableData\" />\n  </div>\n</div>\n"
+        },
+        {
+            "name": "MainPageComponent",
+            "id": "component-MainPageComponent-b4f175fd5ec5d07398d1bb62e88852dbfe8668ffbed07225dfa82f79e941f3e74b8f3c7acfd623cec35f2927c39b17f50edf0b0bbb4c97e5994411c560a0655f",
+            "file": "src/app/components/pages/mainPage/mainPage.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-main-page",
+            "styleUrls": [
+                "./mainPage.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./mainPage.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "filterTabs",
+                    "defaultValue": "[\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post' },\n    { label: 'Refund request', count: 13, state: 'refund' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "navTabs",
+                    "defaultValue": "[\n    { label: 'Today', icon: 'calendar_today', route: '/', active: true },\n    { label: 'Job done', icon: 'check', route: '/done', active: false },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "statCards",
+                    "defaultValue": "[\n    { count: 850, label: 'Priority', icon: 'logout' },\n    { count: 850, label: 'Express', icon: 'logout' },\n    { count: 850, label: 'Standard', icon: 'logout' },\n    { count: 850, label: 'Documents waiting', icon: 'logout' },\n    { count: 850, label: 'Unpaid waiting', icon: 'logout' },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "tableData",
+                    "defaultValue": "[\n    { id: 1, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 2, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MainGroupTemplateComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\n\n@Component({\n  selector: 'app-main-page',\n  standalone: true,\n  imports: [CommonModule, MainGroupTemplateComponent],\n  templateUrl: './mainPage.component.html',\n  styleUrls: ['./mainPage.component.scss'],\n})\nexport class MainPageComponent {\n  navTabs = [\n    { label: 'Today', icon: 'calendar_today', route: '/', active: true },\n    { label: 'Job done', icon: 'check', route: '/done', active: false },\n  ];\n\n  statCards = [\n    { count: 850, label: 'Priority', icon: 'logout' },\n    { count: 850, label: 'Express', icon: 'logout' },\n    { count: 850, label: 'Standard', icon: 'logout' },\n    { count: 850, label: 'Documents waiting', icon: 'logout' },\n    { count: 850, label: 'Unpaid waiting', icon: 'logout' },\n  ];\n\n  filterTabs = [\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post' },\n    { label: 'Refund request', count: 13, state: 'refund' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ];\n\n  tableData = [\n    { id: 1, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 2, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n  ];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".page-wrapper {\r\n  background-color: #f5f5f5;\r\n  min-height: 100vh;\r\n  padding: 2rem;\r\n  box-sizing: border-box;\r\n}\r\n",
+                    "styleUrl": "./mainPage.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"page-wrapper\">\n  <app-main-group-template\n    [navTabs]=\"navTabs\"\n    [statCards]=\"statCards\"\n    [filterTabs]=\"filterTabs\"\n    [tableData]=\"tableData\"\n  />\n</div>\n"
+        },
+        {
+            "name": "NavTabComponent",
+            "id": "component-NavTabComponent-0ad05e8e5315369bfe04e95755d321433f5ff2f5c19c76261e8fec286587a5b09caa8314aa065a454a4aae6a84827d893981d120cf9d4e591f9d7fe0306f9a2f",
+            "file": "src/app/components/molecules/navTab/navTab.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-nav-tab",
+            "styleUrls": [
+                "./navTab.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./navTab.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "active",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "route",
+                    "defaultValue": "'/'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "RouterModule",
+                    "type": "module"
+                },
+                {
+                    "name": "IconComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { RouterModule } from '@angular/router';\nimport { IconComponent } from '../../atoms/icon/icon.component';\nimport { TextComponent } from '../../atoms/text/text.component';\n\n@Component({\n  selector: 'app-nav-tab',\n  standalone: true,\n  imports: [CommonModule, RouterModule, IconComponent, TextComponent],\n  templateUrl: './navTab.component.html',\n  styleUrls: ['./navTab.component.scss'],\n})\nexport class NavTabComponent {\n  @Input() label: string = '';\n  @Input() icon: string = '';\n  @Input() route: string = '/';\n  @Input() active: boolean = false;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".nav-tab {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 0.4rem;\r\n  padding: 0.25rem 1rem 0.35rem; // reduced bottom padding\r\n  text-decoration: none;\r\n  color: #6c757d;\r\n  cursor: pointer;\r\n  border-bottom: 2px solid transparent;\r\n  transition: border-color 0.2s, color 0.2s;\r\n\r\n  &.active {\r\n    color: #af15fd;\r\n    border-bottom-color: #af15fd;\r\n  }\r\n\r\n  &:hover {\r\n    color: #bf41fe;\r\n    border-bottom-color: #ce70fd;\r\n  }\r\n\r\n  app-icon,\r\n  app-text {\r\n    display: inline-flex;\r\n    align-items: center;\r\n  }\r\n\r\n  app-text {\r\n    font-size: 0.95rem;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./navTab.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<a\n  [routerLink]=\"route\"\n  class=\"nav-tab\"\n  [class.active]=\"active\"\n>\n  <app-icon [name]=\"icon\" size=\"18px\" />\n  <app-text [content]=\"label\" weight=\"medium\" />\n</a>\n"
+        },
+        {
+            "name": "NavTabGroupComponent",
+            "id": "component-NavTabGroupComponent-5a3f236bba8b3fe2676627dece4ebbacbbd85270f9cc1be025635cba8242a792f694d09659b6e48a2a21f49259fba8911b4ccf9dd5d8331fed7dc230e2ea2606",
+            "file": "src/app/components/organisms/navTabGroup/navTabGroup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-nav-tab-group",
+            "styleUrls": [
+                "./navTabGroup.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./navTabGroup.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "tabs",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "NavTabItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NavTabComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NavTabComponent } from '../../molecules/navTab/navTab.component';\n\nexport interface NavTabItem {\n  label: string;\n  icon: string;\n  route: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-nav-tab-group',\n  standalone: true,\n  imports: [CommonModule, NavTabComponent],\n  templateUrl: './navTabGroup.component.html',\n  styleUrls: ['./navTabGroup.component.scss'],\n})\nexport class NavTabGroupComponent {\n  @Input() tabs: NavTabItem[] = [];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".nav-tab-group {\r\n  display: flex;\r\n  gap: 1rem;\r\n  border-bottom: 1px solid #e0e0e0;\r\n  padding-bottom: 0.5rem;\r\n  align-items: flex-end;\r\n}\r\n",
+                    "styleUrl": "./navTabGroup.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<nav class=\"nav-tab-group\">\n  <app-nav-tab\n    *ngFor=\"let tab of tabs\"\n    [label]=\"tab.label\"\n    [icon]=\"tab.icon\"\n    [route]=\"tab.route\"\n    [active]=\"tab.active ?? false\"\n  />\n</nav>\n"
+        },
+        {
+            "name": "StatCardComponent",
+            "id": "component-StatCardComponent-6afbbb34289545519069fff08d9ab371d34161f36a83062281cbc7898381b0d63801c9ca550235291548d9a4c2c25c314d3ece5f25bd510a157dd162806959d0",
+            "file": "src/app/components/molecules/statCard/statCard.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-stat-card",
+            "styleUrls": [
+                "./statCard.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./statCard.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "count",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "number | string",
+                    "decorators": []
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TextComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { IconComponent } from '../../atoms/icon/icon.component';\n\n@Component({\n  selector: 'app-stat-card',\n  standalone: true,\n  imports: [CommonModule, TextComponent, IconComponent],\n  templateUrl: './statCard.component.html',\n  styleUrls: ['./statCard.component.scss'],\n})\nexport class StatCardComponent {\n  @Input() label: string = '';\n  @Input() count: number | string = '';\n  @Input() icon: string = '';\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: block;\r\n  flex: 1 1 140px;           // responsive card sizing\r\n  max-width: 380px;          // optional cap\r\n  min-width: 140px;\r\n}\r\n\r\n.stat-card {\r\n  position: relative;\r\n  padding: 1rem;\r\n  border: 1px solid #e0e0e0;\r\n  border-radius: 8px;\r\n  background-color: white;\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);\r\n  height: 64px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n\r\n  .card-icon {\r\n    position: absolute;\r\n    top: 0.5rem;\r\n    right: 0.5rem;\r\n  }\r\n\r\n  .card-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./statCard.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"stat-card\">\n  <div class=\"card-icon\">\n    <app-icon [name]=\"icon\" size=\"20px\" colour=\"#af15fd\" />\n  </div>\n\n  <div class=\"card-content\">\n    <app-text [content]=\"count.toString()\" size=\"lg\" weight=\"bold\" />\n    <app-text [content]=\"label\" size=\"md\" />\n  </div>\n</div>\n"
+        },
+        {
+            "name": "StatCardGroupComponent",
+            "id": "component-StatCardGroupComponent-132c7cce5907fbc1ae9c76fad76709dd8f45c4ddad5d45de80493ab0386503224cf698f096b69f1e66674fd4157f0708c47a79c6dbf91e24de77c6190440f6a1",
+            "file": "src/app/components/organisms/statCardGroup/statCardGroup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-stat-card-group",
+            "styleUrls": [
+                "./statCardGroup.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./statCardGroup.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "cards",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "StatCardItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "StatCardComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StatCardComponent } from '../../molecules/statCard/statCard.component';\n\nexport interface StatCardItem {\n  count: number | string;\n  label: string;\n  icon: string;\n}\n\n@Component({\n  selector: 'app-stat-card-group',\n  standalone: true,\n  imports: [CommonModule, StatCardComponent],\n  templateUrl: './statCardGroup.component.html',\n  styleUrls: ['./statCardGroup.component.scss'],\n})\nexport class StatCardGroupComponent {\n  @Input() cards: StatCardItem[] = [];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".stat-card-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 1rem;\r\n  //padding: 1rem;\r\n  width: 100%;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n\r\n",
+                    "styleUrl": "./statCardGroup.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"stat-card-group\">\n  <app-stat-card\n    *ngFor=\"let card of cards\"\n    [count]=\"card.count\"\n    [label]=\"card.label\"\n    [icon]=\"card.icon\"\n  />\n</div>\n"
+        },
+        {
             "name": "TabGroupComponent",
-            "id": "component-TabGroupComponent-33302887bf821c5c86cc1931a24f03d8a900382de7af8a8dec0644cf87b5d0ddd639e696724ef2c4e011049146cf2db6c55db09964f9c18549da03b3a0efe136",
-            "file": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
+            "id": "component-TabGroupComponent-c52361acedb37a22315a2ddf6bbceafd3cf94e64c1594615cd4b0e1f92d479d5eda84ea4984a3d40c7a7ebd1e3d4e75999c60c10fadfa3bec6d4854cfc7ea7da",
+            "file": "src/app/components/molecules/filterTabGroup/filterTabGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -576,24 +1598,15 @@
             "providers": [],
             "selector": "app-tab-group",
             "styleUrls": [
-                "./tabGroup.component.scss"
+                "./filterTabGroup.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./tabGroup.component.html"
+                "./filterTabGroup.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
-                {
-                    "name": "selectedTab",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 19,
-                    "type": "string",
-                    "decorators": []
-                },
                 {
                     "name": "tabs",
                     "defaultValue": "[]",
@@ -610,14 +1623,54 @@
                     "defaultValue": "new EventEmitter<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 23,
                     "type": "EventEmitter"
                 }
             ],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "selectedTab",
+                    "defaultValue": "signal('')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "WritableSignal<string>",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "onSelectTab",
+                    "name": "isActive",
+                    "args": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "selectTab",
                     "args": [
                         {
                             "name": "label",
@@ -629,7 +1682,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -663,17 +1716,509 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent],\n  templateUrl: './tabGroup.component.html',\n  styleUrls: ['./tabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = ''; // currently active tab\n  @Output() tabSelected = new EventEmitter<string>();\n\n  onSelectTab(label: string): void {\n    this.tabSelected.emit(label);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, signal, WritableSignal, computed } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent],\n  templateUrl: './filterTabGroup.component.html',\n  styleUrls: ['./filterTabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n\n  // signal to track the selected tab label\n  selectedTab: WritableSignal<string> = signal(''); // signal-based\n\n  @Output() tabSelected = new EventEmitter<string>();\n\n  selectTab(label: string): void {\n    this.selectedTab.set(label);\n    this.tabSelected.emit(label);\n  }\n\n  isActive(label: string): boolean {\n    return this.selectedTab() === label;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".tab-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  column-gap: 0.5rem;\r\n  row-gap: 0.4rem;\r\n}\r\n",
-                    "styleUrl": "./tabGroup.component.scss"
+                    "data": ".filter-tab-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  column-gap: 2px;\r\n  row-gap: 0.4rem;\r\n}\r\n",
+                    "styleUrl": "./filterTabGroup.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"tab-group\">\n  <app-filter-tab-button\n    *ngFor=\"let tab of tabs\"\n    [label]=\"tab.label\"\n    [count]=\"tab.count\"\n    [active]=\"selectedTab === tab.label\"\n    (selected)=\"onSelectTab(tab.label)\"\n  />\n</div>\n"
+            "templateData": "<div class=\"filter-tab-group\">\n  <app-filter-tab-button\n    *ngFor=\"let tab of tabs\"\n    [label]=\"tab.label\"\n    [count]=\"tab.count\"\n    [active]=\"isActive(tab.label)\"\n    (selected)=\"selectTab(tab.label)\"\n  />\n</div>\n"
+        },
+        {
+            "name": "TableHeaderComponent",
+            "id": "component-TableHeaderComponent-d9798630b9d634c4e0e20b4b0ccc4fa3c8195c11ebdf484f3200e5ab1a97d2ff7e7e80bd4f92f09c7086119a9c191ab867aabf11052f4587a1640df8b9620df3",
+            "file": "src/app/components/molecules/tableHeader/tableHeader.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-table-header",
+            "styleUrls": [
+                "./tableHeader.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./tableHeader.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "allChecked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "sortDirection",
+                    "defaultValue": "'asc'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "\"asc\" | \"desc\"",
+                    "decorators": []
+                },
+                {
+                    "name": "sortKey",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "sortChange",
+                    "defaultValue": "new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "toggleAll",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "handleToggleAll",
+                    "args": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleSort",
+                    "args": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "key",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TextComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "IconComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "CheckboxComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { IconComponent } from '../../atoms/icon/icon.component';\nimport { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';\n\n@Component({\n  selector: 'app-table-header',\n  standalone: true,\n  imports: [CommonModule, TextComponent, IconComponent, CheckboxComponent],\n  templateUrl: './tableHeader.component.html',\n  styleUrls: ['./tableHeader.component.scss'],\n})\nexport class TableHeaderComponent {\n  @Input() sortKey: string = '';\n  @Input() sortDirection: 'asc' | 'desc' = 'asc';\n  @Input() allChecked: boolean = false;\n\n  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();\n  @Output() toggleAll = new EventEmitter<boolean>();\n\n  toggleSort(key: string): void {\n    const newDirection = (key === this.sortKey && this.sortDirection === 'asc') ? 'desc' : 'asc';\n    this.sortChange.emit({ key, direction: newDirection });\n  }\n\n  handleToggleAll(checked: boolean) {\n    this.toggleAll.emit(checked);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".table-header-row {\r\n  display: table;\r\n  width: 100%;\r\n  table-layout: fixed;\r\n\r\n  th {\r\n    padding: 0.75rem 1rem;\r\n    text-align: left;\r\n    border-bottom: 2px solid #e0e0e0;\r\n    -webkit-user-select: none;\r\n    user-select: none;\r\n    vertical-align: middle;\r\n\r\n    &.checkbox-cell {\r\n      width: 60px;\r\n      text-align: center;\r\n      padding: 0;\r\n    }\r\n\r\n    &.state-cell {\r\n      width: 160px;\r\n      text-align: left;\r\n    }\r\n\r\n    &.file-number-cell {\r\n      width: auto;\r\n      text-align: left;\r\n    }\r\n\r\n    &.divider-col {\r\n      width: 1px;\r\n      padding: 0;\r\n      background-color: #e0e0e0;\r\n    }\r\n\r\n    &.action-cell {\r\n      width: 200px;\r\n      text-align: left;\r\n    }\r\n\r\n    &.sortable {\r\n      cursor: pointer;\r\n    }\r\n\r\n    .th-content {\r\n      display: flex;\r\n      align-items: center;\r\n      gap: 0.25rem;\r\n    }\r\n  }\r\n}\r\n",
+                    "styleUrl": "./tableHeader.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<tr class=\"table-header-row\">\n  <th class=\"checkbox-cell\">\n    <app-checkbox\n    [checked]=\"allChecked\"\n    (checkedChange)=\"handleToggleAll($event)\"\n    />\n  </th>\n\n  <th class=\"state-cell\">\n    <app-text content=\"State\" weight=\"medium\" size=\"md\" />\n  </th>\n\n  <th class=\"sortable\" (click)=\"toggleSort('fileNumber')\">\n    <div class=\"th-content\">\n      <app-text content=\"File number\" weight=\"medium\" size=\"md\" />\n      <app-icon\n        *ngIf=\"sortKey === 'fileNumber'\"\n        [name]=\"sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'\"\n        size=\"16px\"\n      />\n    </div>\n  </th>\n\n  <th class=\"divider-col\" aria-hidden=\"true\"></th>\n\n  <th class=\"action-cell\">\n    <app-text content=\"Action\" weight=\"medium\" size=\"md\" />\n  </th>\n</tr>\n"
+        },
+        {
+            "name": "TableRowComponent",
+            "id": "component-TableRowComponent-59c610e8cfbc922426ed38c68e72f0b3734a261217322f1d78a38939e2dcb0884d647a096309b806327960a3e111ec3d142a53c02798eaf2c24ec9a1cfd2c8fb",
+            "file": "src/app/components/molecules/tableRow/tableRow.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-table-row",
+            "styleUrls": [
+                "./tableRow.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./tableRow.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "fileNumber",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "number | string",
+                    "decorators": []
+                },
+                {
+                    "name": "selected",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "state",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "consult",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "selectChange",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getBadgeVariant",
+                    "args": [
+                        {
+                            "name": "state",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "\"info\" | \"success\" | \"warning\" | \"danger\"",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "state",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "handleConsult",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleSelect",
+                    "args": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CheckboxComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "BadgeComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { BadgeComponent } from '../../atoms/badge/badge.component';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-table-row',\n  standalone: true,\n  imports: [\n    CommonModule,\n    CheckboxComponent,\n    TextComponent,\n    BadgeComponent,\n    ButtonComponent,\n  ],\n  templateUrl: './tableRow.component.html',\n  styleUrls: ['./tableRow.component.scss'],\n})\nexport class TableRowComponent {\n  @Input() selected: boolean = false;\n  @Input() state: string = '';\n  @Input() fileNumber: number | string = '';\n  @Output() selectChange = new EventEmitter<boolean>();\n  @Output() consult = new EventEmitter<void>();\n\n  toggleSelect(checked: boolean): void {\n    this.selectChange.emit(checked);\n  }\n\n  handleConsult(): void {\n    this.consult.emit();\n  }\n\n  getBadgeVariant(state: string): 'info' | 'success' | 'warning' | 'danger' {\n    const map: Record<string, 'info' | 'success' | 'warning' | 'danger'> = {\n      fraud: 'danger',\n      validated: 'success',\n      'refund request': 'warning',\n      'post-payment': 'info',\n      identity: 'info',\n      total: 'info', // if needed\n    };\n\n    return map[state.toLowerCase()] || 'info';\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".table-row {\r\n  display: table;\r\n  width: 100%;\r\n\r\n  td {\r\n    padding: 0.75rem 1rem;\r\n    border-bottom: 1px solid #e0e0e0;\r\n    vertical-align: middle;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    height: 50px;\r\n\r\n    &.checkbox-cell {\r\n      width: 60px;\r\n      text-align: center;\r\n      padding: 0;\r\n    }\r\n\r\n    &.state-cell {\r\n      width: 160px;\r\n      align-items: left;\r\n    }\r\n\r\n    &.file-number-cell {\r\n      text-align: left;\r\n      width: auto; // allow it to grow\r\n    }\r\n\r\n    &.divider-cell {\r\n      width: 1px;\r\n      background-color: #e0e0e0;\r\n      padding: 0;\r\n    }\r\n\r\n    &.action-cell {\r\n      width: 200px;\r\n      text-align: center;\r\n    }\r\n  }\r\n\r\n  &:hover {\r\n    background-color: #f9f9f9;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./tableRow.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<tr class=\"table-row\">\n  <td class=\"checkbox-cell\">\n    <app-checkbox\n      [checked]=\"selected\"\n      (checkedChange)=\"toggleSelect($event)\"\n      [colour]=\"'#af15fd'\"\n    />\n  </td>\n\n  <td class=\"state-cell\">\n    <app-badge\n    [label]=\"state\"\n    [variant]=\"getBadgeVariant(state)\"\n    fontSize=\"1.1rem\"\n    fontWeight=\"500\"\n    height=\"32px\"\n    width=\"150px\"\n  />\n  </td>\n\n  <td class=\"file-number-cell\">\n    <app-text [content]=\"fileNumber.toString()\" />\n  </td>\n\n  <td class=\"divider-cell\" aria-hidden=\"true\"></td>\n\n  <td class=\"action-cell\">\n    <app-button label=\"Consult\" variant=\"primary\" [borderless]=\"true\" (click)=\"handleConsult()\" />\n  </td>\n</tr>\n"
+        },
+        {
+            "name": "TableRowGroupComponent",
+            "id": "component-TableRowGroupComponent-30aa7958f38102f869c10c3ee9e3b3613f202401be72ab092d0a6ae158c92fe6fff93505ca75872bb055e66fc1d6354c1975c45b1c6a085001fa4e94da7329b7",
+            "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-table-row-group",
+            "styleUrls": [
+                "./tableRowGroup.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./tableRowGroup.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "rows",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "TableRowData[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "consultClicked",
+                    "defaultValue": "new EventEmitter<string | number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "rowSelected",
+                    "defaultValue": "new EventEmitter<{ id: string | number; selected: boolean }>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "handleConsultClick",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "string | number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "string | number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "handleSelectChange",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "string | number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "string | number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TableRowComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, value: any) {\n  const checked = value as boolean;\n  this.rowSelected.emit({ id, selected: checked });\n}\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".table-row-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n}\r\n",
+                    "styleUrl": "./tableRowGroup.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"table-row-group\">\n  <app-table-row\n    *ngFor=\"let row of rows\"\n    [state]=\"row.state\"\n    [fileNumber]=\"row.fileNumber\"\n    [selected]=\"row.selected ?? false\"\n    (selectChange)=\"handleSelectChange(row.id, $event)\"\n    (consult)=\"handleConsultClick(row.id)\"\n  />\n</div>\n"
         },
         {
             "name": "TextComponent",
@@ -753,7 +2298,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "span {\r\n  font-family: 'Segoe UI', sans-serif;\r\n\r\n  &.sm {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  &.md {\r\n    font-size: 1rem;\r\n  }\r\n\r\n  &.lg {\r\n    font-size: 1.25rem;\r\n  }\r\n\r\n  &.normal {\r\n    font-weight: 400;\r\n  }\r\n\r\n  &.medium {\r\n    font-weight: 500;\r\n  }\r\n\r\n  &.bold {\r\n    font-weight: 700;\r\n  }\r\n}\r\n",
+                    "data": "span {\r\n  font-family: 'Segoe UI', sans-serif;\r\n\r\n\r\n  &.sm {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  &.md {\r\n    font-size: 1rem;\r\n  }\r\n\r\n  &.lg {\r\n    font-size: 2rem;\r\n  }\r\n\r\n  &.normal {\r\n    font-weight: 400;\r\n  }\r\n\r\n  &.medium {\r\n    font-weight: 500;\r\n  }\r\n\r\n  &.bold {\r\n    font-weight: 700;\r\n  }\r\n}\r\n",
                     "styleUrl": "./text.component.scss"
                 }
             ],
@@ -816,9 +2361,9 @@
                 "filePath": "src/app/app.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "App",
+                "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -827,7 +2372,7 @@
                 "linktype": "component",
                 "name": "BadgeComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -836,7 +2381,7 @@
                 "linktype": "component",
                 "name": "ButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -845,7 +2390,16 @@
                 "linktype": "component",
                 "name": "CheckboxComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/atoms/filterTabButton/filterTabButton.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FilterTabButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -867,30 +2421,156 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/molecules/filterTabButton/filterTabButton.component.ts",
+                "filePath": "src/app/components/molecules/actionBar/actionBar.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "FilterTabButtonComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/6",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "TabGroupComponent",
+                "name": "ActionBarComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/molecules/tabGroup/tabGroup.component.ts",
+                "filePath": "src/app/components/molecules/filterTabGroup/filterTabGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TabGroupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/filterTabGroup/filterTabGroup.component.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "FilterTab",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/navTab/navTab.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NavTabComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/statCard/statCard.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StatCardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/tableHeader/tableHeader.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TableHeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/molecules/tableRow/tableRow.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TableRowComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/filterActionGroup/filterActionGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FilterActionGroupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/filterActionGroup/filterActionGroup.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "FilterTab",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/navTabGroup/navTabGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NavTabGroupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/navTabGroup/navTabGroup.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "NavTabItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/statCardGroup/statCardGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StatCardGroupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/statCardGroup/statCardGroup.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "StatCardItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TableRowGroupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TableRowData",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/pages/mainPage/mainPage.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MainPageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/templates/mainGroup/mainGroup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MainGroupTemplateComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
                 "status": "low"
             }
         ]

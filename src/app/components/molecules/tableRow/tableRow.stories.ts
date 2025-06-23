@@ -25,7 +25,7 @@ export const Default: Story = {
     fileNumber: 1284,
   },
   argTypes: {
-    selectedChange: { action: 'selectedChange' },
+    selectChange: { action: 'selectedChange' },
     consult: { action: 'consult' },
   },
 

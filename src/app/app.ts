@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MainPageComponent } from './components/pages/mainPage/mainPage.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  standalone: true,
+  imports: [MainPageComponent],
+  template: '<app-main-page />',
 })
-export class App {
-  protected title = 'atomic-spa';
-}
+export class AppComponent {}

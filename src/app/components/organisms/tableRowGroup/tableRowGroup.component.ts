@@ -22,9 +22,10 @@ export class TableRowGroupComponent {
   @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();
   @Output() consultClicked = new EventEmitter<string | number>();
 
-  handleSelectChange(id: string | number, selected: boolean) {
-    this.rowSelected.emit({ id, selected });
-  }
+  handleSelectChange(id: string | number, value: any) {
+  const checked = value as boolean;
+  this.rowSelected.emit({ id, selected: checked });
+}
 
   handleConsultClick(id: string | number) {
     this.consultClicked.emit(id);
