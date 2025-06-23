@@ -1,9 +1,9 @@
 button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-weight: 600;
-  font-size: 0.95rem;
   padding: 0.4rem 0.9rem;
   cursor: pointer;
   background-color: white;
@@ -38,7 +38,6 @@ button {
     }
   }
 
-
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -48,18 +47,18 @@ button {
   }
 
   app-icon {
-    color: inherit; // This makes the icon the same colour as the text
+    color: inherit;
   }
 }
 
 button.borderless {
   border: none !important;
   background-color: transparent !important;
-  padding: 0; // optional: tighten spacing
+  padding: 0;
   box-shadow: none;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05); // subtle hover feedback
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
   &:disabled {

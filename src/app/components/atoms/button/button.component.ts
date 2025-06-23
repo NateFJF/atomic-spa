@@ -18,6 +18,8 @@ export class ButtonComponent {
   @Input() iconPosition: 'start' | 'end' = 'start'; // default is front
   @Input() borderRadius: string = '0px'; // Default square
   @Input() borderless: boolean = false; // Default is not borderless (with border)
-
+  @Input() width: string = 'auto'; // Default is auto width
+  @Input() height: string = 'auto'; // Default is auto height
+  @Input() fontSize: string = '1rem'; // Default font size
 
 }

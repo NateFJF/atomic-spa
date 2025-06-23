@@ -1,0 +1,35 @@
+.main-template {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.table-section {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow-x: auto;
+  background: white;
+}
+
+
+app-stat-card-group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+app-filter-action-bar {
+  padding-bottom: 2rem;
+}
+
+// app-nav-tab-group {
+//   border: 1px dashed red; //Debug
+//   min-height: 3rem;
+// }

@@ -9,6 +9,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    height: 50px;
 
     &.checkbox-cell {
       width: 60px;
@@ -17,8 +18,8 @@
     }
 
     &.state-cell {
-      width: 140px;
-      text-align: center;
+      width: 160px;
+      align-items: left;
     }
 
     &.file-number-cell {
@@ -33,7 +34,7 @@
     }
 
     &.action-cell {
-      width: 150px;
+      width: 200px;
       text-align: center;
     }
   }

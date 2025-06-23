@@ -13,4 +13,6 @@ export class BadgeComponent {
   @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';
   @Input() fontSize: string = '0.875rem';
   @Input() fontWeight: string = '500';
+  @Input() height: string = '20px'; // Default height
+  @Input() width: string = 'auto'; // Default width
 }

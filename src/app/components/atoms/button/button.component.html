@@ -3,6 +3,9 @@
   [disabled]="disabled"
   [ngClass]="[variant, borderless ? 'borderless' : '']"
   [style.borderRadius]="borderRadius"
+  [style.width]="width"
+  [style.height]="height"
+  [style.fontSize]="fontSize"
 >
   <ng-container *ngIf="icon && iconPosition === 'start'">
     <app-icon [name]="icon" size="20px" />
