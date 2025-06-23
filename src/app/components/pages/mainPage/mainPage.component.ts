@@ -15,16 +15,22 @@ type SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;
 export class MainPageComponent {
   // Base data
   readonly tableData = signal<TableRowData[]>([
-    { id: 1, state: 'fraud', fileNumber: '1', selected: false },
+    { id: 1, state: 'Fraud', fileNumber: '1', selected: false },
     { id: 2, state: 'Refund Request', fileNumber: '3', selected: false },
     { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },
     { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },
     { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },
+    { id: 6, state: 'Post-payment', fileNumber: '2', selected: false },
+    { id: 7, state: 'Post-payment', fileNumber: '4', selected: false },
+    { id: 8, state: 'Identity', fileNumber: '6', selected: false },
+    { id: 9, state: 'Identity', fileNumber: '7', selected: false },
+    { id: 10, state: 'Validated', fileNumber: '9', selected: false },
   ]);
 
   // Sorting
   readonly sortKey = signal<SortableKey>('fileNumber');
   readonly sortDirection = signal<'asc' | 'desc'>('asc');
+  selectedTab: string = "total";
 
   // Filtering
   readonly selectedFilter = signal<string>('total');
@@ -84,17 +90,8 @@ export class MainPageComponent {
 
   onFilterChange(state: string) {
     this.selectedFilter.set(state);
-    this.filterTabs = this.filterTabs.map(tab => ({
-      ...tab,
-      active: tab.state === state,
-    }));
+    this.selectedTab = state;
   }
-
-  // UI data
-  navTabs = [
-    { label: 'Today', icon: 'calendar_today', route: '/', active: true },
-    { label: 'Job done', icon: 'check', route: '/done', active: false },
-  ];
 
   statCards = [
     { count: 850, label: 'Priority', icon: 'logout' },
@@ -104,12 +101,24 @@ export class MainPageComponent {
     { count: 850, label: 'Unpaid waiting', icon: 'logout' },
   ];
 
-  filterTabs = [
-    { label: 'Total', count: 164, state: 'total', active: true },
-    { label: 'Identity', count: 15, state: 'identity' },
-    { label: 'Post-payment', count: 35, state: 'post-payment' },
-    { label: 'Refund request', count: 13, state: 'refund request' },
-    { label: 'Fraud', count: 55, state: 'fraud' },
-    { label: 'Validated', count: 85, state: 'validated' },
+  readonly filterTabs = computed(() => {
+  const data = this.tableData();
+  const counts: Record<string, number> = {};
+
+  for (const row of data) {
+    const key = row.state.toLowerCase();
+    counts[key] = (counts[key] || 0) + 1;
+  }
+
+  return [
+    { label: 'Total', count: data.length, state: 'total' },
+    { label: 'Identity', count: counts['identity'] ?? 0, state: 'identity' },
+    { label: 'Pre-payment', count: counts['pre-payment'] ?? 0, state: 'pre-payment' },
+    { label: 'Post-payment', count: counts['post-payment'] ?? 0, state: 'post-payment' },
+    { label: 'Refund request', count: counts['refund request'] ?? 0, state: 'refund request' },
+    { label: 'Fraud', count: counts['fraud'] ?? 0, state: 'fraud' },
+    { label: 'Validated', count: counts['validated'] ?? 0, state: 'validated' },
+
   ];
+});
 }
