@@ -6,7 +6,22 @@
   <app-filter-action-group [tabs]="filterTabs" />
 
   <div class="table-section">
-    <app-table-header />
-    <app-table-row-group [rows]="tableData" />
+    <table>
+      <thead>
+        <app-table-header
+          [allChecked]="allChecked"
+          [sortKey]="sortKey"
+          [sortDirection]="sortDirection"
+          (toggleAll)="toggleAll.emit($event)"
+          (sortChange)="sortChange.emit($event)"
+        />
+      </thead>
+      <tbody>
+        <app-table-row-group
+          [rows]="tableData"
+          (rowSelected)="rowSelected.emit($event)"
+        />
+      </tbody>
+    </table>
   </div>
 </div>

@@ -1,10 +1,10 @@
-<label class="checkbox-wrapper" [for]="'customCheckbox'">
+<label class="checkbox-wrapper" [for]="checkboxId">
   <input
-    id="customCheckbox"
+    [id]="checkboxId"
     type="checkbox"
     [checked]="checked"
     [disabled]="disabled"
-    (change)="toggleCheck()"
+    (change)="toggleCheck($event)"
     title="Toggle checkbox"
   />
   <span class="custom-checkbox" [style.borderColor]="colour">
@@ -12,7 +12,6 @@
       class="checkmark"
       *ngIf="checked"
       [style.borderColor]="colour"
-      [style.transform]="'rotate(45deg)'"
     ></span>
   </span>
 </label>

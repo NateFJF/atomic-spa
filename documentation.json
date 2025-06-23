@@ -196,12 +196,12 @@
         },
         {
             "name": "TableRowData",
-            "id": "interface-TableRowData-30aa7958f38102f869c10c3ee9e3b3613f202401be72ab092d0a6ae158c92fe6fff93505ca75872bb055e66fc1d6354c1975c45b1c6a085001fa4e94da7329b7",
+            "id": "interface-TableRowData-39c56e04f56d11916de5c0a9ddd779f092e439032f248b67ae42a9c1d7acebad3c08d5932cb65bf0bdc0bdedcf615f13b2ee28e7e4a39f3794e44d898e70a23d",
             "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, value: any) {\n  const checked = value as boolean;\n  this.rowSelected.emit({ id, selected: checked });\n}\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, checked: boolean): void {\n    this.rowSelected.emit({ id, selected: checked });\n  }\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
             "properties": [
                 {
                     "name": "fileNumber",
@@ -645,7 +645,7 @@
         },
         {
             "name": "CheckboxComponent",
-            "id": "component-CheckboxComponent-696bcf6fa0f162e723d876a91bd24060917f3b901f3fc6988699d5bc6e04aaf1ccdfdde650f51d1a2b10f3e4719aed23cbe78f77e0012b955e8e139a38d476db",
+            "id": "component-CheckboxComponent-eb06935ea83dc6a8ac33434086a293de5e8b86ef58b127138ec6421c3d58763fb7408d8abe449fae41c4020b4ba07d88a9dc3cd6c1b15f0f40fe6806004c334d",
             "file": "src/app/components/atoms/checkbox/checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -668,7 +668,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 14,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -677,7 +677,7 @@
                     "defaultValue": "'#af15fd'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": []
                 },
@@ -686,7 +686,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 15,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -697,21 +697,51 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 17,
                     "type": "EventEmitter"
                 }
             ],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "checkboxId",
+                    "defaultValue": "`customCheckbox-${++nextId}`",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "toggleCheck",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 17,
+                    "line": 21,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -728,17 +758,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss'],\n})\nexport class CheckboxComponent {\n  @Input() checked: boolean = false;\n  @Input() disabled: boolean = false;\n  @Input() colour: string = '#af15fd';\n  @Output() checkedChange = new EventEmitter<boolean>();\n\n  toggleCheck() {\n    if (!this.disabled) {\n      this.checked = !this.checked;\n      this.checkedChange.emit(this.checked);\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nlet nextId = 0;\n\n@Component({\n  selector: 'app-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss'],\n})\nexport class CheckboxComponent {\n  @Input() checked: boolean = false;\n  @Input() disabled: boolean = false;\n  @Input() colour: string = '#af15fd';\n  @Output() checkedChange = new EventEmitter<boolean>();\n\n  checkboxId = `customCheckbox-${++nextId}`;\n\n  toggleCheck(event: Event): void {\n    const input = event.target as HTMLInputElement;\n    this.checkedChange.emit(input.checked);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".checkbox-wrapper {\r\n  input {\r\n    display: none;\r\n  }\r\n\r\n  .custom-checkbox {\r\n    width: 20px;\r\n    height: 20px;\r\n    border: 2px solid;\r\n    border-radius: 4px;\r\n    display: inline-block;\r\n    position: relative;\r\n\r\n    .checkmark {\r\n      position: absolute;\r\n      top: 1px;\r\n      left: 6px;\r\n      width: 5px;\r\n      height: 12px;\r\n      border: solid;\r\n      border-width: 0 3px 3px 0;\r\n      color: inherit;\r\n      content: '';\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ".checkbox-wrapper {\r\n  position: relative;\r\n  display: inline-block;\r\n  width: 20px;\r\n  height: 20px;\r\n  cursor: pointer;\r\n\r\n  input {\r\n    position: absolute;\r\n    opacity: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    z-index: 2;\r\n    cursor: pointer;\r\n    pointer-events: all;\r\n  }\r\n\r\n  .custom-checkbox {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 100%;\r\n    border: 2px solid;\r\n    border-radius: 4px;\r\n    background-color: white;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n  }\r\n\r\n  .checkmark {\r\n    position: absolute;\r\n    top: 2px;\r\n    width: 5px;\r\n    height: 12px;\r\n    border: solid;\r\n    border-width: 0 2px 2px 0;\r\n    transform: rotate(45deg);\r\n    display: inline-block;\r\n\r\n  }\r\n}\r\n",
                     "styleUrl": "./checkbox.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<label class=\"checkbox-wrapper\" [for]=\"'customCheckbox'\">\n  <input\n    id=\"customCheckbox\"\n    type=\"checkbox\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    (change)=\"toggleCheck()\"\n    title=\"Toggle checkbox\"\n  />\n  <span class=\"custom-checkbox\" [style.borderColor]=\"colour\">\n    <span\n      class=\"checkmark\"\n      *ngIf=\"checked\"\n      [style.borderColor]=\"colour\"\n      [style.transform]=\"'rotate(45deg)'\"\n    ></span>\n  </span>\n</label>\n"
+            "templateData": "<label class=\"checkbox-wrapper\" [for]=\"checkboxId\">\n  <input\n    [id]=\"checkboxId\"\n    type=\"checkbox\"\n    [checked]=\"checked\"\n    [disabled]=\"disabled\"\n    (change)=\"toggleCheck($event)\"\n    title=\"Toggle checkbox\"\n  />\n  <span class=\"custom-checkbox\" [style.borderColor]=\"colour\">\n    <span\n      class=\"checkmark\"\n      *ngIf=\"checked\"\n      [style.borderColor]=\"colour\"\n    ></span>\n  </span>\n</label>\n"
         },
         {
             "name": "FilterActionGroupComponent",
@@ -974,7 +1004,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: inline-block;\r\n\r\n  app-button {\r\n    padding: 0.35rem 0.3rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n    background-color: white;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ":host {\r\n  display: inline-block;\r\n\r\n  app-button {\r\n    padding: 0.35rem 0.3rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n    //background-color: white;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./filterTabButton.component.scss"
                 }
             ],
@@ -1076,7 +1106,7 @@
         },
         {
             "name": "MainGroupTemplateComponent",
-            "id": "component-MainGroupTemplateComponent-03ff7f925a6b984d7231f7f1d7b4d6a1814c60ebe2fe7a5c571650a7e02b421937445b806d39282c04e94480cf3c993d4822149991679b4f31a151c46d039a31",
+            "id": "component-MainGroupTemplateComponent-ec0b3ad7614dcaf6de3ad355bd79f516097b39e82ab68c0d39b63d13d740ef303fbac42a4de9468896145e089c6188626d3572453aee39a8d55c85d9ce90b5cf",
             "file": "src/app/components/templates/mainGroup/mainGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1095,11 +1125,20 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "allChecked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
                     "name": "filterTabs",
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 28,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1108,7 +1147,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 26,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1117,7 +1156,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 27,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1126,12 +1165,29 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
-                    "type": "any[]",
+                    "line": 29,
+                    "type": "TableRowData[]",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "rowSelected",
+                    "defaultValue": "new EventEmitter<{ id: string | number; selected: boolean }>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "toggleAll",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
             "methodsClass": [],
             "deprecated": false,
@@ -1168,7 +1224,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { NavTabGroupComponent } from '../../organisms/navTabGroup/navTabGroup.component';\nimport { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGroup.component';\nimport { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';\nimport { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';\nimport { TableRowGroupComponent } from '../../organisms/tableRowGroup/tableRowGroup.component';\n\n@Component({\n  selector: 'app-main-group-template',\n  standalone: true,\n  imports: [\n    CommonModule,\n    NavTabGroupComponent,\n    StatCardGroupComponent,\n    FilterActionGroupComponent,\n    TableHeaderComponent,\n    TableRowGroupComponent\n  ],\n  templateUrl: './mainGroup.component.html',\n  styleUrls: ['./mainGroup.component.scss']\n})\nexport class MainGroupTemplateComponent {\n  @Input() navTabs: any[] = [];\n  @Input() statCards: any[] = [];\n  @Input() filterTabs: any[] = [];\n  @Input() tableData: any[] = [];\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { NavTabGroupComponent } from '../../organisms/navTabGroup/navTabGroup.component';\nimport { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGroup.component';\nimport { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';\nimport { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';\nimport { TableRowGroupComponent } from '../../organisms/tableRowGroup/tableRowGroup.component';\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\n\n@Component({\n  selector: 'app-main-group-template',\n  standalone: true,\n  imports: [\n    CommonModule,\n    NavTabGroupComponent,\n    StatCardGroupComponent,\n    FilterActionGroupComponent,\n    TableHeaderComponent,\n    TableRowGroupComponent\n  ],\n  templateUrl: './mainGroup.component.html',\n  styleUrls: ['./mainGroup.component.scss']\n})\nexport class MainGroupTemplateComponent {\n  @Input() navTabs: any[] = [];\n  @Input() statCards: any[] = [];\n  @Input() filterTabs: any[] = [];\n  @Input() tableData: TableRowData[] = [];\n\n  @Input() allChecked: boolean = false;\n\n  @Output() toggleAll = new EventEmitter<boolean>();\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1178,11 +1234,11 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"main-template\">\n  <app-nav-tab-group [tabs]=\"navTabs\" />\n\n  <app-stat-card-group [cards]=\"statCards\" />\n\n  <app-filter-action-group [tabs]=\"filterTabs\" />\n\n  <div class=\"table-section\">\n    <app-table-header />\n    <app-table-row-group [rows]=\"tableData\" />\n  </div>\n</div>\n"
+            "templateData": "<div class=\"main-template\">\n  <app-nav-tab-group [tabs]=\"navTabs\" />\n\n  <app-stat-card-group [cards]=\"statCards\" />\n\n  <app-filter-action-group [tabs]=\"filterTabs\" />\n\n  <div class=\"table-section\">\n    <table>\n      <thead>\n        <app-table-header\n          [allChecked]=\"allChecked\"\n          (toggleAll)=\"toggleAll.emit($event)\"\n        />\n      </thead>\n      <tbody>\n        <app-table-row-group\n          [rows]=\"tableData\"\n          (rowSelected)=\"rowSelected.emit($event)\"\n        />\n      </tbody>\n    </table>\n  </div>\n</div>\n"
         },
         {
             "name": "MainPageComponent",
-            "id": "component-MainPageComponent-b4f175fd5ec5d07398d1bb62e88852dbfe8668ffbed07225dfa82f79e941f3e74b8f3c7acfd623cec35f2927c39b17f50edf0b0bbb4c97e5994411c560a0655f",
+            "id": "component-MainPageComponent-2efea7b162d53f68167cbd92d2772809c63d4a1e489e319e1e762b1e194e904ef66cf77c121a6b41087ed641ce8abc5b97123ff42f524671356d4b084aaf00ca",
             "file": "src/app/components/pages/mainPage/mainPage.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1203,6 +1259,20 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "allChecked",
+                    "defaultValue": "computed(() =>\n    this.tableData().length > 0 && this.tableData().every(row => row.selected)\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
                     "name": "filterTabs",
                     "defaultValue": "[\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post' },\n    { label: 'Refund request', count: 13, state: 'refund' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ]",
                     "deprecated": false,
@@ -1211,7 +1281,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 54
                 },
                 {
                     "name": "navTabs",
@@ -1222,7 +1292,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 41
                 },
                 {
                     "name": "statCards",
@@ -1233,21 +1303,81 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 46
                 },
                 {
                     "name": "tableData",
-                    "defaultValue": "[\n    { id: 1, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 2, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n  ]",
+                    "defaultValue": "signal<TableRowData[]>([\n    { id: 1, state: 'Pre-payment', fileNumber: '1', selected: false },\n    { id: 2, state: 'Pre-payment', fileNumber: '3', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },\n  ])",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35
+                    "line": 14,
+                    "modifierKind": [
+                        148
+                    ]
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "onRowSelected",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onToggleAll",
+                    "args": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -1266,7 +1396,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\n\n@Component({\n  selector: 'app-main-page',\n  standalone: true,\n  imports: [CommonModule, MainGroupTemplateComponent],\n  templateUrl: './mainPage.component.html',\n  styleUrls: ['./mainPage.component.scss'],\n})\nexport class MainPageComponent {\n  navTabs = [\n    { label: 'Today', icon: 'calendar_today', route: '/', active: true },\n    { label: 'Job done', icon: 'check', route: '/done', active: false },\n  ];\n\n  statCards = [\n    { count: 850, label: 'Priority', icon: 'logout' },\n    { count: 850, label: 'Express', icon: 'logout' },\n    { count: 850, label: 'Standard', icon: 'logout' },\n    { count: 850, label: 'Documents waiting', icon: 'logout' },\n    { count: 850, label: 'Unpaid waiting', icon: 'logout' },\n  ];\n\n  filterTabs = [\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post' },\n    { label: 'Refund request', count: 13, state: 'refund' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ];\n\n  tableData = [\n    { id: 1, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 2, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5509808388', selected: false },\n  ];\n}\n",
+            "sourceCode": "import { Component, computed, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\n\n@Component({\n  selector: 'app-main-page',\n  standalone: true,\n  imports: [CommonModule, MainGroupTemplateComponent],\n  templateUrl: './mainPage.component.html',\n  styleUrls: ['./mainPage.component.scss'],\n})\nexport class MainPageComponent {\n  readonly tableData = signal<TableRowData[]>([\n    { id: 1, state: 'Pre-payment', fileNumber: '1', selected: false },\n    { id: 2, state: 'Pre-payment', fileNumber: '3', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },\n  ]);\n\n  readonly allChecked = computed(() =>\n    this.tableData().length > 0 && this.tableData().every(row => row.selected)\n  );\n\n  onRowSelected(change: { id: string | number; selected: boolean }) {\n    console.log('Updating row:', change.id, '→', change.selected);\n    this.tableData.update(rows =>\n      rows.map(row =>\n        row.id === change.id ? { ...row, selected: change.selected } : row\n      )\n    );\n  }\n\n  onToggleAll(checked: boolean) {\n    this.tableData.update(rows =>\n      rows.map(row => ({ ...row, selected: checked }))\n    );\n  }\n\n  navTabs = [\n    { label: 'Today', icon: 'calendar_today', route: '/', active: true },\n    { label: 'Job done', icon: 'check', route: '/done', active: false },\n  ];\n\n  statCards = [\n    { count: 850, label: 'Priority', icon: 'logout' },\n    { count: 850, label: 'Express', icon: 'logout' },\n    { count: 850, label: 'Standard', icon: 'logout' },\n    { count: 850, label: 'Documents waiting', icon: 'logout' },\n    { count: 850, label: 'Unpaid waiting', icon: 'logout' },\n  ];\n\n  filterTabs = [\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post' },\n    { label: 'Refund request', count: 13, state: 'refund' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ];\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1276,7 +1406,7 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"page-wrapper\">\n  <app-main-group-template\n    [navTabs]=\"navTabs\"\n    [statCards]=\"statCards\"\n    [filterTabs]=\"filterTabs\"\n    [tableData]=\"tableData\"\n  />\n</div>\n"
+            "templateData": "<div class=\"page-wrapper\">\n  <app-main-group-template\n    [navTabs]=\"navTabs\"\n    [statCards]=\"statCards\"\n    [filterTabs]=\"filterTabs\"\n    [tableData]=\"tableData()\"\n    [allChecked]=\"allChecked()\"\n    (toggleAll)=\"onToggleAll($event)\"\n    (rowSelected)=\"onRowSelected($event)\"\n  />\n</div>\n"
         },
         {
             "name": "NavTabComponent",
@@ -1889,7 +2019,7 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<tr class=\"table-header-row\">\n  <th class=\"checkbox-cell\">\n    <app-checkbox\n    [checked]=\"allChecked\"\n    (checkedChange)=\"handleToggleAll($event)\"\n    />\n  </th>\n\n  <th class=\"state-cell\">\n    <app-text content=\"State\" weight=\"medium\" size=\"md\" />\n  </th>\n\n  <th class=\"sortable\" (click)=\"toggleSort('fileNumber')\">\n    <div class=\"th-content\">\n      <app-text content=\"File number\" weight=\"medium\" size=\"md\" />\n      <app-icon\n        *ngIf=\"sortKey === 'fileNumber'\"\n        [name]=\"sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'\"\n        size=\"16px\"\n      />\n    </div>\n  </th>\n\n  <th class=\"divider-col\" aria-hidden=\"true\"></th>\n\n  <th class=\"action-cell\">\n    <app-text content=\"Action\" weight=\"medium\" size=\"md\" />\n  </th>\n</tr>\n"
+            "templateData": "<tr class=\"table-header-row\">\n  <th class=\"checkbox-cell\">\n    <app-checkbox\n    [checked]=\"allChecked\"\n    (checkedChange)=\"handleToggleAll($event)\"\n    />\n  </th>\n\n  <th class=\"state-cell\">\n    <app-text content=\"State\" weight=\"medium\" size=\"md\" />\n  </th>\n\n  <th class=\"sortable\" (click)=\"toggleSort('fileNumber')\">\n    <div class=\"th-content\">\n      <app-text content=\"File number\" weight=\"medium\" size=\"md\" />\n      <app-icon\n        *ngIf=\"sortKey === 'fileNumber'\"\n        [name]=\"sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward'\"\n        size=\"16px\"\n      />\n    </div>\n  </th>\n\n  <th class=\"divider-col\" aria-hidden=\"true\"></th>\n\n  <th class=\"action-cell\">\n    <app-text content=\"Action\" weight=\"medium\" size=\"md\" />\n  </th>\n</tr>\n\n"
         },
         {
             "name": "TableRowComponent",
@@ -2070,7 +2200,7 @@
         },
         {
             "name": "TableRowGroupComponent",
-            "id": "component-TableRowGroupComponent-30aa7958f38102f869c10c3ee9e3b3613f202401be72ab092d0a6ae158c92fe6fff93505ca75872bb055e66fc1d6354c1975c45b1c6a085001fa4e94da7329b7",
+            "id": "component-TableRowGroupComponent-39c56e04f56d11916de5c0a9ddd779f092e439032f248b67ae42a9c1d7acebad3c08d5932cb65bf0bdc0bdedcf615f13b2ee28e7e4a39f3794e44d898e70a23d",
             "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2131,7 +2261,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 29,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2156,8 +2286,8 @@
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "value",
-                            "type": "any",
+                            "name": "checked",
+                            "type": "boolean",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -2179,8 +2309,8 @@
                             }
                         },
                         {
-                            "name": "value",
-                            "type": "any",
+                            "name": "checked",
+                            "type": "boolean",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -2208,7 +2338,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, value: any) {\n  const checked = value as boolean;\n  this.rowSelected.emit({ id, selected: checked });\n}\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, checked: boolean): void {\n    this.rowSelected.emit({ id, selected: checked });\n  }\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2319,6 +2449,16 @@
                 "deprecationMessage": "",
                 "type": "ApplicationConfig",
                 "defaultValue": "{\r\n  providers: [\r\n    provideBrowserGlobalErrorListeners(),\r\n    provideZoneChangeDetection({ eventCoalescing: true }),\r\n    provideRouter(routes)\r\n  ]\r\n}"
+            },
+            {
+                "name": "nextId",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/atoms/checkbox/checkbox.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "number",
+                "defaultValue": "0"
             }
         ],
         "functions": [],
@@ -2335,6 +2475,18 @@
                     "deprecationMessage": "",
                     "type": "ApplicationConfig",
                     "defaultValue": "{\r\n  providers: [\r\n    provideBrowserGlobalErrorListeners(),\r\n    provideZoneChangeDetection({ eventCoalescing: true }),\r\n    provideRouter(routes)\r\n  ]\r\n}"
+                }
+            ],
+            "src/app/components/atoms/checkbox/checkbox.component.ts": [
+                {
+                    "name": "nextId",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/atoms/checkbox/checkbox.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "defaultValue": "0"
                 }
             ]
         },
@@ -2390,7 +2542,17 @@
                 "linktype": "component",
                 "name": "CheckboxComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/atoms/checkbox/checkbox.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "nextId",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -2561,7 +2723,7 @@
                 "linktype": "component",
                 "name": "MainPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -2570,7 +2732,7 @@
                 "linktype": "component",
                 "name": "MainGroupTemplateComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/8",
                 "status": "low"
             }
         ]

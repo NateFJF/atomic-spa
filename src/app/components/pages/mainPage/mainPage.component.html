@@ -3,6 +3,12 @@
     [navTabs]="navTabs"
     [statCards]="statCards"
     [filterTabs]="filterTabs"
-    [tableData]="tableData"
+    [tableData]="sortedTableData()"
+    [sortKey]="sortKey()"
+    [sortDirection]="sortDirection()"
+    (sortChange)="onSortChange($event)"
+    [allChecked]="allChecked()"
+    (toggleAll)="onToggleAll($event)"
+    (rowSelected)="onRowSelected($event)"
   />
 </div>

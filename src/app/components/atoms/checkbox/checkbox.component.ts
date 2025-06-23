@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+let nextId = 0;
+
 @Component({
   selector: 'app-checkbox',
   standalone: true,
@@ -14,10 +16,10 @@ export class CheckboxComponent {
   @Input() colour: string = '#af15fd';
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  toggleCheck() {
-    if (!this.disabled) {
-      this.checked = !this.checked;
-      this.checkedChange.emit(this.checked);
-    }
+  checkboxId = `customCheckbox-${++nextId}`;
+
+  toggleCheck(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.checkedChange.emit(input.checked);
   }
 }

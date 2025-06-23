@@ -5,6 +5,10 @@ const meta: Meta<CheckboxComponent> = {
   title: 'Atoms/Checkbox',
   component: CheckboxComponent,
   tags: ['autodocs'],
+  argTypes: {
+    checked: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+  },
 };
 
 export default meta;
@@ -36,4 +40,22 @@ export const DisabledChecked: Story = {
     checked: true,
     disabled: true,
   },
+};
+
+export const Interactive: Story = {
+  render: () => ({
+    template: `
+      <app-checkbox
+        [checked]="checked"
+        (checkedChange)="onCheckedChange($event)"
+        [colour]="'#af15fd'"
+      />
+    `,
+    props: {
+      checked: false,
+      onCheckedChange(val: boolean) {
+        this['checked'] = val;
+      },
+    },
+  }),
 };
