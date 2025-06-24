@@ -16,10 +16,16 @@ export interface FilterTab {
   styleUrls: ['./filterTabGroup.component.scss'],
 })
 export class TabGroupComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() tabs: FilterTab[] = [];
   @Input() selectedTab: string = '';
 
+  // Output properties
   @Output() tabSelected = new EventEmitter<string>();
+
+  // --------------------------- Handlers --------------------------
 
   onSelectTab(state: string) {
     this.tabSelected.emit(state);

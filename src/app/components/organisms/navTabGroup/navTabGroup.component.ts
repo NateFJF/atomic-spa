@@ -17,5 +17,8 @@ export interface NavTabItem {
   styleUrls: ['./navTabGroup.component.scss'],
 })
 export class NavTabGroupComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() tabs: NavTabItem[] = [];
 }

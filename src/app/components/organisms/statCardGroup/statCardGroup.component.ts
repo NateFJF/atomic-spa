@@ -16,5 +16,11 @@ export interface StatCardItem {
   styleUrls: ['./statCardGroup.component.scss'],
 })
 export class StatCardGroupComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() cards: StatCardItem[] = [];
+
+  // Output properties
+  // No output properties defined for this component
 }

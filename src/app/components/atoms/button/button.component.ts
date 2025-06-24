@@ -10,12 +10,14 @@ import { IconComponent } from '../icon/icon.component';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() label: string = 'Button';
-  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() type: 'button' | 'submit' | 'reset' = 'button'; // Default is button
   @Input() disabled: boolean = false;
   @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';
   @Input() icon?: string; // Material icon name
-  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front
+  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front of the label
   @Input() borderRadius: string = '0px'; // Default square
   @Input() borderless: boolean = false; // Default is not borderless (with border)
   @Input() width: string = 'auto'; // Default is auto width

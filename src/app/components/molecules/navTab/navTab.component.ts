@@ -12,6 +12,9 @@ import { TextComponent } from '../../atoms/text/text.component';
   styleUrls: ['./navTab.component.scss'],
 })
 export class NavTabComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() label: string = '';
   @Input() icon: string = '';
   @Input() route: string = '/';

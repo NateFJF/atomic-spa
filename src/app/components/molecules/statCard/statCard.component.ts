@@ -11,6 +11,9 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   styleUrls: ['./statCard.component.scss'],
 })
 export class StatCardComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() label: string = '';
   @Input() count: number | string = '';
   @Input() icon: string = '';

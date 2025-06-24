@@ -21,6 +21,9 @@ import { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.compon
   styleUrls: ['./mainGroup.component.scss']
 })
 export class MainGroupTemplateComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() navTabs: any[] = [];
   @Input() statCards: any[] = [];
   @Input() filterTabs: any[] = [];
@@ -28,11 +31,9 @@ export class MainGroupTemplateComponent {
   @Input() sortKey: string = '';
   @Input() sortDirection: 'asc' | 'desc' = 'asc';
   @Input() selectedTab: string = '';
-
-
-
   @Input() allChecked: boolean = false;
 
+  // Output properties
   @Output() toggleAll = new EventEmitter<boolean>();
   @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();
   @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();

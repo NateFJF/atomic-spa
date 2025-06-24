@@ -10,11 +10,17 @@ import { ButtonComponent } from '../button/button.component';
   styleUrls: ['./filterTabButton.component.scss'],
 })
 export class FilterTabButtonComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() label: string = '';
   @Input() count: number = 0;
   @Input() active: boolean = false;
 
+  // Output properties
   @Output() selected = new EventEmitter<void>();
+
+  // --------------------------- Handlers --------------------------
 
   handleClick(): void {
     this.selected.emit();

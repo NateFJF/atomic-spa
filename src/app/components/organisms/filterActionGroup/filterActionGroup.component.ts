@@ -17,14 +17,20 @@ export interface FilterTab {
   templateUrl: './filterActionGroup.component.html',
   styleUrls: ['./filterActionGroup.component.scss'],
 })
+
 export class FilterActionGroupComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() tabs: FilterTab[] = [];
   @Input() selectedTab: string = '';
 
-
+  // Output properties
   @Output() tabChanged = new EventEmitter<string>();
   @Output() exportClicked = new EventEmitter<void>();
   @Output() filterClicked = new EventEmitter<void>();
+
+  // --------------------------- Handlers --------------------------
 
   handleTabChange(tab: string) {
     this.tabChanged.emit(tab);

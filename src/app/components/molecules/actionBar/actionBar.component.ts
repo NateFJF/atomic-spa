@@ -10,8 +10,13 @@ import { ButtonComponent } from '../../atoms/button/button.component';
   styleUrls: ['./actionBar.component.scss'],
 })
 export class ActionBarComponent {
+
+  // --------------------------- Outputs --------------------------
+  // Emitters for export and filter actions
   @Output() exportClicked = new EventEmitter<void>();
   @Output() filterClicked = new EventEmitter<void>();
+
+  // --------------------------- Handlers --------------------------
 
   onExportClick() {
     this.exportClicked.emit();

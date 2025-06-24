@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./icon.component.scss'],
 })
 export class IconComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() name: string = '';
   @Input() size: string = '20px';
   @Input() colour: string = 'inherit';

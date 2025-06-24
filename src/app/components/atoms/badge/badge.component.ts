@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./badge.component.scss'],
 })
 export class BadgeComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() label: string = '';
   @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';
   @Input() fontSize: string = '0.875rem';

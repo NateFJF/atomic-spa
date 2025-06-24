@@ -4,12 +4,10 @@
   align-items: center;
 
   app-button {
-    //padding: 0.4rem 0.2rem;
     display: flex;
     align-items: center;
-    //transition: background-color 0.2s;
 
-    // This ensures icons follow text colour
+    // ensures icons follow text colour
     app-icon, mat-icon {
       color: inherit;
     }

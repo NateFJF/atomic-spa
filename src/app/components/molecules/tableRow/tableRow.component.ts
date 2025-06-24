@@ -19,11 +19,18 @@ import { ButtonComponent } from '../../atoms/button/button.component';
   styleUrls: ['./tableRow.component.scss'],
 })
 export class TableRowComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() selected: boolean = false;
   @Input() state: string = '';
   @Input() fileNumber: number | string = '';
+
+  // Output properties
   @Output() selectChange = new EventEmitter<boolean>();
   @Output() consult = new EventEmitter<void>();
+
+  // --------------------------- Handlers ---------------------------
 
   toggleSelect(checked: boolean): void {
     this.selectChange.emit(checked);
@@ -33,6 +40,7 @@ export class TableRowComponent {
     this.consult.emit();
   }
 
+  // bage variant based on state
   getBadgeVariant(state: string): 'info' | 'success' | 'warning' | 'danger' {
     const map: Record<string, 'info' | 'success' | 'warning' | 'danger'> = {
       fraud: 'danger',

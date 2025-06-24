@@ -48,9 +48,9 @@ export const Default: Story = {
       { label: 'Validated', count: 85, state: 'validated' },
     ],
     tableData: [
-      { id: 1, state: 'Validated', fileNumber: '550980838', selected: false },
-      { id: 2, state: 'Fraud', fileNumber: '550980839', selected: false },
-      { id: 3, state: 'Refund request', fileNumber: '550980840', selected: true },
+      { id: 1, state: 'Validated', fileNumber: 550980838, selected: false },
+      { id: 2, state: 'Fraud', fileNumber: 550980839, selected: false },
+      { id: 3, state: 'Refund request', fileNumber: 550980840, selected: true },
     ],
   },
 };

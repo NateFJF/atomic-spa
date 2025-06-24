@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TableRowComponent } from '../../molecules/tableRow/tableRow.component';
 
 export interface TableRowData {
-  id: string | number;
+  id: number;
   state: string;
-  fileNumber: string;
+  fileNumber: number;
   selected?: boolean;
 }
 
@@ -16,11 +16,18 @@ export interface TableRowData {
   templateUrl: './tableRowGroup.component.html',
   styleUrls: ['./tableRowGroup.component.scss'],
 })
+
 export class TableRowGroupComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() rows: TableRowData[] = [];
 
+  // Output properties
   @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();
   @Output() consultClicked = new EventEmitter<string | number>();
+
+  // --------------------------- Handlers ---------------------------
 
   handleSelectChange(id: string | number, checked: boolean): void {
     this.rowSelected.emit({ id, selected: checked });

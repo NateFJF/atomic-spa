@@ -18,9 +18,9 @@ type Story = StoryObj<TableRowGroupComponent>;
 export const Default: Story = {
   args: {
     rows: [
-      { id: 1, state: 'Pre-payment', fileNumber: '550980838', selected: false },
-      { id: 2, state: 'Validated', fileNumber: '550980839', selected: false },
-      { id: 3, state: 'Fraud', fileNumber: '550980840', selected: true },
+      { id: 1, state: 'Pre-payment', fileNumber: 550980838, selected: false },
+      { id: 2, state: 'Validated', fileNumber: 550980839, selected: false },
+      { id: 3, state: 'Fraud', fileNumber: 550980840, selected: true },
     ],
   },
   argTypes: {

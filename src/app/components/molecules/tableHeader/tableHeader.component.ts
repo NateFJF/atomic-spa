@@ -12,12 +12,18 @@ import { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';
   styleUrls: ['./tableHeader.component.scss'],
 })
 export class TableHeaderComponent {
+
+  // --------------------------- Properties --------------------------
+  // Input properties
   @Input() sortKey: string = '';
   @Input() sortDirection: 'asc' | 'desc' = 'asc';
   @Input() allChecked: boolean = false;
 
+  // Output properties
   @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();
   @Output() toggleAll = new EventEmitter<boolean>();
+
+  // --------------------------- Handlers ---------------------------
 
   toggleSort(key: string): void {
     const newDirection = (key === this.sortKey && this.sortDirection === 'asc') ? 'desc' : 'asc';

@@ -2,6 +2,10 @@ import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';
 import { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';
+import {
+  TableDataService,
+  SortDirection,
+} from '../../../services/tableData.service';
 
 type SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;
 
@@ -12,24 +16,32 @@ type SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;
   templateUrl: './mainPage.component.html',
   styleUrls: ['./mainPage.component.scss'],
 })
+
+// ------------------------- MainPageComponent -------------------------
+// This component serves as the main page of the application, handling data display, sorting, filtering, and exporting functionalities.
+// It uses a service to manage table data operations like sorting, filtering, and exporting to CSV.
+
+
 export class MainPageComponent {
+  constructor(private tableDataService: TableDataService) {} // Service injection
+
   // Base data
   readonly tableData = signal<TableRowData[]>([
-    { id: 1, state: 'Fraud', fileNumber: '1', selected: false },
-    { id: 2, state: 'Refund Request', fileNumber: '3', selected: false },
-    { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },
-    { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },
-    { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },
-    { id: 6, state: 'Post-payment', fileNumber: '2', selected: false },
-    { id: 7, state: 'Post-payment', fileNumber: '4', selected: false },
-    { id: 8, state: 'Identity', fileNumber: '6', selected: false },
-    { id: 9, state: 'Identity', fileNumber: '7', selected: false },
-    { id: 10, state: 'Validated', fileNumber: '9', selected: false },
+    { id: 1, state: 'Fraud', fileNumber: 1, selected: false },
+    { id: 2, state: 'Refund Request', fileNumber: 3, selected: false },
+    { id: 3, state: 'Pre-payment', fileNumber: 8, selected: false },
+    { id: 4, state: 'Pre-payment', fileNumber: 10, selected: false },
+    { id: 5, state: 'Pre-payment', fileNumber: 5, selected: false },
+    { id: 6, state: 'Post-payment', fileNumber: 2, selected: false },
+    { id: 7, state: 'Post-payment', fileNumber: 4, selected: false },
+    { id: 8, state: 'Identity', fileNumber: 6, selected: false },
+    { id: 9, state: 'Identity', fileNumber: 7, selected: false },
+    { id: 10, state: 'Validated', fileNumber: 9, selected: false },
   ]);
 
   // Sorting
   readonly sortKey = signal<SortableKey>('fileNumber');
-  readonly sortDirection = signal<'asc' | 'desc'>('asc');
+  readonly sortDirection = signal<SortDirection>('asc');
   selectedTab: string = 'total';
 
   // Filtering
@@ -40,31 +52,28 @@ export class MainPageComponent {
     const direction = this.sortDirection();
     const key = this.sortKey();
 
-    // Filter
+    // TableDataService for filtering and sorting
     let rows = this.tableData();
     if (selected !== 'total') {
-      rows = rows.filter(
-        (row) => row.state.toLowerCase() === selected.toLowerCase()
-      );
+      rows = this.tableDataService.filterByState(rows, selected);
     }
-
-    // Then Sort
-    return [...rows].sort((a, b) => {
-      const aVal = a[key] ?? '';
-      const bVal = b[key] ?? '';
-
-      const isNumeric = !isNaN(+aVal) && !isNaN(+bVal);
-      return isNumeric
-        ? direction === 'asc'
-          ? +aVal - +bVal
-          : +bVal - +aVal
-        : direction === 'asc'
-        ? String(aVal).localeCompare(String(bVal))
-        : String(bVal).localeCompare(String(aVal));
-    });
+    if (key === 'fileNumber') {
+      rows = this.tableDataService.sortByFileNumber(rows, direction);
+    } else {
+      // fallback to default sort for other keys
+      rows = [...rows].sort((a, b) => {
+        const aVal = a[key] ?? '';
+        const bVal = b[key] ?? '';
+        return direction === 'asc'
+          ? String(aVal).localeCompare(String(bVal))
+          : String(bVal).localeCompare(String(aVal));
+      });
+    }
+    return rows;
   });
 
-  // Row selection
+  // ---------------------------- Row selection ---------------------
+
   readonly allChecked = computed(
     () =>
       this.tableData().length > 0 &&
@@ -85,8 +94,9 @@ export class MainPageComponent {
     );
   }
 
-  // Handlers
-  onSortChange(change: { key: string; direction: 'asc' | 'desc' }) {
+  // ---------------------------- Handlers ----------------------------
+
+  onSortChange(change: { key: string; direction: SortDirection }) {
     if (['fileNumber', 'id', 'state'].includes(change.key)) {
       this.sortKey.set(change.key as 'fileNumber' | 'state' | 'id');
       this.sortDirection.set(change.direction);
@@ -106,28 +116,15 @@ export class MainPageComponent {
     { count: 850, label: 'Unpaid waiting', icon: 'logout' },
   ];
 
-  // CSV Export
+  // ------------------------------ CSV Export ------------------------------
 
   onExportToCSV(): void {
     const rows = this.visibleTableData();
-    const csvRows = [
-      ['State', 'File number'], // Header
-      ...rows.map((row) => [row.state, row.fileNumber]),
-    ];
-
-    const csvContent = csvRows.map((e) => e.join(',')).join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'table-data.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const csvContent = this.tableDataService.exportToCSV(rows); // <-- Use service
+    this.tableDataService.downloadCSV(csvContent, 'table-data.csv'); // <-- Use service
   }
 
-  // Filter tabs
+  // ------------------------------ Filter tabs ------------------------------
 
   readonly filterTabs = computed(() => {
     const data = this.tableData();
