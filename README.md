@@ -88,7 +88,7 @@ src/app/
 * Node.js (v18+)
 * Angular CLI
 
-### ▶️ Run the app
+#### ▶️ Run the app
 
 ```bash
 npm install
@@ -132,7 +132,7 @@ All filtering is handled reactively via Angular Signals.
 
 During the initial UI planning phase, I studied the provided mock-up to break down the interface into atomic levels. This process helped guide the structure of the application.
 
-Below are the visual segmentations that correspond to each level in Atomic Design:
+Below are the visual depictions that correspond to each level in Atomic Design:
 
 #### 🧱 Atoms (e.g., Text, Button, Icons)
 
@@ -146,7 +146,7 @@ Below are the visual segmentations that correspond to each level in Atomic Desig
 
 ![Organisms](./assets/Organisms.png)
 
-#### 🖼 Templates (e.g., Overall layout frame)
+#### 🖼️ Templates (e.g., Overall layout frame)
 
 ![Templates](./assets/Templates.png)
 
@@ -171,25 +171,57 @@ Additionally, during the **Research and UI Planning** stage, I sketched diagrams
 
 ---
 
+### 🛠 Additional Enhancements
+
+- Custom favicon added for a polished and branded browser tab experience.
+- Dynamic page title updates based on the active route for improved navigation clarity.
+- Proof of concept Job Done page to simulate non-refreshing routing.
+
+---
+
 ## 💡 Future Improvements
 
 Given more time, I would:
 
-* Reacher mobile responsiveness and accessibility
+* Research mobile responsiveness and accessibility
 * Further testing of CSV export, sorting, and filtering
-* Scaleable data handling for scaleable modular elements (Using API's and Data Containers)
+* Scale data handling for scaleable modular elements (Using API's and Data Containers)
 * Integrate a design system like Angular Material fully or Tailwind
 * Expand Storybook coverage with controls and interactions
-* Adding more services for resusable functions
+* Adding more services (e.g. filter tab and row selection service) for resusable functions
+* Include console logs for debugging purpuses
+* Revist code to remove redundant stlying (scss)
 
 ---
 
 ## ⚠️ Known Limitations
 
-- No unit or integration tests yet implemented (besides Storybook)
+- No unit or integration tests implemented (besides Storybook)
 - Fully static mock data (no API connection)
 - Responsive layout not fully tested on mobile devices
 
+---
+
+## 📚 References
+
+- [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/chapter-2/)
+- [Atomic Design Methodology – Kamath Rohan](https://blog.kamathrohan.com/atomic-design-methodology-for-building-design-systems-f912cf714f53)
+- [Storybook Documentation](https://storybook.js.org/docs)
+- [Intro to Storybook Tutorial](https://storybook.js.org/tutorials/intro-to-storybook/)
+- [MASTER Angular in 90 Minutes with This Crash Course](https://youtu.be/oUmVFHlwZsI?si=H8IYin_LNroogb2S)
+- [Change Angular Application default Logo or Fevicon](https://www.youtube.com/watch?v=4Lx0JJosFDo)
+- [Emojipedia](https://emojipedia.org/)
+- [Flaticon](https://www.flaticon.com/)
+
+---
+
+## 📈 Learning Reflection
+
+This project represents my **first ever Angular project**.
+
+I began with no prior knowledge of Angular or Storybook and completed the entire application including component design, state management, styling, and Storybook integration within **3 days**.
+
+This reflects my ability to **adapt quickly to new technologies**, learn under pressure, and deliver clean, structured solutions in a short timeframe.
 
 ---
 
