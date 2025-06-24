@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavTabGroupComponent } from './components/organisms/navTabGroup/navTabGroup.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -19,4 +20,10 @@ export class AppComponent {
     { label: 'Today', icon: 'calendar_today', route: '/' },
     { label: 'Job done', icon: 'check', route: '/done' },
   ];
+
+  constructor(private titleService: Title) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Job Done | My App');
+  }
 }
