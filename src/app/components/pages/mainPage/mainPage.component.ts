@@ -21,7 +21,6 @@ type SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;
 // This component serves as the main page of the application, handling data display, sorting, filtering, and exporting functionalities.
 // It uses a service to manage table data operations like sorting, filtering, and exporting to CSV.
 
-
 export class MainPageComponent {
   constructor(private tableDataService: TableDataService) {} // Service injection
 
@@ -30,13 +29,28 @@ export class MainPageComponent {
     { id: 1, state: 'Fraud', fileNumber: 1, selected: false },
     { id: 2, state: 'Refund Request', fileNumber: 3, selected: false },
     { id: 3, state: 'Pre-payment', fileNumber: 8, selected: false },
-    { id: 4, state: 'Pre-payment', fileNumber: 10, selected: false },
-    { id: 5, state: 'Pre-payment', fileNumber: 5, selected: false },
+    { id: 4, state: 'Validated', fileNumber: 10, selected: false },
+    { id: 5, state: 'Validated', fileNumber: 5, selected: false },
     { id: 6, state: 'Post-payment', fileNumber: 2, selected: false },
     { id: 7, state: 'Post-payment', fileNumber: 4, selected: false },
     { id: 8, state: 'Identity', fileNumber: 6, selected: false },
-    { id: 9, state: 'Identity', fileNumber: 7, selected: false },
+    { id: 9, state: 'Pre-payment', fileNumber: 7, selected: false },
     { id: 10, state: 'Validated', fileNumber: 9, selected: false },
+    { id: 11, state: 'Validated', fileNumber: 11, selected: false },
+    { id: 12, state: 'Refund Request', fileNumber: 12, selected: false },
+    { id: 13, state: 'Fraud', fileNumber: 13, selected: false },
+    { id: 14, state: 'Fraud', fileNumber: 14, selected: false },
+    { id: 15, state: 'Validated', fileNumber: 15, selected: false },
+    { id: 16, state: 'Identity', fileNumber: 16, selected: false },
+    { id: 17, state: 'Post-payment', fileNumber: 17, selected: false },
+    { id: 18, state: 'Refund Request', fileNumber: 18, selected: false },
+    { id: 19, state: 'Fraud', fileNumber: 19, selected: false },
+    { id: 20, state: 'Validated', fileNumber: 20, selected: false },
+    { id: 21, state: 'Identity', fileNumber: 21, selected: false },
+    { id: 22, state: 'Post-payment', fileNumber: 22, selected: false },
+    { id: 23, state: 'Refund Request', fileNumber: 23, selected: false },
+    { id: 24, state: 'Fraud', fileNumber: 24, selected: false },
+    { id: 25, state: 'Validated', fileNumber: 25, selected: false },
   ]);
 
   // Sorting
@@ -108,14 +122,6 @@ export class MainPageComponent {
     this.selectedTab = state;
   }
 
-  statCards = [
-    { count: 850, label: 'Priority', icon: 'logout' },
-    { count: 850, label: 'Express', icon: 'logout' },
-    { count: 850, label: 'Standard', icon: 'logout' },
-    { count: 850, label: 'Documents waiting', icon: 'logout' },
-    { count: 850, label: 'Unpaid waiting', icon: 'logout' },
-  ];
-
   // ------------------------------ CSV Export ------------------------------
 
   onExportToCSV(): void {
@@ -158,6 +164,43 @@ export class MainPageComponent {
         label: 'Validated',
         count: counts['validated'] ?? 0,
         state: 'validated',
+      },
+    ];
+  });
+
+  // ----------------------------- Stat cards -----------------------------
+
+  readonly statCards = computed(() => {
+    const data = this.tableData();
+    const counts: Record<string, number> = {};
+
+    for (const row of data) {
+      const key = row.state.toLowerCase();
+      counts[key] = (counts[key] || 0) + 1;
+    }
+
+    return [
+      { count: data.length,
+        label: 'Total',
+        icon: 'layers'
+      },
+      { count: counts['identity'] ?? 0,
+        label: 'Identity',
+        icon: 'person'
+      },
+      { count: counts['refund request'] ?? 0,
+        label: 'Refund Request',
+        icon: 'receipt',
+      },
+      {
+        count: counts['fraud'] ?? 0,
+        label: 'Fraud',
+        icon: 'warning',
+      },
+      {
+        count: counts['validated'] ?? 0,
+        label: 'Validated',
+        icon: 'check',
       },
     ];
   });

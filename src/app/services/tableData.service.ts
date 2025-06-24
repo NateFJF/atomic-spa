@@ -24,8 +24,8 @@ export class TableDataService {
 
   // Filters the table data based on the selected state.
   filterByState(data: TableRow[], state: string | null): TableRow[] {
-    if (!state || state === 'all') return data;
-    return data.filter(row => row.state === state);
+    if (!state || state === 'total') return data;
+    return data.filter(row => row.state.toLowerCase() === state.toLowerCase());
   }
 
   // Sorts the table data by file number in the specified direction.

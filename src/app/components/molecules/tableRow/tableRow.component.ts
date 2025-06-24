@@ -48,7 +48,8 @@ export class TableRowComponent {
       'refund request': 'warning',
       'post-payment': 'info',
       identity: 'info',
-      total: 'info', // if needed
+      done: 'success',
+      pending: 'warning',
     };
 
     return map[state.toLowerCase()] || 'info';

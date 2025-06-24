@@ -1,6 +1,16 @@
-<div class="todo-wrapper">
-  <h2>Job Done ✅</h2>
-  <ul>
-    <li *ngFor="let item of todos">{{ item }}</li>
-  </ul>
+<div class="page-wrapper">
+  <app-main-group-template
+    [statCards]="statCards()"
+    [filterTabs]="filterTabs()"
+    [tableData]="visibleTableData()"
+    [sortKey]="sortKey()"
+    [sortDirection]="sortDirection()"
+    (sortChange)="onSortChange($event)"
+    [allChecked]="allChecked()"
+    (toggleAll)="onToggleAll($event)"
+    (rowSelected)="onRowSelected($event)"
+    (filterTabChange)="onFilterChange($event)"
+    [selectedTab]="selectedFilter()"
+    (exportClicked)="onExportToCSV()"
+  />
 </div>
