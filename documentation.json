@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "FilterTab",
-            "id": "interface-FilterTab-9ae4cd188d792627e62adeb29702984c848b6ded02a8e09814cc26d6c0551cd2020dd85867f6dac6fa07122f3ab270f29f5b563cbcc63712956044f4f6bfc7d5",
+            "id": "interface-FilterTab-a1376b3a49e75eab1f5e837997d95d56177495977b8600f3b89f7f9f04e2778fd07fd73f61224eb381370a8d96ab3c47651482da1a2169d90005e0830bc55742",
             "file": "src/app/components/molecules/filterTabGroup/filterTabGroup.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent, FilterTabButtonComponent],\n  templateUrl: './filterTabGroup.component.html',\n  styleUrls: ['./filterTabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = '';\n\n  @Output() tabSelected = new EventEmitter<string>();\n\n  onSelectTab(label: string) {\n    this.tabSelected.emit(label);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent, FilterTabButtonComponent],\n  templateUrl: './filterTabGroup.component.html',\n  styleUrls: ['./filterTabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = '';\n\n  // Output properties\n  @Output() tabSelected = new EventEmitter<string>();\n\n  // --------------------------- Handlers --------------------------\n\n  onSelectTab(state: string) {\n    this.tabSelected.emit(state);\n    this.selectedTab = state;\n  }\n}\n",
             "properties": [
                 {
                     "name": "count",
@@ -48,12 +48,12 @@
         },
         {
             "name": "FilterTab",
-            "id": "interface-FilterTab-b041a5dc2e6d871a9efbf14ff9b489980dca9914aedd9cc3280046549ae86d6b868deb646275cd776af37a070a1ebd817b6ee23cbc4dff351825e9be7f66cf82-1",
+            "id": "interface-FilterTab-59fc373828b191fc4c64853e9c6255eb49c61dca9f65a884ad91582a1fde4c1fed0b2deeee753a89232ad1f31aa9793a51ef6eefb26b52afd65c7b569ffaf7fb-1",
             "file": "src/app/components/organisms/filterActionGroup/filterActionGroup.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TabGroupComponent } from '../../molecules/filterTabGroup/filterTabGroup.component';\nimport { ActionBarComponent } from '../../molecules/actionBar/actionBar.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-filter-action-group',\n  standalone: true,\n  imports: [CommonModule, TabGroupComponent, ActionBarComponent],\n  templateUrl: './filterActionGroup.component.html',\n  styleUrls: ['./filterActionGroup.component.scss'],\n})\nexport class FilterActionGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = '';\n\n\n  @Output() tabChanged = new EventEmitter<string>();\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  handleTabChange(tab: string) {\n    this.tabChanged.emit(tab);\n  }\n\n  handleExport() {\n    this.exportClicked.emit();\n  }\n\n  handleFilter() {\n    this.filterClicked.emit();\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { TabGroupComponent } from '../../molecules/filterTabGroup/filterTabGroup.component';\r\nimport { ActionBarComponent } from '../../molecules/actionBar/actionBar.component';\r\n\r\nexport interface FilterTab {\r\n  label: string;\r\n  count: number;\r\n  state: string;\r\n  active?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-filter-action-group',\r\n  standalone: true,\r\n  imports: [CommonModule, TabGroupComponent, ActionBarComponent],\r\n  templateUrl: './filterActionGroup.component.html',\r\n  styleUrls: ['./filterActionGroup.component.scss'],\r\n})\r\n\r\nexport class FilterActionGroupComponent {\r\n\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() tabs: FilterTab[] = [];\r\n  @Input() selectedTab: string = '';\r\n\r\n  // Output properties\r\n  @Output() tabChanged = new EventEmitter<string>();\r\n  @Output() exportClicked = new EventEmitter<void>();\r\n  @Output() filterClicked = new EventEmitter<void>();\r\n\r\n  // --------------------------- Handlers --------------------------\r\n\r\n  handleTabChange(tab: string) {\r\n    this.tabChanged.emit(tab);\r\n  }\r\n\r\n  handleExport() {\r\n    this.exportClicked.emit();\r\n  }\r\n\r\n  handleFilter() {\r\n    this.filterClicked.emit();\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "active",
@@ -106,12 +106,12 @@
         },
         {
             "name": "NavTabItem",
-            "id": "interface-NavTabItem-5a3f236bba8b3fe2676627dece4ebbacbbd85270f9cc1be025635cba8242a792f694d09659b6e48a2a21f49259fba8911b4ccf9dd5d8331fed7dc230e2ea2606",
+            "id": "interface-NavTabItem-0995d1f3925c054c28cb14a4fdfdfbd297d9d021cca0229cbfdc2f335a16291f7da762ea90d5e54540b629ea56fdcc9ac3e4966894bc7586c11d818e290c1b12",
             "file": "src/app/components/organisms/navTabGroup/navTabGroup.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NavTabComponent } from '../../molecules/navTab/navTab.component';\n\nexport interface NavTabItem {\n  label: string;\n  icon: string;\n  route: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-nav-tab-group',\n  standalone: true,\n  imports: [CommonModule, NavTabComponent],\n  templateUrl: './navTabGroup.component.html',\n  styleUrls: ['./navTabGroup.component.scss'],\n})\nexport class NavTabGroupComponent {\n  @Input() tabs: NavTabItem[] = [];\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NavTabComponent } from '../../molecules/navTab/navTab.component';\n\nexport interface NavTabItem {\n  label: string;\n  icon: string;\n  route: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-nav-tab-group',\n  standalone: true,\n  imports: [CommonModule, NavTabComponent],\n  templateUrl: './navTabGroup.component.html',\n  styleUrls: ['./navTabGroup.component.scss'],\n})\nexport class NavTabGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() tabs: NavTabItem[] = [];\n}\n",
             "properties": [
                 {
                     "name": "active",
@@ -161,12 +161,12 @@
         },
         {
             "name": "StatCardItem",
-            "id": "interface-StatCardItem-132c7cce5907fbc1ae9c76fad76709dd8f45c4ddad5d45de80493ab0386503224cf698f096b69f1e66674fd4157f0708c47a79c6dbf91e24de77c6190440f6a1",
+            "id": "interface-StatCardItem-9f209766bfd1854dfecd69fc0c4c48590d3af666d3a17942aabfa7db675bde07275b165f5c9eb2df597559d2eac63fe918604f74d80a715d9665877eed6c474c",
             "file": "src/app/components/organisms/statCardGroup/statCardGroup.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StatCardComponent } from '../../molecules/statCard/statCard.component';\n\nexport interface StatCardItem {\n  count: number | string;\n  label: string;\n  icon: string;\n}\n\n@Component({\n  selector: 'app-stat-card-group',\n  standalone: true,\n  imports: [CommonModule, StatCardComponent],\n  templateUrl: './statCardGroup.component.html',\n  styleUrls: ['./statCardGroup.component.scss'],\n})\nexport class StatCardGroupComponent {\n  @Input() cards: StatCardItem[] = [];\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StatCardComponent } from '../../molecules/statCard/statCard.component';\n\nexport interface StatCardItem {\n  count: number | string;\n  label: string;\n  icon: string;\n}\n\n@Component({\n  selector: 'app-stat-card-group',\n  standalone: true,\n  imports: [CommonModule, StatCardComponent],\n  templateUrl: './statCardGroup.component.html',\n  styleUrls: ['./statCardGroup.component.scss'],\n})\nexport class StatCardGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() cards: StatCardItem[] = [];\n\n  // Output properties\n  // No output properties defined for this component\n}\n",
             "properties": [
                 {
                     "name": "count",
@@ -205,19 +205,74 @@
             "extends": []
         },
         {
-            "name": "TableRowData",
-            "id": "interface-TableRowData-39c56e04f56d11916de5c0a9ddd779f092e439032f248b67ae42a9c1d7acebad3c08d5932cb65bf0bdc0bdedcf615f13b2ee28e7e4a39f3794e44d898e70a23d",
-            "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
+            "name": "TableRow",
+            "id": "interface-TableRow-028bb2b3b261944480c05cc7664d6be5e5032d941f3e3fa0322aa197f8627d9817c09614dd5504768e45f00c15e5d4ed9ff4955a11a38385120dee4ef27b5e8f",
+            "file": "src/app/services/tableData.service.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, checked: boolean): void {\n    this.rowSelected.emit({ id, selected: checked });\n  }\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\n\n// TableRow interface defines the structure of each row in the table.\nexport interface TableRow {\n  id: number;\n  state: string;\n  fileNumber: number;\n  selected?: boolean;\n}\n\n// Key for sorting the table data.\nexport type SortDirection = 'asc' | 'desc';\n\n@Injectable({\n  providedIn: 'root'\n})\n\nexport class TableDataService {\n  constructor() {}\n\n  // Filters the table data based on the selected state.\n  filterByState(data: TableRow[], state: string | null): TableRow[] {\n    if (!state || state === 'total') return data;\n    return data.filter(row => row.state.toLowerCase() === state.toLowerCase());\n  }\n\n  // Sorts the table data by file number in the specified direction.\n  sortByFileNumber(data: TableRow[], direction: SortDirection): TableRow[] {\n    return [...data].sort((a, b) => {\n      const diff = a.fileNumber - b.fileNumber;\n      return direction === 'asc' ? diff : -diff;\n    });\n  }\n\n  // Exports the table data to a CSV format.\n  exportToCSV(data: TableRow[]): string {\n    const headers = ['State', 'File number'];\n    const rows = data.map(row => [row.state, row.fileNumber]);\n    const csvContent = [headers, ...rows]\n      .map(row => row.map(val => `\"${val}\"`).join(','))\n      .join('\\n');\n\n    return csvContent;\n  }\n\n  // Downloads the CSV data as a .csv file.\n  downloadCSV(csvData: string, filename = 'export.csv'): void {\n    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });\n    const link = document.createElement('a');\n    const url = URL.createObjectURL(blob);\n\n    link.href = url;\n    link.setAttribute('download', filename);\n    link.click();\n\n    URL.revokeObjectURL(url);\n  }\n}\n",
             "properties": [
                 {
                     "name": "fileNumber",
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "selected",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "state",
+                    "deprecated": false,
+                    "deprecationMessage": "",
                     "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "TableRowData",
+            "id": "interface-TableRowData-4895397fd9da9f433f7c26dd89faa8b8a3258abb5e732a283c9c0ba7bb90d36c1920b6bc6f33dbd6e5c8416232b7c9a27a28a83d91b08907d5b61c3f7ea64bcf",
+            "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: number;\n  state: string;\n  fileNumber: number;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\n\nexport class TableRowGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() rows: TableRowData[] = [];\n\n  // Output properties\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  // --------------------------- Handlers ---------------------------\n\n  handleSelectChange(id: string | number, checked: boolean): void {\n    this.rowSelected.emit({ id, selected: checked });\n  }\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "fileNumber",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
@@ -227,7 +282,7 @@
                     "name": "id",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string | number",
+                    "type": "number",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
@@ -260,7 +315,190 @@
             "extends": []
         }
     ],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "TableDataService",
+            "id": "injectable-TableDataService-028bb2b3b261944480c05cc7664d6be5e5032d941f3e3fa0322aa197f8627d9817c09614dd5504768e45f00c15e5d4ed9ff4955a11a38385120dee4ef27b5e8f",
+            "file": "src/app/services/tableData.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "downloadCSV",
+                    "args": [
+                        {
+                            "name": "csvData",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "filename",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "'export.csv'"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "csvData",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "filename",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "'export.csv'",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "exportToCSV",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "TableRow[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "data",
+                            "type": "TableRow[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "filterByState",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "TableRow[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "state",
+                            "type": "string | null",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "TableRow[]",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "data",
+                            "type": "TableRow[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "state",
+                            "type": "string | null",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sortByFileNumber",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "TableRow[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "direction",
+                            "type": "SortDirection",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "TableRow[]",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "data",
+                            "type": "TableRow[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "direction",
+                            "type": "SortDirection",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\n\n// TableRow interface defines the structure of each row in the table.\nexport interface TableRow {\n  id: number;\n  state: string;\n  fileNumber: number;\n  selected?: boolean;\n}\n\n// Key for sorting the table data.\nexport type SortDirection = 'asc' | 'desc';\n\n@Injectable({\n  providedIn: 'root'\n})\n\nexport class TableDataService {\n  constructor() {}\n\n  // Filters the table data based on the selected state.\n  filterByState(data: TableRow[], state: string | null): TableRow[] {\n    if (!state || state === 'total') return data;\n    return data.filter(row => row.state.toLowerCase() === state.toLowerCase());\n  }\n\n  // Sorts the table data by file number in the specified direction.\n  sortByFileNumber(data: TableRow[], direction: SortDirection): TableRow[] {\n    return [...data].sort((a, b) => {\n      const diff = a.fileNumber - b.fileNumber;\n      return direction === 'asc' ? diff : -diff;\n    });\n  }\n\n  // Exports the table data to a CSV format.\n  exportToCSV(data: TableRow[]): string {\n    const headers = ['State', 'File number'];\n    const rows = data.map(row => [row.state, row.fileNumber]);\n    const csvContent = [headers, ...rows]\n      .map(row => row.map(val => `\"${val}\"`).join(','))\n      .join('\\n');\n\n    return csvContent;\n  }\n\n  // Downloads the CSV data as a .csv file.\n  downloadCSV(csvData: string, filename = 'export.csv'): void {\n    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });\n    const link = document.createElement('a');\n    const url = URL.createObjectURL(blob);\n\n    link.href = url;\n    link.setAttribute('download', filename);\n    link.click();\n\n    URL.revokeObjectURL(url);\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 22
+            },
+            "extends": [],
+            "type": "injectable"
+        }
+    ],
     "guards": [],
     "interceptors": [],
     "classes": [],
@@ -268,7 +506,7 @@
     "components": [
         {
             "name": "ActionBarComponent",
-            "id": "component-ActionBarComponent-db1ef616cf3e971d5ae1678a56e35477b422e91e96f4fd75f751fff3aaf653861e6c0b3af1ab1c24752232a703b1ef24a48a4560540e473e9caa114b5182bd3a",
+            "id": "component-ActionBarComponent-95d6fee57cd875fec7c13451c088f7f9f8e6b95b9696f55a864e28f9dfa9fcfafaad701259d84bfbc8f831e3c1bfd882a6b0ec46089585744d76a6a6376223fb",
             "file": "src/app/components/molecules/actionBar/actionBar.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -292,7 +530,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "EventEmitter"
                 },
                 {
@@ -300,7 +538,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "EventEmitter"
                 }
             ],
@@ -312,7 +550,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 21,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -322,7 +560,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -345,11 +583,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-action-bar',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './actionBar.component.html',\n  styleUrls: ['./actionBar.component.scss'],\n})\nexport class ActionBarComponent {\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  onExportClick() {\n    this.exportClicked.emit();\n  }\n\n  onFilterClick() {\n    this.filterClicked.emit();\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-action-bar',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './actionBar.component.html',\n  styleUrls: ['./actionBar.component.scss'],\n})\nexport class ActionBarComponent {\n\n  // --------------------------- Outputs --------------------------\n  // Emitters for export and filter actions\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  // --------------------------- Handlers --------------------------\n\n  onExportClick() {\n    this.exportClicked.emit();\n  }\n\n  onFilterClick() {\n    this.filterClicked.emit();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".action-bar {\r\n  display: flex;\r\n  gap: 0.5rem; // more natural spacing between buttons\r\n  align-items: center;\r\n\r\n  app-button {\r\n    //padding: 0.4rem 0.2rem;\r\n    display: flex;\r\n    align-items: center;\r\n    //transition: background-color 0.2s;\r\n\r\n    // This ensures icons follow text colour\r\n    app-icon, mat-icon {\r\n      color: inherit;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ".action-bar {\r\n  display: flex;\r\n  gap: 0.5rem; // more natural spacing between buttons\r\n  align-items: center;\r\n\r\n  app-button {\r\n    display: flex;\r\n    align-items: center;\r\n\r\n    // ensures icons follow text colour\r\n    app-icon, mat-icon {\r\n      color: inherit;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./actionBar.component.scss"
                 }
             ],
@@ -359,7 +597,7 @@
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-72991a0419d176edb2d1d38cf24efef51253c34c69ab9856da16ce1555bfc6d00d90180c54c7056a26a5cffea33e9e42644e55560e0b3bcacde5e6f516dad03e",
+            "id": "component-AppComponent-7b7694f8b61a0dc681b260b216b2fe92e0b7bdec0cf149d7b299b52c7133fc5c22afa9ade6006f083571c20f7a82b93f798ed342f043db55c3cdf970d95d8bc2",
             "file": "src/app/app.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -387,10 +625,21 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -408,7 +657,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\nimport { NavTabGroupComponent } from './components/organisms/navTabGroup/navTabGroup.component';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  standalone: true,\r\n  imports: [RouterOutlet, NavTabGroupComponent],\r\n  styleUrls: ['./app.scss'],\r\n  template: `\r\n    <div class=\"layout-wrapper\">\r\n      <app-nav-tab-group [tabs]=\"navTabs\" />\r\n      <router-outlet />\r\n    </div>\r\n  `,\r\n})\r\nexport class AppComponent {\r\n  navTabs = [\r\n    { label: 'Today', icon: 'calendar_today', route: '/' },\r\n    { label: 'Job done', icon: 'check', route: '/done' },\r\n  ];\r\n}\r\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\nimport { NavTabGroupComponent } from './components/organisms/navTabGroup/navTabGroup.component';\r\nimport { Title } from '@angular/platform-browser';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  standalone: true,\r\n  imports: [RouterOutlet, NavTabGroupComponent],\r\n  styleUrls: ['./app.scss'],\r\n  template: `\r\n    <div class=\"layout-wrapper\">\r\n      <app-nav-tab-group [tabs]=\"navTabs\" />\r\n      <router-outlet />\r\n    </div>\r\n  `,\r\n})\r\nexport class AppComponent {\r\n  navTabs = [\r\n    { label: 'Today', icon: 'calendar_today', route: '/' },\r\n    { label: 'Job done', icon: 'check', route: '/done' },\r\n  ];\r\n\r\n  constructor(private titleService: Title) {}\r\n\r\n  ngOnInit(): void {\r\n    this.titleService.setTitle('Job Done | My App');\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -417,11 +666,37 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "titleService",
+                        "type": "Title",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 22,
+                "jsdoctags": [
+                    {
+                        "name": "titleService",
+                        "type": "Title",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": []
         },
         {
             "name": "BadgeComponent",
-            "id": "component-BadgeComponent-2c6090387035c7fd59270a0cd9d97c93f68845bb588aa74d32dbd4e2f7d8acae1abd8f5734d7b8a3b8b78f1af5561362557d7e30f09fbb098953383f7fde7d77",
+            "id": "component-BadgeComponent-479232ddcb36e0ca9fa3e9d458a8f310abe57b00d355a9b83480f27672273388743db9888d0bef0bf5a524321bd61a47bcbb4c8ecae869fcc9b8d0267a795f0a",
             "file": "src/app/components/atoms/badge/badge.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -444,7 +719,7 @@
                     "defaultValue": "'0.875rem'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "string",
                     "decorators": []
                 },
@@ -453,7 +728,7 @@
                     "defaultValue": "'500'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -462,7 +737,7 @@
                     "defaultValue": "'20px'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -471,7 +746,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -480,7 +755,7 @@
                     "defaultValue": "'default'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "\"default\" | \"info\" | \"success\" | \"warning\" | \"danger\"",
                     "decorators": []
                 },
@@ -489,7 +764,7 @@
                     "defaultValue": "'auto'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 20,
                     "type": "string",
                     "decorators": []
                 }
@@ -511,7 +786,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-badge',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './badge.component.html',\n  styleUrls: ['./badge.component.scss'],\n})\nexport class BadgeComponent {\n  @Input() label: string = '';\n  @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';\n  @Input() fontSize: string = '0.875rem';\n  @Input() fontWeight: string = '500';\n  @Input() height: string = '20px'; // Default height\n  @Input() width: string = 'auto'; // Default width\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-badge',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './badge.component.html',\n  styleUrls: ['./badge.component.scss'],\n})\nexport class BadgeComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() label: string = '';\n  @Input() variant: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';\n  @Input() fontSize: string = '0.875rem';\n  @Input() fontWeight: string = '500';\n  @Input() height: string = '20px'; // Default height\n  @Input() width: string = 'auto'; // Default width\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -525,7 +800,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-a906cbef31ddd726a8f32401b4aa3e528199f23af81a0e5b0597164256545510e649548c8808b446512093a805931c33741832b8def78ad399ececbb650fb68b",
+            "id": "component-ButtonComponent-55a06e562146bca26e2ab3ba75cbf4ec685a45c2bc0ebee2ad98ea8102dd508c0ecf02495e162fe9fcdbbc794946f6af1a4a0f1c62df6c3685d96bcf7441769a",
             "file": "src/app/components/atoms/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -548,7 +823,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 22,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -557,7 +832,7 @@
                     "defaultValue": "'0px'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": []
                 },
@@ -566,7 +841,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 17,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -575,7 +850,7 @@
                     "defaultValue": "'1rem'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 25,
                     "type": "string",
                     "decorators": []
                 },
@@ -584,7 +859,7 @@
                     "defaultValue": "'auto'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 24,
                     "type": "string",
                     "decorators": []
                 },
@@ -592,7 +867,7 @@
                     "name": "icon",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -601,7 +876,7 @@
                     "defaultValue": "'start'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 20,
                     "type": "\"start\" | \"end\"",
                     "decorators": []
                 },
@@ -610,7 +885,7 @@
                     "defaultValue": "'Button'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -619,7 +894,7 @@
                     "defaultValue": "'button'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 16,
                     "type": "\"button\" | \"submit\" | \"reset\"",
                     "decorators": []
                 },
@@ -628,7 +903,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 18,
                     "type": "\"primary\" | \"secondary\" | \"danger\"",
                     "decorators": []
                 },
@@ -637,7 +912,7 @@
                     "defaultValue": "'auto'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 23,
                     "type": "string",
                     "decorators": []
                 }
@@ -663,7 +938,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { IconComponent } from '../icon/icon.component';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  standalone: true,\r\n  imports: [CommonModule, IconComponent],\r\n  templateUrl: './button.component.html',\r\n  styleUrls: ['./button.component.scss'],\r\n})\r\nexport class ButtonComponent {\r\n  @Input() label: string = 'Button';\r\n  @Input() type: 'button' | 'submit' | 'reset' = 'button';\r\n  @Input() disabled: boolean = false;\r\n  @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';\r\n  @Input() icon?: string; // Material icon name\r\n  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front\r\n  @Input() borderRadius: string = '0px'; // Default square\r\n  @Input() borderless: boolean = false; // Default is not borderless (with border)\r\n  @Input() width: string = 'auto'; // Default is auto width\r\n  @Input() height: string = 'auto'; // Default is auto height\r\n  @Input() fontSize: string = '1rem'; // Default font size\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { IconComponent } from '../icon/icon.component';\r\n\r\n@Component({\r\n  selector: 'app-button',\r\n  standalone: true,\r\n  imports: [CommonModule, IconComponent],\r\n  templateUrl: './button.component.html',\r\n  styleUrls: ['./button.component.scss'],\r\n})\r\nexport class ButtonComponent {\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() label: string = 'Button';\r\n  @Input() type: 'button' | 'submit' | 'reset' = 'button'; // Default is button\r\n  @Input() disabled: boolean = false;\r\n  @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';\r\n  @Input() icon?: string; // Material icon name\r\n  @Input() iconPosition: 'start' | 'end' = 'start'; // default is front of the label\r\n  @Input() borderRadius: string = '0px'; // Default square\r\n  @Input() borderless: boolean = false; // Default is not borderless (with border)\r\n  @Input() width: string = 'auto'; // Default is auto width\r\n  @Input() height: string = 'auto'; // Default is auto height\r\n  @Input() fontSize: string = '1rem'; // Default font size\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -677,7 +952,7 @@
         },
         {
             "name": "CheckboxComponent",
-            "id": "component-CheckboxComponent-eb06935ea83dc6a8ac33434086a293de5e8b86ef58b127138ec6421c3d58763fb7408d8abe449fae41c4020b4ba07d88a9dc3cd6c1b15f0f40fe6806004c334d",
+            "id": "component-CheckboxComponent-31809cb4936d3291a0b386d50be5e6407bc4b1988e2e83915ec64e56d4671b834128978dc105d725084f02f6bc1da2e0bdc9f53c59a789124eefccdd75fe987d",
             "file": "src/app/components/atoms/checkbox/checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -700,7 +975,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -709,7 +984,7 @@
                     "defaultValue": "'#af15fd'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -718,7 +993,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -729,7 +1004,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 22,
                     "type": "EventEmitter"
                 }
             ],
@@ -743,7 +1018,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 26
                 }
             ],
             "methodsClass": [
@@ -760,7 +1035,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -790,7 +1065,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nlet nextId = 0;\n\n@Component({\n  selector: 'app-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss'],\n})\nexport class CheckboxComponent {\n  @Input() checked: boolean = false;\n  @Input() disabled: boolean = false;\n  @Input() colour: string = '#af15fd';\n  @Output() checkedChange = new EventEmitter<boolean>();\n\n  checkboxId = `customCheckbox-${++nextId}`;\n\n  toggleCheck(event: Event): void {\n    const input = event.target as HTMLInputElement;\n    this.checkedChange.emit(input.checked);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nlet nextId = 0;\n\n@Component({\n  selector: 'app-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss'],\n})\nexport class CheckboxComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() checked: boolean = false;\n  @Input() disabled: boolean = false;\n  @Input() colour: string = '#af15fd';\n\n  // Output properties\n  @Output() checkedChange = new EventEmitter<boolean>();\n\n\n  // Unique ID for the checkbox\n  checkboxId = `customCheckbox-${++nextId}`;\n\n  // --------------------------- Handlers ---------------------------\n\n  toggleCheck(event: Event): void {\n    const input = event.target as HTMLInputElement;\n    this.checkedChange.emit(input.checked);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -804,7 +1079,7 @@
         },
         {
             "name": "FilterActionGroupComponent",
-            "id": "component-FilterActionGroupComponent-b041a5dc2e6d871a9efbf14ff9b489980dca9914aedd9cc3280046549ae86d6b868deb646275cd776af37a070a1ebd817b6ee23cbc4dff351825e9be7f66cf82",
+            "id": "component-FilterActionGroupComponent-59fc373828b191fc4c64853e9c6255eb49c61dca9f65a884ad91582a1fde4c1fed0b2deeee753a89232ad1f31aa9793a51ef6eefb26b52afd65c7b569ffaf7fb",
             "file": "src/app/components/organisms/filterActionGroup/filterActionGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -827,7 +1102,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 26,
                     "type": "string",
                     "decorators": []
                 },
@@ -836,7 +1111,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 25,
                     "type": "FilterTab[]",
                     "decorators": []
                 }
@@ -847,7 +1122,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 30,
                     "type": "EventEmitter"
                 },
                 {
@@ -855,7 +1130,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 31,
                     "type": "EventEmitter"
                 },
                 {
@@ -863,7 +1138,7 @@
                     "defaultValue": "new EventEmitter<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 29,
                     "type": "EventEmitter"
                 }
             ],
@@ -875,7 +1150,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -885,7 +1160,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -902,7 +1177,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -940,7 +1215,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TabGroupComponent } from '../../molecules/filterTabGroup/filterTabGroup.component';\nimport { ActionBarComponent } from '../../molecules/actionBar/actionBar.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-filter-action-group',\n  standalone: true,\n  imports: [CommonModule, TabGroupComponent, ActionBarComponent],\n  templateUrl: './filterActionGroup.component.html',\n  styleUrls: ['./filterActionGroup.component.scss'],\n})\nexport class FilterActionGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = '';\n\n\n  @Output() tabChanged = new EventEmitter<string>();\n  @Output() exportClicked = new EventEmitter<void>();\n  @Output() filterClicked = new EventEmitter<void>();\n\n  handleTabChange(tab: string) {\n    this.tabChanged.emit(tab);\n  }\n\n  handleExport() {\n    this.exportClicked.emit();\n  }\n\n  handleFilter() {\n    this.filterClicked.emit();\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { TabGroupComponent } from '../../molecules/filterTabGroup/filterTabGroup.component';\r\nimport { ActionBarComponent } from '../../molecules/actionBar/actionBar.component';\r\n\r\nexport interface FilterTab {\r\n  label: string;\r\n  count: number;\r\n  state: string;\r\n  active?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-filter-action-group',\r\n  standalone: true,\r\n  imports: [CommonModule, TabGroupComponent, ActionBarComponent],\r\n  templateUrl: './filterActionGroup.component.html',\r\n  styleUrls: ['./filterActionGroup.component.scss'],\r\n})\r\n\r\nexport class FilterActionGroupComponent {\r\n\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() tabs: FilterTab[] = [];\r\n  @Input() selectedTab: string = '';\r\n\r\n  // Output properties\r\n  @Output() tabChanged = new EventEmitter<string>();\r\n  @Output() exportClicked = new EventEmitter<void>();\r\n  @Output() filterClicked = new EventEmitter<void>();\r\n\r\n  // --------------------------- Handlers --------------------------\r\n\r\n  handleTabChange(tab: string) {\r\n    this.tabChanged.emit(tab);\r\n  }\r\n\r\n  handleExport() {\r\n    this.exportClicked.emit();\r\n  }\r\n\r\n  handleFilter() {\r\n    this.filterClicked.emit();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -954,7 +1229,7 @@
         },
         {
             "name": "FilterTabButtonComponent",
-            "id": "component-FilterTabButtonComponent-5dcf800d283cf7724187dc43f91c3a0bc9aa180b8ef22befcc947587c9c60365f1504080df3b41b5394930aa2dbd215a58185ce4130bc95f6ae531bc6358b179",
+            "id": "component-FilterTabButtonComponent-8a8606e085f174efc737011227efad27aedc83adbe799b89a3b8802aba0fac606c0ff1fcf37e57b54643c12c5d06a8871e9896d76ec989a83215277f10a3c4c4",
             "file": "src/app/components/atoms/filterTabButton/filterTabButton.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -977,7 +1252,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -986,7 +1261,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "number",
                     "decorators": []
                 },
@@ -995,7 +1270,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "string",
                     "decorators": []
                 }
@@ -1006,7 +1281,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 21,
                     "type": "EventEmitter"
                 }
             ],
@@ -1018,7 +1293,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1041,11 +1316,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from '../button/button.component';\n\n@Component({\n  selector: 'app-filter-tab-button',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  templateUrl: './filterTabButton.component.html',\n  styleUrls: ['./filterTabButton.component.scss'],\n})\nexport class FilterTabButtonComponent {\n  @Input() label: string = '';\n  @Input() count: number = 0;\n  @Input() active: boolean = false;\n\n  @Output() selected = new EventEmitter<void>();\n\n  handleClick(): void {\n    this.selected.emit();\n  }\n\n  get displayText(): string {\n    return `${this.label} (${this.count})`;\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { ButtonComponent } from '../button/button.component';\r\n\r\n@Component({\r\n  selector: 'app-filter-tab-button',\r\n  standalone: true,\r\n  imports: [CommonModule, ButtonComponent],\r\n  templateUrl: './filterTabButton.component.html',\r\n  styleUrls: ['./filterTabButton.component.scss'],\r\n})\r\nexport class FilterTabButtonComponent {\r\n\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() label: string = '';\r\n  @Input() count: number = 0;\r\n  @Input() active: boolean = false;\r\n\r\n  // Output properties\r\n  @Output() selected = new EventEmitter<void>();\r\n\r\n  // --------------------------- Handlers --------------------------\r\n\r\n  handleClick(): void {\r\n    this.selected.emit();\r\n  }\r\n\r\n  get displayText(): string {\r\n    return `${this.label} (${this.count})`;\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: inline-block;\r\n\r\n  app-button {\r\n    padding: 0.35rem 0.3rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n    //background-color: white;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ":host {\r\n  display: inline-block;\r\n\r\n  app-button {\r\n    padding: 0.35rem 0.3rem;\r\n    font-weight: 500;\r\n    font-size: 0.85rem;\r\n    border-width: 2px;\r\n\r\n    &.primary {\r\n      border-color: #af15fd;\r\n      color: #af15fd;\r\n\r\n      &:hover {\r\n        background-color: rgba(175, 21, 253, 0.1);\r\n      }\r\n    }\r\n\r\n    &.secondary {\r\n      border-color: #ddd;\r\n      color: #555;\r\n\r\n      &:hover {\r\n        background-color: rgba(0, 0, 0, 0.04);\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./filterTabButton.component.scss"
                 }
             ],
@@ -1058,7 +1333,7 @@
                         "name": "displayText",
                         "type": "string",
                         "returnType": "string",
-                        "line": 23
+                        "line": 29
                     }
                 }
             },
@@ -1066,7 +1341,7 @@
         },
         {
             "name": "IconComponent",
-            "id": "component-IconComponent-968e8b224827f71998ce8ebd6e02f660130c16a63588eba3a8b82d508886a917eda13012dd296b6cf551ec8575792f5c9201d6aa4d60ab55da4ec064b0fa200e",
+            "id": "component-IconComponent-996eb234ef8c38ae235f982e252f6566cbecf703bb6a9a25ba2189460e2537c8b3f554875cb5b0e174e1a57207e90380880f20e99534f32f49b1152d877cb898",
             "file": "src/app/components/atoms/icon/icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1089,7 +1364,7 @@
                     "defaultValue": "'inherit'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -1098,7 +1373,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "string",
                     "decorators": []
                 },
@@ -1107,7 +1382,7 @@
                     "defaultValue": "'20px'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "string",
                     "decorators": []
                 }
@@ -1133,7 +1408,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-icon',\r\n  standalone: true,\r\n  imports: [CommonModule, MatIconModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.scss'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name: string = '';\r\n  @Input() size: string = '20px';\r\n  @Input() colour: string = 'inherit';\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-icon',\r\n  standalone: true,\r\n  imports: [CommonModule, MatIconModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.scss'],\r\n})\r\nexport class IconComponent {\r\n\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() name: string = '';\r\n  @Input() size: string = '20px';\r\n  @Input() colour: string = 'inherit';\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1146,70 +1421,275 @@
             "templateData": "<mat-icon [style.fontSize]=\"size\" [style.color]=\"colour\">\r\n  {{ name }}\r\n</mat-icon>\r\n"
         },
         {
-            "name": "JobDonePageComponent",
-            "id": "component-JobDonePageComponent-48f8692f6d22fd37f255f5cf5c65ac8603f610a3af6a57b74705de5314ab7281935f8c65c18286dbe1014635ec82f2c647b6ea6bc3e41b9ac15048b7df809b5a",
+            "name": "JobDoneComponent",
+            "id": "component-JobDoneComponent-58068299cfb15d6f7bc821021ed78a7a91d823c7a81837e5cf57b81804cf60005a7935983f345995dc23d87d67f08bfeab09796d9ec8265ea3b4a432b1624d26",
             "file": "src/app/components/pages/jobDone/jobDone.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-job-done-page",
-            "styleUrls": [],
+            "selector": "app-main-page",
+            "styleUrls": [
+                "./jobDone.component.scss"
+            ],
             "styles": [],
-            "template": "<app-main-group-template\n  [navTabs]=\"navTabs\"\n  [statCards]=\"statCards\"\n  [filterTabs]=\"filterTabs\"\n  [tableData]=\"todos\"\n/>\n",
-            "templateUrl": [],
+            "templateUrl": [
+                "./jobDone.component.html"
+            ],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "filterTabs",
-                    "defaultValue": "[\n    { label: 'All', count: 3, state: 'all', active: true },\n  ]",
+                    "name": "allChecked",
+                    "defaultValue": "computed(\n    () =>\n      this.tableData().length > 0 &&\n      this.tableData().every((row) => row.selected)\n  )",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 80,
+                    "modifierKind": [
+                        148
+                    ]
                 },
                 {
-                    "name": "navTabs",
-                    "defaultValue": "[\n    { label: 'Today', icon: 'calendar_today', route: '/' },\n    { label: 'Job done', icon: 'check', route: '/done', active: true },\n  ]",
+                    "name": "filterTabs",
+                    "defaultValue": "computed(() => {\n    const data = this.tableData();\n    const counts: Record<string, number> = {};\n\n    for (const row of data) {\n      const key = row.state.toLowerCase();\n      counts[key] = (counts[key] || 0) + 1;\n    }\n\n    return [\n      { label: 'Total',\n        count: data.length,\n        state: 'total'\n      },\n      { label: 'Done',\n        count: counts['done'] ?? 0,\n        state: 'done'\n      },\n      {\n        label: 'Pending',\n        count: counts['pending'] ?? 0,\n        state: 'pending',\n      },\n    ];\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 124,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "selectedFilter",
+                    "defaultValue": "signal<string>('total')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "selectedTab",
+                    "defaultValue": "'total'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 48
+                },
+                {
+                    "name": "sortDirection",
+                    "defaultValue": "signal<SortDirection>('asc')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 47,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "sortKey",
+                    "defaultValue": "signal<SortableKey>('fileNumber')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 46,
+                    "modifierKind": [
+                        148
+                    ]
                 },
                 {
                     "name": "statCards",
-                    "defaultValue": "[\n    { count: 3, label: 'Tasks', icon: 'check_circle' },\n  ]",
+                    "defaultValue": "computed(() => {\n    const data = this.tableData();\n    const done = data.filter((r) => r.state.toLowerCase() === 'done').length;\n    const pending = data.filter(\n      (r) => r.state.toLowerCase() === 'pending'\n    ).length;\n\n    return [\n      { count: done,\n        label: 'Done',\n        icon: 'check'\n      },\n      { count: pending,\n        label: 'Pending',\n        icon: 'hourglass_empty'\n      },\n    ];\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24
+                    "line": 152,
+                    "modifierKind": [
+                        148
+                    ]
                 },
                 {
-                    "name": "todos",
-                    "defaultValue": "[\n    { id: 1, state: 'Done', fileNumber: 'Finish code review', selected: false },\n    { id: 2, state: 'Done', fileNumber: 'Refactor routing', selected: false },\n    { id: 3, state: 'Done', fileNumber: 'Test component reuse', selected: false },\n  ]",
+                    "name": "tableData",
+                    "defaultValue": "signal<TableRowData[]>([\n    { id: 1, state: 'Done', fileNumber: 1, selected: false },\n    { id: 2, state: 'Pending', fileNumber: 3, selected: false },\n    { id: 3, state: 'Pending', fileNumber: 8, selected: false },\n    { id: 4, state: 'Done', fileNumber: 10, selected: false },\n    { id: 5, state: 'Pending', fileNumber: 5, selected: false },\n    { id: 6, state: 'Pending', fileNumber: 2, selected: false },\n    { id: 7, state: 'Pending', fileNumber: 4, selected: false },\n    { id: 8, state: 'Done', fileNumber: 6, selected: false },\n    { id: 9, state: 'Done', fileNumber: 7, selected: false },\n    { id: 10, state: 'Pending', fileNumber: 9, selected: false },\n    { id: 11, state: 'Done', fileNumber: 11, selected: false },\n    { id: 12, state: 'Pending', fileNumber: 12, selected: false },\n    { id: 13, state: 'Done', fileNumber: 13, selected: false },\n    { id: 14, state: 'Pending', fileNumber: 14, selected: false },\n    { id: 15, state: 'Done', fileNumber: 15, selected: false },\n  ])",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 32
+                    "line": 27,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "visibleTableData",
+                    "defaultValue": "computed(() => {\n    const selected = this.selectedFilter();\n    const direction = this.sortDirection();\n    const key = this.sortKey();\n\n    // TableDataService for filtering and sorting\n    let rows = this.tableData();\n    if (selected !== 'total') {\n      rows = this.tableDataService.filterByState(rows, selected);\n    }\n    if (key === 'fileNumber') {\n      rows = this.tableDataService.sortByFileNumber(rows, direction);\n    } else {\n      // fallback to default sort for other keys\n      rows = [...rows].sort((a, b) => {\n        const aVal = a[key] ?? '';\n        const bVal = b[key] ?? '';\n        return direction === 'asc'\n          ? String(aVal).localeCompare(String(bVal))\n          : String(bVal).localeCompare(String(aVal));\n      });\n    }\n    return rows;\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 53,
+                    "modifierKind": [
+                        148
+                    ]
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "onExportToCSV",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 116,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onFilterChange",
+                    "args": [
+                        {
+                            "name": "state",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 109,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "state",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onRowSelected",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 86,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSortChange",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 102,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onToggleAll",
+                    "args": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 94,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -1228,15 +1708,47 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\n\n@Component({\n  selector: 'app-job-done-page',\n  standalone: true,\n  imports: [CommonModule, MainGroupTemplateComponent],\n  template: `\n    <app-main-group-template\n      [navTabs]=\"navTabs\"\n      [statCards]=\"statCards\"\n      [filterTabs]=\"filterTabs\"\n      [tableData]=\"todos\"\n    />\n  `,\n})\nexport class JobDonePageComponent {\n  navTabs = [\n    { label: 'Today', icon: 'calendar_today', route: '/' },\n    { label: 'Job done', icon: 'check', route: '/done', active: true },\n  ];\n\n  statCards = [\n    { count: 3, label: 'Tasks', icon: 'check_circle' },\n  ];\n\n  filterTabs = [\n    { label: 'All', count: 3, state: 'all', active: true },\n  ];\n\n  todos = [\n    { id: 1, state: 'Done', fileNumber: 'Finish code review', selected: false },\n    { id: 2, state: 'Done', fileNumber: 'Refactor routing', selected: false },\n    { id: 3, state: 'Done', fileNumber: 'Test component reuse', selected: false },\n  ];\n}\n",
+            "sourceCode": "import { Component, computed, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\nimport {\n  TableDataService,\n  SortDirection,\n} from '../../../services/tableData.service';\n\ntype SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;\n\n@Component({\n  selector: 'app-main-page',\n  standalone: true,\n  imports: [CommonModule, MainGroupTemplateComponent],\n  templateUrl: './jobDone.component.html',\n  styleUrls: ['./jobDone.component.scss'],\n})\n\n// ------------------------- JobDoneComponent -------------------------\n// This serves to show the use of Atomic Design principles in a Single Page Application (SPA).\n// By using a template component, it allows for the reuse of the main layout structure while focusing on the specific data and functionality of the \"Job Done\" page.\nexport class JobDoneComponent {\n  constructor(private tableDataService: TableDataService) {} // Service injection\n\n  // Base data\n  readonly tableData = signal<TableRowData[]>([\n    { id: 1, state: 'Done', fileNumber: 1, selected: false },\n    { id: 2, state: 'Pending', fileNumber: 3, selected: false },\n    { id: 3, state: 'Pending', fileNumber: 8, selected: false },\n    { id: 4, state: 'Done', fileNumber: 10, selected: false },\n    { id: 5, state: 'Pending', fileNumber: 5, selected: false },\n    { id: 6, state: 'Pending', fileNumber: 2, selected: false },\n    { id: 7, state: 'Pending', fileNumber: 4, selected: false },\n    { id: 8, state: 'Done', fileNumber: 6, selected: false },\n    { id: 9, state: 'Done', fileNumber: 7, selected: false },\n    { id: 10, state: 'Pending', fileNumber: 9, selected: false },\n    { id: 11, state: 'Done', fileNumber: 11, selected: false },\n    { id: 12, state: 'Pending', fileNumber: 12, selected: false },\n    { id: 13, state: 'Done', fileNumber: 13, selected: false },\n    { id: 14, state: 'Pending', fileNumber: 14, selected: false },\n    { id: 15, state: 'Done', fileNumber: 15, selected: false },\n  ]);\n\n  // Sorting\n  readonly sortKey = signal<SortableKey>('fileNumber');\n  readonly sortDirection = signal<SortDirection>('asc');\n  selectedTab: string = 'total';\n\n  // Filtering\n  readonly selectedFilter = signal<string>('total');\n\n  readonly visibleTableData = computed(() => {\n    const selected = this.selectedFilter();\n    const direction = this.sortDirection();\n    const key = this.sortKey();\n\n    // TableDataService for filtering and sorting\n    let rows = this.tableData();\n    if (selected !== 'total') {\n      rows = this.tableDataService.filterByState(rows, selected);\n    }\n    if (key === 'fileNumber') {\n      rows = this.tableDataService.sortByFileNumber(rows, direction);\n    } else {\n      // fallback to default sort for other keys\n      rows = [...rows].sort((a, b) => {\n        const aVal = a[key] ?? '';\n        const bVal = b[key] ?? '';\n        return direction === 'asc'\n          ? String(aVal).localeCompare(String(bVal))\n          : String(bVal).localeCompare(String(aVal));\n      });\n    }\n    return rows;\n  });\n\n  // ---------------------------- Row selection ---------------------\n\n  readonly allChecked = computed(\n    () =>\n      this.tableData().length > 0 &&\n      this.tableData().every((row) => row.selected)\n  );\n\n  onRowSelected(change: { id: string | number; selected: boolean }) {\n    this.tableData.update((rows) =>\n      rows.map((row) =>\n        row.id === change.id ? { ...row, selected: change.selected } : row\n      )\n    );\n  }\n\n  onToggleAll(checked: boolean) {\n    this.tableData.update((rows) =>\n      rows.map((row) => ({ ...row, selected: checked }))\n    );\n  }\n\n  // ---------------------------- Handlers ----------------------------\n\n  onSortChange(change: { key: string; direction: SortDirection }) {\n    if (['fileNumber', 'id', 'state'].includes(change.key)) {\n      this.sortKey.set(change.key as 'fileNumber' | 'state' | 'id');\n      this.sortDirection.set(change.direction);\n    }\n  }\n\n  onFilterChange(state: string) {\n    this.selectedFilter.set(state);\n    this.selectedTab = state;\n  }\n\n  // ------------------------------ CSV Export ------------------------------\n\n  onExportToCSV(): void {\n    const rows = this.visibleTableData();\n    const csvContent = this.tableDataService.exportToCSV(rows); // <-- Use service\n    this.tableDataService.downloadCSV(csvContent, 'table-data.csv'); // <-- Use service\n  }\n\n  // ------------------------------ Filter tabs ------------------------------\n\n  readonly filterTabs = computed(() => {\n    const data = this.tableData();\n    const counts: Record<string, number> = {};\n\n    for (const row of data) {\n      const key = row.state.toLowerCase();\n      counts[key] = (counts[key] || 0) + 1;\n    }\n\n    return [\n      { label: 'Total',\n        count: data.length,\n        state: 'total'\n      },\n      { label: 'Done',\n        count: counts['done'] ?? 0,\n        state: 'done'\n      },\n      {\n        label: 'Pending',\n        count: counts['pending'] ?? 0,\n        state: 'pending',\n      },\n    ];\n  });\n\n  // ----------------------------- Stat cards -----------------------------\n\n  readonly statCards = computed(() => {\n    const data = this.tableData();\n    const done = data.filter((r) => r.state.toLowerCase() === 'done').length;\n    const pending = data.filter(\n      (r) => r.state.toLowerCase() === 'pending'\n    ).length;\n\n    return [\n      { count: done,\n        label: 'Done',\n        icon: 'check'\n      },\n      { count: pending,\n        label: 'Pending',\n        icon: 'hourglass_empty'\n      },\n    ];\n  });\n}\n",
             "assetsDirs": [],
-            "styleUrlsData": "",
+            "styleUrlsData": [
+                {
+                    "data": ".page-wrapper {\r\n  background-color: #f5f5f5;\r\n  min-height: 100vh;\r\n  padding: 2rem;\r\n  box-sizing: border-box;\r\n}\r\n",
+                    "styleUrl": "./jobDone.component.scss"
+                }
+            ],
             "stylesData": "",
-            "extends": []
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "tableDataService",
+                        "type": "TableDataService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 23,
+                "jsdoctags": [
+                    {
+                        "name": "tableDataService",
+                        "type": "TableDataService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "templateData": "<div class=\"page-wrapper\">\n  <app-main-group-template\n    [statCards]=\"statCards()\"\n    [filterTabs]=\"filterTabs()\"\n    [tableData]=\"visibleTableData()\"\n    [sortKey]=\"sortKey()\"\n    [sortDirection]=\"sortDirection()\"\n    (sortChange)=\"onSortChange($event)\"\n    [allChecked]=\"allChecked()\"\n    (toggleAll)=\"onToggleAll($event)\"\n    (rowSelected)=\"onRowSelected($event)\"\n    (filterTabChange)=\"onFilterChange($event)\"\n    [selectedTab]=\"selectedFilter()\"\n    (exportClicked)=\"onExportToCSV()\"\n  />\n</div>\n"
         },
         {
             "name": "MainGroupTemplateComponent",
-            "id": "component-MainGroupTemplateComponent-226ba46dfd25eb3ec82b8cbc258fd73884ac3e2cf7e2f63861125e58903467f1bd7c676a0afc1dbcda6c6c25084be733a73c80ab9f14f1492dd77749c2cdbf40",
+            "id": "component-MainGroupTemplateComponent-2ca6561494ce10b0e9a5b5c7126f500b12625d77285ea9fa3885f994aa15ab8de3b7e07a3cbff3a5dd82d789bcdfea225c7bc97cce03c48531064e2b7eda5f8e",
             "file": "src/app/components/templates/mainGroup/mainGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1268,7 +1780,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 29,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1277,7 +1789,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 27,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1286,7 +1798,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 30,
+                    "line": 33,
                     "type": "string",
                     "decorators": []
                 },
@@ -1295,7 +1807,7 @@
                     "defaultValue": "'asc'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 29,
+                    "line": 32,
                     "type": "\"asc\" | \"desc\"",
                     "decorators": []
                 },
@@ -1304,7 +1816,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
+                    "line": 31,
                     "type": "string",
                     "decorators": []
                 },
@@ -1313,7 +1825,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 28,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1322,18 +1834,26 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 30,
                     "type": "TableRowData[]",
                     "decorators": []
                 }
             ],
             "outputsClass": [
                 {
+                    "name": "exportClicked",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "EventEmitter"
+                },
+                {
                     "name": "filterTabChange",
                     "defaultValue": "new EventEmitter<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "EventEmitter"
                 },
                 {
@@ -1341,7 +1861,7 @@
                     "defaultValue": "new EventEmitter<{ id: string | number; selected: boolean }>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 39,
                     "type": "EventEmitter"
                 },
                 {
@@ -1349,7 +1869,7 @@
                     "defaultValue": "new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 32,
+                    "line": 38,
                     "type": "EventEmitter"
                 },
                 {
@@ -1357,7 +1877,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 37,
                     "type": "EventEmitter"
                 }
             ],
@@ -1393,21 +1913,21 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGroup.component';\nimport { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';\nimport { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';\nimport { TableRowGroupComponent } from '../../organisms/tableRowGroup/tableRowGroup.component';\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\n\n@Component({\n  selector: 'app-main-group-template',\n  standalone: true,\n  imports: [\n    CommonModule,\n    StatCardGroupComponent,\n    FilterActionGroupComponent,\n    TableHeaderComponent,\n    TableRowGroupComponent\n  ],\n  templateUrl: './mainGroup.component.html',\n  styleUrls: ['./mainGroup.component.scss']\n})\nexport class MainGroupTemplateComponent {\n  @Input() navTabs: any[] = [];\n  @Input() statCards: any[] = [];\n  @Input() filterTabs: any[] = [];\n  @Input() tableData: TableRowData[] = [];\n  @Input() sortKey: string = '';\n  @Input() sortDirection: 'asc' | 'desc' = 'asc';\n  @Input() selectedTab: string = '';\n\n  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();\n\n  @Input() allChecked: boolean = false;\n\n  @Output() toggleAll = new EventEmitter<boolean>();\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() filterTabChange = new EventEmitter<string>();\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nimport { StatCardGroupComponent } from '../../organisms/statCardGroup/statCardGroup.component';\r\nimport { FilterActionGroupComponent } from '../../organisms/filterActionGroup/filterActionGroup.component';\r\nimport { TableHeaderComponent } from '../../molecules/tableHeader/tableHeader.component';\r\nimport { TableRowGroupComponent } from '../../organisms/tableRowGroup/tableRowGroup.component';\r\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\r\n\r\n@Component({\r\n  selector: 'app-main-group-template',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    StatCardGroupComponent,\r\n    FilterActionGroupComponent,\r\n    TableHeaderComponent,\r\n    TableRowGroupComponent\r\n  ],\r\n  templateUrl: './mainGroup.component.html',\r\n  styleUrls: ['./mainGroup.component.scss']\r\n})\r\nexport class MainGroupTemplateComponent {\r\n\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() navTabs: any[] = [];\r\n  @Input() statCards: any[] = [];\r\n  @Input() filterTabs: any[] = [];\r\n  @Input() tableData: TableRowData[] = [];\r\n  @Input() sortKey: string = '';\r\n  @Input() sortDirection: 'asc' | 'desc' = 'asc';\r\n  @Input() selectedTab: string = '';\r\n  @Input() allChecked: boolean = false;\r\n\r\n  // Output properties\r\n  @Output() toggleAll = new EventEmitter<boolean>();\r\n  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();\r\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\r\n  @Output() filterTabChange = new EventEmitter<string>();\r\n  @Output() exportClicked = new EventEmitter<void>();\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".main-template {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n  padding: 0rem;\r\n  background: #f5f5f5;\r\n  margin-right: auto;\r\n}\r\n\r\n.table-section {\r\n  border: 1px solid #ccc;\r\n  border-radius: 6px;\r\n  overflow-x: auto;\r\n  background: white;\r\n}\r\n\r\n\r\napp-stat-card-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n  padding-bottom: 1rem;\r\n  padding-top: 0rem;\r\n}\r\n\r\napp-filter-action-bar {\r\n  padding-bottom: 2rem;\r\n}\r\n\r\n// app-nav-tab-group {\r\n//   border: 1px dashed red; //Debug\r\n//   min-height: 3rem;\r\n// }\r\n",
+                    "data": ".main-template {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n  padding: 0rem;\r\n  background: #f5f5f5;\r\n  margin-right: auto;\r\n}\r\n\r\n.table-section {\r\n  border: 1px solid #ccc;\r\n  border-radius: 6px;\r\n  overflow-x: auto;\r\n  background: white;\r\n}\r\n\r\n.table-row-scroll-wrapper {\r\n  max-height: calc(100vh - 25rem);\r\n  overflow-y: auto;\r\n  overflow-x: hidden;\r\n}\r\n\r\n\r\napp-stat-card-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n  padding-bottom: 1rem;\r\n  padding-top: 0rem;\r\n}\r\n\r\napp-filter-action-bar {\r\n  padding-bottom: 2rem;\r\n}\r\n",
                     "styleUrl": "./mainGroup.component.scss"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"main-template\">\n\n\n  <app-stat-card-group [cards]=\"statCards\" />\n\n  <app-filter-action-group\n    [tabs]=\"filterTabs\"\n    (tabChanged)=\"filterTabChange.emit($event)\"\n    />\n\n  <div class=\"table-section\">\n    <table>\n      <thead>\n        <app-table-header\n          [allChecked]=\"allChecked\"\n          [sortKey]=\"sortKey\"\n          [sortDirection]=\"sortDirection\"\n          (toggleAll)=\"toggleAll.emit($event)\"\n          (sortChange)=\"sortChange.emit($event)\"\n        />\n      </thead>\n      <tbody>\n        <app-table-row-group\n          [rows]=\"tableData\"\n          (rowSelected)=\"rowSelected.emit($event)\"\n        />\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+            "templateData": "<div class=\"main-template\">\r\n\r\n\r\n  <app-stat-card-group [cards]=\"statCards\" />\r\n\r\n  <app-filter-action-group\r\n    [tabs]=\"filterTabs\"\r\n    [selectedTab]=\"selectedTab\"\r\n    (tabChanged)=\"filterTabChange.emit($event)\"\r\n    (exportClicked)=\"exportClicked.emit()\"\r\n    />\r\n\r\n  <div class=\"table-section\">\r\n  <app-table-header\r\n    [sortKey]=\"sortKey\"\r\n    [sortDirection]=\"sortDirection\"\r\n    [allChecked]=\"allChecked\"\r\n    (sortChange)=\"sortChange.emit($event)\"\r\n    (toggleAll)=\"toggleAll.emit($event)\"\r\n  />\r\n\r\n  <div class=\"table-row-scroll-wrapper\">\r\n    <app-table-row-group\r\n      [rows]=\"tableData\"\r\n      (rowSelected)=\"rowSelected.emit($event)\"\r\n\r\n    />\r\n  </div>\r\n</div>\r\n\r\n</div>\r\n"
         },
         {
             "name": "MainPageComponent",
-            "id": "component-MainPageComponent-66ea4cf2a2687ed9ec0a358ac8e9d0169fcf6df98e227f41c451758d3db7c4c2aa018a2796c31c526f2a43057e75f63effaa9103021a6fcbaa8d6d15f51b4a1e",
+            "id": "component-MainPageComponent-0f22e3f185c13ea4ae335a8a74bf614ec3832795628e1d3c29f7219020e22fb7de363868e6603478f137c9a29d38764bb1220d3484d6e2961b032e62afde3cec",
             "file": "src/app/components/pages/mainPage/mainPage.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1429,39 +1949,31 @@
             "propertiesClass": [
                 {
                     "name": "allChecked",
-                    "defaultValue": "computed(\n    () => this.tableData().length > 0 && this.tableData().every(row => row.selected)\n  )",
+                    "defaultValue": "computed(\r\n    () =>\r\n      this.tableData().length > 0 &&\r\n      this.tableData().every((row) => row.selected)\r\n  )",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 58,
+                    "line": 91,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
                     "name": "filterTabs",
-                    "defaultValue": "[\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post-payment' },\n    { label: 'Refund request', count: 13, state: 'refund request' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ]",
+                    "defaultValue": "computed(() => {\r\n    const data = this.tableData();\r\n    const counts: Record<string, number> = {};\r\n\r\n    for (const row of data) {\r\n      const key = row.state.toLowerCase();\r\n      counts[key] = (counts[key] || 0) + 1;\r\n    }\r\n\r\n    return [\r\n      { label: 'Total', count: data.length, state: 'total' },\r\n      { label: 'Identity', count: counts['identity'] ?? 0, state: 'identity' },\r\n      {\r\n        label: 'Pre-payment',\r\n        count: counts['pre-payment'] ?? 0,\r\n        state: 'pre-payment',\r\n      },\r\n      {\r\n        label: 'Post-payment',\r\n        count: counts['post-payment'] ?? 0,\r\n        state: 'post-payment',\r\n      },\r\n      {\r\n        label: 'Refund request',\r\n        count: counts['refund request'] ?? 0,\r\n        state: 'refund request',\r\n      },\r\n      { label: 'Fraud', count: counts['fraud'] ?? 0, state: 'fraud' },\r\n      {\r\n        label: 'Validated',\r\n        count: counts['validated'] ?? 0,\r\n        state: 'validated',\r\n      },\r\n    ];\r\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 107
-                },
-                {
-                    "name": "navTabs",
-                    "defaultValue": "[\n    { label: 'Today', icon: 'calendar_today', route: '/', active: true },\n    { label: 'Job done', icon: 'check', route: '/done', active: false },\n  ]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "[]",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 94
+                    "line": 135,
+                    "modifierKind": [
+                        148
+                    ]
                 },
                 {
                     "name": "selectedFilter",
@@ -1472,21 +1984,32 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 62,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
+                    "name": "selectedTab",
+                    "defaultValue": "'total'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 59
+                },
+                {
                     "name": "sortDirection",
-                    "defaultValue": "signal<'asc' | 'desc'>('asc')",
+                    "defaultValue": "signal<SortDirection>('asc')",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 58,
                     "modifierKind": [
                         148
                     ]
@@ -1500,52 +2023,65 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 57,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
                     "name": "statCards",
-                    "defaultValue": "[\n    { count: 850, label: 'Priority', icon: 'logout' },\n    { count: 850, label: 'Express', icon: 'logout' },\n    { count: 850, label: 'Standard', icon: 'logout' },\n    { count: 850, label: 'Documents waiting', icon: 'logout' },\n    { count: 850, label: 'Unpaid waiting', icon: 'logout' },\n  ]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "[]",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 99
-                },
-                {
-                    "name": "tableData",
-                    "defaultValue": "signal<TableRowData[]>([\n    { id: 1, state: 'fraud', fileNumber: '1', selected: false },\n    { id: 2, state: 'Refund Request', fileNumber: '3', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },\n  ])",
+                    "defaultValue": "computed(() => {\r\n    const data = this.tableData();\r\n    const counts: Record<string, number> = {};\r\n\r\n    for (const row of data) {\r\n      const key = row.state.toLowerCase();\r\n      counts[key] = (counts[key] || 0) + 1;\r\n    }\r\n\r\n    return [\r\n      { count: data.length,\r\n        label: 'Total',\r\n        icon: 'layers'\r\n      },\r\n      { count: counts['identity'] ?? 0,\r\n        label: 'Identity',\r\n        icon: 'person'\r\n      },\r\n      { count: counts['refund request'] ?? 0,\r\n        label: 'Refund Request',\r\n        icon: 'receipt',\r\n      },\r\n      {\r\n        count: counts['fraud'] ?? 0,\r\n        label: 'Fraud',\r\n        icon: 'warning',\r\n      },\r\n      {\r\n        count: counts['validated'] ?? 0,\r\n        label: 'Validated',\r\n        icon: 'check',\r\n      },\r\n    ];\r\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 173,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "tableData",
+                    "defaultValue": "signal<TableRowData[]>([\r\n    { id: 1, state: 'Fraud', fileNumber: 1, selected: false },\r\n    { id: 2, state: 'Refund Request', fileNumber: 3, selected: false },\r\n    { id: 3, state: 'Pre-payment', fileNumber: 8, selected: false },\r\n    { id: 4, state: 'Validated', fileNumber: 10, selected: false },\r\n    { id: 5, state: 'Validated', fileNumber: 5, selected: false },\r\n    { id: 6, state: 'Post-payment', fileNumber: 2, selected: false },\r\n    { id: 7, state: 'Post-payment', fileNumber: 4, selected: false },\r\n    { id: 8, state: 'Identity', fileNumber: 6, selected: false },\r\n    { id: 9, state: 'Pre-payment', fileNumber: 7, selected: false },\r\n    { id: 10, state: 'Validated', fileNumber: 9, selected: false },\r\n    { id: 11, state: 'Validated', fileNumber: 11, selected: false },\r\n    { id: 12, state: 'Refund Request', fileNumber: 12, selected: false },\r\n    { id: 13, state: 'Fraud', fileNumber: 13, selected: false },\r\n    { id: 14, state: 'Fraud', fileNumber: 14, selected: false },\r\n    { id: 15, state: 'Validated', fileNumber: 15, selected: false },\r\n    { id: 16, state: 'Identity', fileNumber: 16, selected: false },\r\n    { id: 17, state: 'Post-payment', fileNumber: 17, selected: false },\r\n    { id: 18, state: 'Refund Request', fileNumber: 18, selected: false },\r\n    { id: 19, state: 'Fraud', fileNumber: 19, selected: false },\r\n    { id: 20, state: 'Validated', fileNumber: 20, selected: false },\r\n    { id: 21, state: 'Identity', fileNumber: 21, selected: false },\r\n    { id: 22, state: 'Post-payment', fileNumber: 22, selected: false },\r\n    { id: 23, state: 'Refund Request', fileNumber: 23, selected: false },\r\n    { id: 24, state: 'Fraud', fileNumber: 24, selected: false },\r\n    { id: 25, state: 'Validated', fileNumber: 25, selected: false },\r\n  ])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
                     "name": "visibleTableData",
-                    "defaultValue": "computed(() => {\n    const selected = this.selectedFilter();\n    const direction = this.sortDirection();\n    const key = this.sortKey();\n\n    // Filter\n    let rows = this.tableData();\n    if (selected !== 'total') {\n      rows = rows.filter(row => row.state.toLowerCase() === selected.toLowerCase());\n    }\n\n    // Then Sort\n    return [...rows].sort((a, b) => {\n      const aVal = a[key] ?? '';\n      const bVal = b[key] ?? '';\n\n      const isNumeric = !isNaN(+aVal) && !isNaN(+bVal);\n      return isNumeric\n        ? direction === 'asc' ? +aVal - +bVal : +bVal - +aVal\n        : direction === 'asc'\n          ? String(aVal).localeCompare(String(bVal))\n          : String(bVal).localeCompare(String(aVal));\n    });\n  })",
+                    "defaultValue": "computed(() => {\r\n    const selected = this.selectedFilter();\r\n    const direction = this.sortDirection();\r\n    const key = this.sortKey();\r\n\r\n    // TableDataService for filtering and sorting\r\n    let rows = this.tableData();\r\n    if (selected !== 'total') {\r\n      rows = this.tableDataService.filterByState(rows, selected);\r\n    }\r\n    if (key === 'fileNumber') {\r\n      rows = this.tableDataService.sortByFileNumber(rows, direction);\r\n    } else {\r\n      // fallback to default sort for other keys\r\n      rows = [...rows].sort((a, b) => {\r\n        const aVal = a[key] ?? '';\r\n        const bVal = b[key] ?? '';\r\n        return direction === 'asc'\r\n          ? String(aVal).localeCompare(String(bVal))\r\n          : String(bVal).localeCompare(String(aVal));\r\n      });\r\n    }\r\n    return rows;\r\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 32,
+                    "line": 64,
                     "modifierKind": [
                         148
                     ]
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "onExportToCSV",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 127,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "onFilterChange",
                     "args": [
@@ -1559,7 +2095,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 85,
+                    "line": 120,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1587,7 +2123,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 62,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1615,7 +2151,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 77,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1643,7 +2179,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 105,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1677,7 +2213,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, computed, signal } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\n\ntype SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;\n\n@Component({\n  selector: 'app-main-page',\n  standalone: true,\n  imports: [CommonModule, MainGroupTemplateComponent],\n  templateUrl: './mainPage.component.html',\n  styleUrls: ['./mainPage.component.scss'],\n})\nexport class MainPageComponent {\n  // Base data\n  readonly tableData = signal<TableRowData[]>([\n    { id: 1, state: 'fraud', fileNumber: '1', selected: false },\n    { id: 2, state: 'Refund Request', fileNumber: '3', selected: false },\n    { id: 3, state: 'Pre-payment', fileNumber: '8', selected: false },\n    { id: 4, state: 'Pre-payment', fileNumber: '10', selected: false },\n    { id: 5, state: 'Pre-payment', fileNumber: '5', selected: false },\n  ]);\n\n  // Sorting\n  readonly sortKey = signal<SortableKey>('fileNumber');\n  readonly sortDirection = signal<'asc' | 'desc'>('asc');\n\n  // Filtering\n  readonly selectedFilter = signal<string>('total');\n\n  readonly visibleTableData = computed(() => {\n    const selected = this.selectedFilter();\n    const direction = this.sortDirection();\n    const key = this.sortKey();\n\n    // Filter\n    let rows = this.tableData();\n    if (selected !== 'total') {\n      rows = rows.filter(row => row.state.toLowerCase() === selected.toLowerCase());\n    }\n\n    // Then Sort\n    return [...rows].sort((a, b) => {\n      const aVal = a[key] ?? '';\n      const bVal = b[key] ?? '';\n\n      const isNumeric = !isNaN(+aVal) && !isNaN(+bVal);\n      return isNumeric\n        ? direction === 'asc' ? +aVal - +bVal : +bVal - +aVal\n        : direction === 'asc'\n          ? String(aVal).localeCompare(String(bVal))\n          : String(bVal).localeCompare(String(aVal));\n    });\n  });\n\n  // Row selection\n  readonly allChecked = computed(\n    () => this.tableData().length > 0 && this.tableData().every(row => row.selected)\n  );\n\n  onRowSelected(change: { id: string | number; selected: boolean }) {\n    this.tableData.update(rows =>\n      rows.map(row =>\n        row.id === change.id ? { ...row, selected: change.selected } : row\n      )\n    );\n  }\n\n  onToggleAll(checked: boolean) {\n    this.tableData.update(rows =>\n      rows.map(row => ({ ...row, selected: checked }))\n    );\n  }\n\n  // Handlers\n  onSortChange(change: { key: string; direction: 'asc' | 'desc' }) {\n  if (['fileNumber', 'id', 'state'].includes(change.key)) {\n    this.sortKey.set(change.key as 'fileNumber' | 'state' | 'id');\n    this.sortDirection.set(change.direction);\n  }\n}\n\n\n  onFilterChange(state: string) {\n    this.selectedFilter.set(state);\n    this.filterTabs = this.filterTabs.map(tab => ({\n      ...tab,\n      active: tab.state === state,\n    }));\n  }\n\n  // UI data\n  navTabs = [\n    { label: 'Today', icon: 'calendar_today', route: '/', active: true },\n    { label: 'Job done', icon: 'check', route: '/done', active: false },\n  ];\n\n  statCards = [\n    { count: 850, label: 'Priority', icon: 'logout' },\n    { count: 850, label: 'Express', icon: 'logout' },\n    { count: 850, label: 'Standard', icon: 'logout' },\n    { count: 850, label: 'Documents waiting', icon: 'logout' },\n    { count: 850, label: 'Unpaid waiting', icon: 'logout' },\n  ];\n\n  filterTabs = [\n    { label: 'Total', count: 164, state: 'total', active: true },\n    { label: 'Identity', count: 15, state: 'identity' },\n    { label: 'Post-payment', count: 35, state: 'post-payment' },\n    { label: 'Refund request', count: 13, state: 'refund request' },\n    { label: 'Fraud', count: 55, state: 'fraud' },\n    { label: 'Validated', count: 85, state: 'validated' },\n  ];\n}\n",
+            "sourceCode": "import { Component, computed, signal } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MainGroupTemplateComponent } from '../../templates/mainGroup/mainGroup.component';\r\nimport { TableRowData } from '../../organisms/tableRowGroup/tableRowGroup.component';\r\nimport {\r\n  TableDataService,\r\n  SortDirection,\r\n} from '../../../services/tableData.service';\r\n\r\ntype SortableKey = keyof Pick<TableRowData, 'fileNumber' | 'state' | 'id'>;\r\n\r\n@Component({\r\n  selector: 'app-main-page',\r\n  standalone: true,\r\n  imports: [CommonModule, MainGroupTemplateComponent],\r\n  templateUrl: './mainPage.component.html',\r\n  styleUrls: ['./mainPage.component.scss'],\r\n})\r\n\r\n// ------------------------- MainPageComponent -------------------------\r\n// This component serves as the main page of the application, handling data display, sorting, filtering, and exporting functionalities.\r\n// It uses a service to manage table data operations like sorting, filtering, and exporting to CSV.\r\n\r\nexport class MainPageComponent {\r\n  constructor(private tableDataService: TableDataService) {} // Service injection\r\n\r\n  // Base data\r\n  readonly tableData = signal<TableRowData[]>([\r\n    { id: 1, state: 'Fraud', fileNumber: 1, selected: false },\r\n    { id: 2, state: 'Refund Request', fileNumber: 3, selected: false },\r\n    { id: 3, state: 'Pre-payment', fileNumber: 8, selected: false },\r\n    { id: 4, state: 'Validated', fileNumber: 10, selected: false },\r\n    { id: 5, state: 'Validated', fileNumber: 5, selected: false },\r\n    { id: 6, state: 'Post-payment', fileNumber: 2, selected: false },\r\n    { id: 7, state: 'Post-payment', fileNumber: 4, selected: false },\r\n    { id: 8, state: 'Identity', fileNumber: 6, selected: false },\r\n    { id: 9, state: 'Pre-payment', fileNumber: 7, selected: false },\r\n    { id: 10, state: 'Validated', fileNumber: 9, selected: false },\r\n    { id: 11, state: 'Validated', fileNumber: 11, selected: false },\r\n    { id: 12, state: 'Refund Request', fileNumber: 12, selected: false },\r\n    { id: 13, state: 'Fraud', fileNumber: 13, selected: false },\r\n    { id: 14, state: 'Fraud', fileNumber: 14, selected: false },\r\n    { id: 15, state: 'Validated', fileNumber: 15, selected: false },\r\n    { id: 16, state: 'Identity', fileNumber: 16, selected: false },\r\n    { id: 17, state: 'Post-payment', fileNumber: 17, selected: false },\r\n    { id: 18, state: 'Refund Request', fileNumber: 18, selected: false },\r\n    { id: 19, state: 'Fraud', fileNumber: 19, selected: false },\r\n    { id: 20, state: 'Validated', fileNumber: 20, selected: false },\r\n    { id: 21, state: 'Identity', fileNumber: 21, selected: false },\r\n    { id: 22, state: 'Post-payment', fileNumber: 22, selected: false },\r\n    { id: 23, state: 'Refund Request', fileNumber: 23, selected: false },\r\n    { id: 24, state: 'Fraud', fileNumber: 24, selected: false },\r\n    { id: 25, state: 'Validated', fileNumber: 25, selected: false },\r\n  ]);\r\n\r\n  // Sorting\r\n  readonly sortKey = signal<SortableKey>('fileNumber');\r\n  readonly sortDirection = signal<SortDirection>('asc');\r\n  selectedTab: string = 'total';\r\n\r\n  // Filtering\r\n  readonly selectedFilter = signal<string>('total');\r\n\r\n  readonly visibleTableData = computed(() => {\r\n    const selected = this.selectedFilter();\r\n    const direction = this.sortDirection();\r\n    const key = this.sortKey();\r\n\r\n    // TableDataService for filtering and sorting\r\n    let rows = this.tableData();\r\n    if (selected !== 'total') {\r\n      rows = this.tableDataService.filterByState(rows, selected);\r\n    }\r\n    if (key === 'fileNumber') {\r\n      rows = this.tableDataService.sortByFileNumber(rows, direction);\r\n    } else {\r\n      // fallback to default sort for other keys\r\n      rows = [...rows].sort((a, b) => {\r\n        const aVal = a[key] ?? '';\r\n        const bVal = b[key] ?? '';\r\n        return direction === 'asc'\r\n          ? String(aVal).localeCompare(String(bVal))\r\n          : String(bVal).localeCompare(String(aVal));\r\n      });\r\n    }\r\n    return rows;\r\n  });\r\n\r\n  // ---------------------------- Row selection ---------------------\r\n\r\n  readonly allChecked = computed(\r\n    () =>\r\n      this.tableData().length > 0 &&\r\n      this.tableData().every((row) => row.selected)\r\n  );\r\n\r\n  onRowSelected(change: { id: string | number; selected: boolean }) {\r\n    this.tableData.update((rows) =>\r\n      rows.map((row) =>\r\n        row.id === change.id ? { ...row, selected: change.selected } : row\r\n      )\r\n    );\r\n  }\r\n\r\n  onToggleAll(checked: boolean) {\r\n    this.tableData.update((rows) =>\r\n      rows.map((row) => ({ ...row, selected: checked }))\r\n    );\r\n  }\r\n\r\n  // ---------------------------- Handlers ----------------------------\r\n\r\n  onSortChange(change: { key: string; direction: SortDirection }) {\r\n    if (['fileNumber', 'id', 'state'].includes(change.key)) {\r\n      this.sortKey.set(change.key as 'fileNumber' | 'state' | 'id');\r\n      this.sortDirection.set(change.direction);\r\n    }\r\n  }\r\n\r\n  onFilterChange(state: string) {\r\n    this.selectedFilter.set(state);\r\n    this.selectedTab = state;\r\n  }\r\n\r\n  // ------------------------------ CSV Export ------------------------------\r\n\r\n  onExportToCSV(): void {\r\n    const rows = this.visibleTableData();\r\n    const csvContent = this.tableDataService.exportToCSV(rows); // <-- Use service\r\n    this.tableDataService.downloadCSV(csvContent, 'table-data.csv'); // <-- Use service\r\n  }\r\n\r\n  // ------------------------------ Filter tabs ------------------------------\r\n\r\n  readonly filterTabs = computed(() => {\r\n    const data = this.tableData();\r\n    const counts: Record<string, number> = {};\r\n\r\n    for (const row of data) {\r\n      const key = row.state.toLowerCase();\r\n      counts[key] = (counts[key] || 0) + 1;\r\n    }\r\n\r\n    return [\r\n      { label: 'Total', count: data.length, state: 'total' },\r\n      { label: 'Identity', count: counts['identity'] ?? 0, state: 'identity' },\r\n      {\r\n        label: 'Pre-payment',\r\n        count: counts['pre-payment'] ?? 0,\r\n        state: 'pre-payment',\r\n      },\r\n      {\r\n        label: 'Post-payment',\r\n        count: counts['post-payment'] ?? 0,\r\n        state: 'post-payment',\r\n      },\r\n      {\r\n        label: 'Refund request',\r\n        count: counts['refund request'] ?? 0,\r\n        state: 'refund request',\r\n      },\r\n      { label: 'Fraud', count: counts['fraud'] ?? 0, state: 'fraud' },\r\n      {\r\n        label: 'Validated',\r\n        count: counts['validated'] ?? 0,\r\n        state: 'validated',\r\n      },\r\n    ];\r\n  });\r\n\r\n  // ----------------------------- Stat cards -----------------------------\r\n\r\n  readonly statCards = computed(() => {\r\n    const data = this.tableData();\r\n    const counts: Record<string, number> = {};\r\n\r\n    for (const row of data) {\r\n      const key = row.state.toLowerCase();\r\n      counts[key] = (counts[key] || 0) + 1;\r\n    }\r\n\r\n    return [\r\n      { count: data.length,\r\n        label: 'Total',\r\n        icon: 'layers'\r\n      },\r\n      { count: counts['identity'] ?? 0,\r\n        label: 'Identity',\r\n        icon: 'person'\r\n      },\r\n      { count: counts['refund request'] ?? 0,\r\n        label: 'Refund Request',\r\n        icon: 'receipt',\r\n      },\r\n      {\r\n        count: counts['fraud'] ?? 0,\r\n        label: 'Fraud',\r\n        icon: 'warning',\r\n      },\r\n      {\r\n        count: counts['validated'] ?? 0,\r\n        label: 'Validated',\r\n        icon: 'check',\r\n      },\r\n    ];\r\n  });\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1686,12 +2222,38 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "tableDataService",
+                        "type": "TableDataService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 24,
+                "jsdoctags": [
+                    {
+                        "name": "tableDataService",
+                        "type": "TableDataService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "templateData": "<div class=\"page-wrapper\">\n  <app-main-group-template\n\n    [statCards]=\"statCards\"\n    [filterTabs]=\"filterTabs\"\n    [tableData]=\"visibleTableData()\"\n    [sortKey]=\"sortKey()\"\n    [sortDirection]=\"sortDirection()\"\n    (sortChange)=\"onSortChange($event)\"\n    [allChecked]=\"allChecked()\"\n    (toggleAll)=\"onToggleAll($event)\"\n    (rowSelected)=\"onRowSelected($event)\"\n    (filterTabChange)=\"onFilterChange($event)\"\n    [selectedTab]=\"selectedFilter()\"\n  />\n</div>\n"
+            "templateData": "<div class=\"page-wrapper\">\r\n  <app-main-group-template\r\n    [statCards]=\"statCards()\"\r\n    [filterTabs]=\"filterTabs()\"\r\n    [tableData]=\"visibleTableData()\"\r\n    [sortKey]=\"sortKey()\"\r\n    [sortDirection]=\"sortDirection()\"\r\n    (sortChange)=\"onSortChange($event)\"\r\n    [allChecked]=\"allChecked()\"\r\n    (toggleAll)=\"onToggleAll($event)\"\r\n    (rowSelected)=\"onRowSelected($event)\"\r\n    (filterTabChange)=\"onFilterChange($event)\"\r\n    [selectedTab]=\"selectedFilter()\"\r\n    (exportClicked)=\"onExportToCSV()\"\r\n  />\r\n</div>\r\n"
         },
         {
             "name": "NavTabComponent",
-            "id": "component-NavTabComponent-0ad05e8e5315369bfe04e95755d321433f5ff2f5c19c76261e8fec286587a5b09caa8314aa065a454a4aae6a84827d893981d120cf9d4e591f9d7fe0306f9a2f",
+            "id": "component-NavTabComponent-407438e8234bbba755eae011630e0babef7560a14b389540a1034754a018a925ee8d198f3613d4a5465cbe3cb5ac6b94f41df1e5aaab6d745bf45a407dd4b037",
             "file": "src/app/components/molecules/navTab/navTab.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1714,7 +2276,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 21,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -1723,7 +2285,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -1732,7 +2294,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -1741,7 +2303,7 @@
                     "defaultValue": "'/'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 20,
                     "type": "string",
                     "decorators": []
                 }
@@ -1775,7 +2337,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { RouterModule } from '@angular/router';\nimport { IconComponent } from '../../atoms/icon/icon.component';\nimport { TextComponent } from '../../atoms/text/text.component';\n\n@Component({\n  selector: 'app-nav-tab',\n  standalone: true,\n  imports: [CommonModule, RouterModule, IconComponent, TextComponent],\n  templateUrl: './navTab.component.html',\n  styleUrls: ['./navTab.component.scss'],\n})\nexport class NavTabComponent {\n  @Input() label: string = '';\n  @Input() icon: string = '';\n  @Input() route: string = '/';\n  @Input() active: boolean = false;\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { RouterModule } from '@angular/router';\nimport { IconComponent } from '../../atoms/icon/icon.component';\nimport { TextComponent } from '../../atoms/text/text.component';\n\n@Component({\n  selector: 'app-nav-tab',\n  standalone: true,\n  imports: [CommonModule, RouterModule, IconComponent, TextComponent],\n  templateUrl: './navTab.component.html',\n  styleUrls: ['./navTab.component.scss'],\n})\nexport class NavTabComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() label: string = '';\n  @Input() icon: string = '';\n  @Input() route: string = '/';\n  @Input() active: boolean = false;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1789,7 +2351,7 @@
         },
         {
             "name": "NavTabGroupComponent",
-            "id": "component-NavTabGroupComponent-5a3f236bba8b3fe2676627dece4ebbacbbd85270f9cc1be025635cba8242a792f694d09659b6e48a2a21f49259fba8911b4ccf9dd5d8331fed7dc230e2ea2606",
+            "id": "component-NavTabGroupComponent-0995d1f3925c054c28cb14a4fdfdfbd297d9d021cca0229cbfdc2f335a16291f7da762ea90d5e54540b629ea56fdcc9ac3e4966894bc7586c11d818e290c1b12",
             "file": "src/app/components/organisms/navTabGroup/navTabGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1812,7 +2374,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 23,
                     "type": "NavTabItem[]",
                     "decorators": []
                 }
@@ -1838,7 +2400,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NavTabComponent } from '../../molecules/navTab/navTab.component';\n\nexport interface NavTabItem {\n  label: string;\n  icon: string;\n  route: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-nav-tab-group',\n  standalone: true,\n  imports: [CommonModule, NavTabComponent],\n  templateUrl: './navTabGroup.component.html',\n  styleUrls: ['./navTabGroup.component.scss'],\n})\nexport class NavTabGroupComponent {\n  @Input() tabs: NavTabItem[] = [];\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NavTabComponent } from '../../molecules/navTab/navTab.component';\n\nexport interface NavTabItem {\n  label: string;\n  icon: string;\n  route: string;\n  active?: boolean;\n}\n\n@Component({\n  selector: 'app-nav-tab-group',\n  standalone: true,\n  imports: [CommonModule, NavTabComponent],\n  templateUrl: './navTabGroup.component.html',\n  styleUrls: ['./navTabGroup.component.scss'],\n})\nexport class NavTabGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() tabs: NavTabItem[] = [];\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1852,7 +2414,7 @@
         },
         {
             "name": "StatCardComponent",
-            "id": "component-StatCardComponent-6afbbb34289545519069fff08d9ab371d34161f36a83062281cbc7898381b0d63801c9ca550235291548d9a4c2c25c314d3ece5f25bd510a157dd162806959d0",
+            "id": "component-StatCardComponent-96fb1f73f4a0f72b432a3f00063afd5146b8838c8a883403bc6b551f8cf87a650e76b7a5f5ec62b0977060a2972db0fbddfec1ed1fad97851b28ab5e4d5c7101",
             "file": "src/app/components/molecules/statCard/statCard.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1875,7 +2437,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "number | string",
                     "decorators": []
                 },
@@ -1884,7 +2446,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 19,
                     "type": "string",
                     "decorators": []
                 },
@@ -1893,7 +2455,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "string",
                     "decorators": []
                 }
@@ -1923,11 +2485,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { IconComponent } from '../../atoms/icon/icon.component';\n\n@Component({\n  selector: 'app-stat-card',\n  standalone: true,\n  imports: [CommonModule, TextComponent, IconComponent],\n  templateUrl: './statCard.component.html',\n  styleUrls: ['./statCard.component.scss'],\n})\nexport class StatCardComponent {\n  @Input() label: string = '';\n  @Input() count: number | string = '';\n  @Input() icon: string = '';\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { IconComponent } from '../../atoms/icon/icon.component';\n\n@Component({\n  selector: 'app-stat-card',\n  standalone: true,\n  imports: [CommonModule, TextComponent, IconComponent],\n  templateUrl: './statCard.component.html',\n  styleUrls: ['./statCard.component.scss'],\n})\nexport class StatCardComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() label: string = '';\n  @Input() count: number | string = '';\n  @Input() icon: string = '';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: block;\r\n  flex: 1 1 140px;           // responsive card sizing\r\n  max-width: 380px;          // optional cap\r\n  min-width: 140px;\r\n}\r\n\r\n.stat-card {\r\n  position: relative;\r\n  padding: 1rem;\r\n  border: 1px solid #e0e0e0;\r\n  border-radius: 8px;\r\n  background-color: white;\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);\r\n  height: 64px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n\r\n  .card-icon {\r\n    position: absolute;\r\n    top: 0.5rem;\r\n    right: 0.5rem;\r\n  }\r\n\r\n  .card-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n  }\r\n}\r\n",
+                    "data": ":host {\r\n  display: block;\r\n  flex: 1 1 140px;           // responsive card sizing\r\n  max-width: 380px;\r\n  min-width: 140px;\r\n}\r\n\r\n.stat-card {\r\n  position: relative;\r\n  padding: 1rem;\r\n  border: 1px solid #e0e0e0;\r\n  border-radius: 8px;\r\n  background-color: white;\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);\r\n  height: 64px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n\r\n  .card-icon {\r\n    position: absolute;\r\n    top: 0.5rem;\r\n    right: 0.5rem;\r\n  }\r\n\r\n  .card-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n  }\r\n}\r\n",
                     "styleUrl": "./statCard.component.scss"
                 }
             ],
@@ -1937,7 +2499,7 @@
         },
         {
             "name": "StatCardGroupComponent",
-            "id": "component-StatCardGroupComponent-132c7cce5907fbc1ae9c76fad76709dd8f45c4ddad5d45de80493ab0386503224cf698f096b69f1e66674fd4157f0708c47a79c6dbf91e24de77c6190440f6a1",
+            "id": "component-StatCardGroupComponent-9f209766bfd1854dfecd69fc0c4c48590d3af666d3a17942aabfa7db675bde07275b165f5c9eb2df597559d2eac63fe918604f74d80a715d9665877eed6c474c",
             "file": "src/app/components/organisms/statCardGroup/statCardGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1960,7 +2522,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 22,
                     "type": "StatCardItem[]",
                     "decorators": []
                 }
@@ -1986,11 +2548,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StatCardComponent } from '../../molecules/statCard/statCard.component';\n\nexport interface StatCardItem {\n  count: number | string;\n  label: string;\n  icon: string;\n}\n\n@Component({\n  selector: 'app-stat-card-group',\n  standalone: true,\n  imports: [CommonModule, StatCardComponent],\n  templateUrl: './statCardGroup.component.html',\n  styleUrls: ['./statCardGroup.component.scss'],\n})\nexport class StatCardGroupComponent {\n  @Input() cards: StatCardItem[] = [];\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { StatCardComponent } from '../../molecules/statCard/statCard.component';\n\nexport interface StatCardItem {\n  count: number | string;\n  label: string;\n  icon: string;\n}\n\n@Component({\n  selector: 'app-stat-card-group',\n  standalone: true,\n  imports: [CommonModule, StatCardComponent],\n  templateUrl: './statCardGroup.component.html',\n  styleUrls: ['./statCardGroup.component.scss'],\n})\nexport class StatCardGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() cards: StatCardItem[] = [];\n\n  // Output properties\n  // No output properties defined for this component\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".stat-card-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 1rem;\r\n  //padding: 1rem;\r\n  width: 100%;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n\r\n",
+                    "data": ".stat-card-group {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 1rem;\r\n  width: 100%;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n\r\n",
                     "styleUrl": "./statCardGroup.component.scss"
                 }
             ],
@@ -2000,7 +2562,7 @@
         },
         {
             "name": "TabGroupComponent",
-            "id": "component-TabGroupComponent-9ae4cd188d792627e62adeb29702984c848b6ded02a8e09814cc26d6c0551cd2020dd85867f6dac6fa07122f3ab270f29f5b563cbcc63712956044f4f6bfc7d5",
+            "id": "component-TabGroupComponent-a1376b3a49e75eab1f5e837997d95d56177495977b8600f3b89f7f9f04e2778fd07fd73f61224eb381370a8d96ab3c47651482da1a2169d90005e0830bc55742",
             "file": "src/app/components/molecules/filterTabGroup/filterTabGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2023,7 +2585,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 23,
                     "type": "string",
                     "decorators": []
                 },
@@ -2032,7 +2594,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 22,
                     "type": "FilterTab[]",
                     "decorators": []
                 }
@@ -2043,7 +2605,7 @@
                     "defaultValue": "new EventEmitter<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 26,
                     "type": "EventEmitter"
                 }
             ],
@@ -2053,7 +2615,7 @@
                     "name": "onSelectTab",
                     "args": [
                         {
-                            "name": "label",
+                            "name": "state",
                             "type": "string",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -2062,12 +2624,12 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "name": "label",
+                            "name": "state",
                             "type": "string",
                             "deprecated": false,
                             "deprecationMessage": "",
@@ -2100,7 +2662,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent, FilterTabButtonComponent],\n  templateUrl: './filterTabGroup.component.html',\n  styleUrls: ['./filterTabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = '';\n\n  @Output() tabSelected = new EventEmitter<string>();\n\n  onSelectTab(label: string) {\n    this.tabSelected.emit(label);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FilterTabButtonComponent } from '../../atoms/filterTabButton/filterTabButton.component';\n\nexport interface FilterTab {\n  label: string;\n  count: number;\n  state: string;\n}\n\n@Component({\n  selector: 'app-tab-group',\n  standalone: true,\n  imports: [CommonModule, FilterTabButtonComponent, FilterTabButtonComponent],\n  templateUrl: './filterTabGroup.component.html',\n  styleUrls: ['./filterTabGroup.component.scss'],\n})\nexport class TabGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() tabs: FilterTab[] = [];\n  @Input() selectedTab: string = '';\n\n  // Output properties\n  @Output() tabSelected = new EventEmitter<string>();\n\n  // --------------------------- Handlers --------------------------\n\n  onSelectTab(state: string) {\n    this.tabSelected.emit(state);\n    this.selectedTab = state;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2114,7 +2676,7 @@
         },
         {
             "name": "TableHeaderComponent",
-            "id": "component-TableHeaderComponent-d9798630b9d634c4e0e20b4b0ccc4fa3c8195c11ebdf484f3200e5ab1a97d2ff7e7e80bd4f92f09c7086119a9c191ab867aabf11052f4587a1640df8b9620df3",
+            "id": "component-TableHeaderComponent-89bd18a8361a3c5cdbdbb9c5f8b24c3b0c2caf708f742c91d80dc5a79b6ecefea83f47baf2f9006903924dde26c08cfb1eb268f99f1df93c3b7e94c1f8e9eb04",
             "file": "src/app/components/molecules/tableHeader/tableHeader.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2137,7 +2699,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 20,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2146,7 +2708,7 @@
                     "defaultValue": "'asc'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 19,
                     "type": "\"asc\" | \"desc\"",
                     "decorators": []
                 },
@@ -2155,7 +2717,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 }
@@ -2166,7 +2728,7 @@
                     "defaultValue": "new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 23,
                     "type": "EventEmitter"
                 },
                 {
@@ -2174,7 +2736,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 24,
                     "type": "EventEmitter"
                 }
             ],
@@ -2193,7 +2755,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2221,7 +2783,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2263,11 +2825,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { IconComponent } from '../../atoms/icon/icon.component';\nimport { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';\n\n@Component({\n  selector: 'app-table-header',\n  standalone: true,\n  imports: [CommonModule, TextComponent, IconComponent, CheckboxComponent],\n  templateUrl: './tableHeader.component.html',\n  styleUrls: ['./tableHeader.component.scss'],\n})\nexport class TableHeaderComponent {\n  @Input() sortKey: string = '';\n  @Input() sortDirection: 'asc' | 'desc' = 'asc';\n  @Input() allChecked: boolean = false;\n\n  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();\n  @Output() toggleAll = new EventEmitter<boolean>();\n\n  toggleSort(key: string): void {\n    const newDirection = (key === this.sortKey && this.sortDirection === 'asc') ? 'desc' : 'asc';\n    this.sortChange.emit({ key, direction: newDirection });\n  }\n\n  handleToggleAll(checked: boolean) {\n    this.toggleAll.emit(checked);\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { IconComponent } from '../../atoms/icon/icon.component';\nimport { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';\n\n@Component({\n  selector: 'app-table-header',\n  standalone: true,\n  imports: [CommonModule, TextComponent, IconComponent, CheckboxComponent],\n  templateUrl: './tableHeader.component.html',\n  styleUrls: ['./tableHeader.component.scss'],\n})\nexport class TableHeaderComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() sortKey: string = '';\n  @Input() sortDirection: 'asc' | 'desc' = 'asc';\n  @Input() allChecked: boolean = false;\n\n  // Output properties\n  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();\n  @Output() toggleAll = new EventEmitter<boolean>();\n\n  // --------------------------- Handlers ---------------------------\n\n  toggleSort(key: string): void {\n    const newDirection = (key === this.sortKey && this.sortDirection === 'asc') ? 'desc' : 'asc';\n    this.sortChange.emit({ key, direction: newDirection });\n  }\n\n  handleToggleAll(checked: boolean) {\n    this.toggleAll.emit(checked);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".table-header-row {\r\n  display: table;\r\n  width: 100%;\r\n  table-layout: fixed;\r\n\r\n  th {\r\n    padding: 0.75rem 1rem;\r\n    text-align: left;\r\n    border-bottom: 2px solid #e0e0e0;\r\n    -webkit-user-select: none;\r\n    user-select: none;\r\n    vertical-align: middle;\r\n\r\n    &.checkbox-cell {\r\n      width: 60px;\r\n      text-align: center;\r\n      padding: 0;\r\n    }\r\n\r\n    &.state-cell {\r\n      width: 160px;\r\n      text-align: left;\r\n    }\r\n\r\n    &.file-number-cell {\r\n      width: auto;\r\n      text-align: left;\r\n    }\r\n\r\n    &.divider-col {\r\n      width: 1px;\r\n      padding: 0;\r\n      background-color: #e0e0e0;\r\n    }\r\n\r\n    &.action-cell {\r\n      width: 200px;\r\n      text-align: left;\r\n    }\r\n\r\n    &.sortable {\r\n      cursor: pointer;\r\n    }\r\n\r\n    .th-content {\r\n      display: flex;\r\n      align-items: center;\r\n      gap: 0.25rem;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ".table-header-row {\r\n  display: table;\r\n  width: 100%;\r\n  table-layout: fixed;\r\n\r\n  th {\r\n    padding: 0.75rem 1rem;\r\n    text-align: left;\r\n    border-bottom: 2px solid #e0e0e0;\r\n    -webkit-user-select: none;\r\n    user-select: none;\r\n    vertical-align: middle;\r\n\r\n    &.checkbox-cell {\r\n      width: 60px;\r\n      text-align: center;\r\n      padding: 0;\r\n    }\r\n\r\n    &.state-cell {\r\n      width: 160px;\r\n      text-align: left;\r\n    }\r\n\r\n    &.file-number-cell {\r\n      width: auto;\r\n      text-align: left;\r\n    }\r\n\r\n    &.divider-col {\r\n      width: 1px;\r\n      padding: 0;\r\n      background-color: #e0e0e0;\r\n    }\r\n\r\n    &.action-cell {\r\n      width: 215px;\r\n      text-align: left;\r\n    }\r\n\r\n    &.sortable {\r\n      cursor: pointer;\r\n    }\r\n\r\n    .th-content {\r\n      display: flex;\r\n      align-items: center;\r\n      gap: 0.25rem;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./tableHeader.component.scss"
                 }
             ],
@@ -2277,7 +2839,7 @@
         },
         {
             "name": "TableRowComponent",
-            "id": "component-TableRowComponent-59c610e8cfbc922426ed38c68e72f0b3734a261217322f1d78a38939e2dcb0884d647a096309b806327960a3e111ec3d142a53c02798eaf2c24ec9a1cfd2c8fb",
+            "id": "component-TableRowComponent-47f42bce3c28cf4a5a7e4265199b288f2de10700ad43530041ee4c8309aa1b0100111219b339d22a960eef0ad6ec0b941ed22d3740684c4142056226c81e745e",
             "file": "src/app/components/molecules/tableRow/tableRow.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2300,7 +2862,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 27,
                     "type": "number | string",
                     "decorators": []
                 },
@@ -2309,7 +2871,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 25,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2318,7 +2880,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 26,
                     "type": "string",
                     "decorators": []
                 }
@@ -2329,7 +2891,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 31,
                     "type": "EventEmitter"
                 },
                 {
@@ -2337,7 +2899,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 30,
                     "type": "EventEmitter"
                 }
             ],
@@ -2356,7 +2918,7 @@
                     "optional": false,
                     "returnType": "\"info\" | \"success\" | \"warning\" | \"danger\"",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2377,7 +2939,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2394,7 +2956,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2440,7 +3002,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { BadgeComponent } from '../../atoms/badge/badge.component';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-table-row',\n  standalone: true,\n  imports: [\n    CommonModule,\n    CheckboxComponent,\n    TextComponent,\n    BadgeComponent,\n    ButtonComponent,\n  ],\n  templateUrl: './tableRow.component.html',\n  styleUrls: ['./tableRow.component.scss'],\n})\nexport class TableRowComponent {\n  @Input() selected: boolean = false;\n  @Input() state: string = '';\n  @Input() fileNumber: number | string = '';\n  @Output() selectChange = new EventEmitter<boolean>();\n  @Output() consult = new EventEmitter<void>();\n\n  toggleSelect(checked: boolean): void {\n    this.selectChange.emit(checked);\n  }\n\n  handleConsult(): void {\n    this.consult.emit();\n  }\n\n  getBadgeVariant(state: string): 'info' | 'success' | 'warning' | 'danger' {\n    const map: Record<string, 'info' | 'success' | 'warning' | 'danger'> = {\n      fraud: 'danger',\n      validated: 'success',\n      'refund request': 'warning',\n      'post-payment': 'info',\n      identity: 'info',\n      total: 'info', // if needed\n    };\n\n    return map[state.toLowerCase()] || 'info';\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { CheckboxComponent } from '../../atoms/checkbox/checkbox.component';\nimport { TextComponent } from '../../atoms/text/text.component';\nimport { BadgeComponent } from '../../atoms/badge/badge.component';\nimport { ButtonComponent } from '../../atoms/button/button.component';\n\n@Component({\n  selector: 'app-table-row',\n  standalone: true,\n  imports: [\n    CommonModule,\n    CheckboxComponent,\n    TextComponent,\n    BadgeComponent,\n    ButtonComponent,\n  ],\n  templateUrl: './tableRow.component.html',\n  styleUrls: ['./tableRow.component.scss'],\n})\nexport class TableRowComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() selected: boolean = false;\n  @Input() state: string = '';\n  @Input() fileNumber: number | string = '';\n\n  // Output properties\n  @Output() selectChange = new EventEmitter<boolean>();\n  @Output() consult = new EventEmitter<void>();\n\n  // --------------------------- Handlers ---------------------------\n\n  toggleSelect(checked: boolean): void {\n    this.selectChange.emit(checked);\n  }\n\n  handleConsult(): void {\n    this.consult.emit();\n  }\n\n  // bage variant based on state\n  getBadgeVariant(state: string): 'info' | 'success' | 'warning' | 'danger' {\n    const map: Record<string, 'info' | 'success' | 'warning' | 'danger'> = {\n      fraud: 'danger',\n      validated: 'success',\n      'refund request': 'warning',\n      'post-payment': 'info',\n      identity: 'info',\n      done: 'success',\n      pending: 'warning',\n    };\n\n    return map[state.toLowerCase()] || 'info';\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2454,7 +3016,7 @@
         },
         {
             "name": "TableRowGroupComponent",
-            "id": "component-TableRowGroupComponent-39c56e04f56d11916de5c0a9ddd779f092e439032f248b67ae42a9c1d7acebad3c08d5932cb65bf0bdc0bdedcf615f13b2ee28e7e4a39f3794e44d898e70a23d",
+            "id": "component-TableRowGroupComponent-4895397fd9da9f433f7c26dd89faa8b8a3258abb5e732a283c9c0ba7bb90d36c1920b6bc6f33dbd6e5c8416232b7c9a27a28a83d91b08907d5b61c3f7ea64bcf",
             "file": "src/app/components/organisms/tableRowGroup/tableRowGroup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2477,7 +3039,7 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 24,
                     "type": "TableRowData[]",
                     "decorators": []
                 }
@@ -2488,7 +3050,7 @@
                     "defaultValue": "new EventEmitter<string | number>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 28,
                     "type": "EventEmitter"
                 },
                 {
@@ -2496,7 +3058,7 @@
                     "defaultValue": "new EventEmitter<{ id: string | number; selected: boolean }>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 27,
                     "type": "EventEmitter"
                 }
             ],
@@ -2515,7 +3077,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 36,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2549,7 +3111,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 32,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2592,7 +3154,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: string | number;\n  state: string;\n  fileNumber: string;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\nexport class TableRowGroupComponent {\n  @Input() rows: TableRowData[] = [];\n\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  handleSelectChange(id: string | number, checked: boolean): void {\n    this.rowSelected.emit({ id, selected: checked });\n  }\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TableRowComponent } from '../../molecules/tableRow/tableRow.component';\n\nexport interface TableRowData {\n  id: number;\n  state: string;\n  fileNumber: number;\n  selected?: boolean;\n}\n\n@Component({\n  selector: 'app-table-row-group',\n  standalone: true,\n  imports: [CommonModule, TableRowComponent],\n  templateUrl: './tableRowGroup.component.html',\n  styleUrls: ['./tableRowGroup.component.scss'],\n})\n\nexport class TableRowGroupComponent {\n\n  // --------------------------- Properties --------------------------\n  // Input properties\n  @Input() rows: TableRowData[] = [];\n\n  // Output properties\n  @Output() rowSelected = new EventEmitter<{ id: string | number; selected: boolean }>();\n  @Output() consultClicked = new EventEmitter<string | number>();\n\n  // --------------------------- Handlers ---------------------------\n\n  handleSelectChange(id: string | number, checked: boolean): void {\n    this.rowSelected.emit({ id, selected: checked });\n  }\n\n  handleConsultClick(id: string | number) {\n    this.consultClicked.emit(id);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2606,7 +3168,7 @@
         },
         {
             "name": "TextComponent",
-            "id": "component-TextComponent-24661751fcc23cf7d7c5a24a2543043e1577fd3795bfb357ecf26bdd8bc0639ec1a1c704dfb8a7546a3b68b58162ef56b8077801876813bcf34464ba10eae7ca",
+            "id": "component-TextComponent-e68b14e1fed0708a8d88e6a63cfb048f56eeb3ba09206e7e0ad00d6360a8e54fc562126160de81c2a781de23b8d2ac74bbd6ca47a759d74cede14634f4e00467",
             "file": "src/app/components/atoms/text/text.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2629,7 +3191,7 @@
                     "defaultValue": "'#333'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 18,
                     "type": "string",
                     "decorators": []
                 },
@@ -2638,7 +3200,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -2647,7 +3209,7 @@
                     "defaultValue": "'md'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "\"sm\" | \"md\" | \"lg\"",
                     "decorators": []
                 },
@@ -2656,7 +3218,7 @@
                     "defaultValue": "'normal'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 17,
                     "type": "\"normal\" | \"medium\" | \"bold\"",
                     "decorators": []
                 }
@@ -2678,7 +3240,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-text',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './text.component.html',\r\n  styleUrls: ['./text.component.scss'],\r\n})\r\nexport class TextComponent {\r\n  @Input() content: string = '';\r\n  @Input() size: 'sm' | 'md' | 'lg' = 'md';\r\n  @Input() weight: 'normal' | 'medium' | 'bold' = 'normal';\r\n  @Input() colour: string = '#333';\r\n}\r\n// This component is a simple text display component that allows customization of content, size, weight, and colour.\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-text',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './text.component.html',\r\n  styleUrls: ['./text.component.scss'],\r\n})\r\nexport class TextComponent {\r\n\r\n  // --------------------------- Properties --------------------------\r\n  // Input properties\r\n  @Input() content: string = '';\r\n  @Input() size: 'sm' | 'md' | 'lg' = 'md';\r\n  @Input() weight: 'normal' | 'medium' | 'bold' = 'normal';\r\n  @Input() colour: string = '#333';\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2689,67 +3251,6 @@
             "stylesData": "",
             "extends": [],
             "templateData": "<span\r\n  [ngClass]=\"[size, weight]\"\r\n  [style.color]=\"colour\"\r\n>\r\n  {{ content }}\r\n</span>\r\n"
-        },
-        {
-            "name": "ToDoTemplateComponent",
-            "id": "component-ToDoTemplateComponent-30d923bfd5fd01c21637ce5b33c9448d692a27832dff2f3bf9660aaa63e5b0645f2657e49a2b2bd6a0ad58dc592c18b3eafeb66987c4c084e7800ec8d310bb4a",
-            "file": "src/app/components/templates/toDo/toDo.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-to-do-template",
-            "styleUrls": [
-                "./toDo.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./toDo.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "navTabs",
-                    "defaultValue": "[\n    { label: 'Today', icon: 'calendar_today', route: '/' },\n    { label: 'Job done', icon: 'check', route: '/done', active: true },\n  ]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "[]",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 12
-                }
-            ],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-to-do-template',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './toDo.component.html',\n  styleUrls: ['./toDo.component.scss'],\n})\nexport class ToDoTemplateComponent {\n  navTabs = [\n    { label: 'Today', icon: 'calendar_today', route: '/' },\n    { label: 'Job done', icon: 'check', route: '/done', active: true },\n  ];\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".todo-wrapper {\r\n  padding: 2rem;\r\n  background-color: #f5f5f5;\r\n\r\n  h2 {\r\n    margin-bottom: 1rem;\r\n    color: #28a745;\r\n  }\r\n\r\n  ul {\r\n    list-style: disc;\r\n    padding-left: 1.5rem;\r\n  }\r\n\r\n  li {\r\n    margin-bottom: 0.5rem;\r\n  }\r\n}\r\n",
-                    "styleUrl": "./toDo.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "extends": [],
-            "templateData": "<div class=\"todo-wrapper\">\n\n  <h2>Job Done ✅</h2>\n  <ul>\n    <li>Finish code review</li>\n    <li>Refactor routing</li>\n    <li>Test component reuse</li>\n  </ul>\n</div>\n"
         }
     ],
     "modules": [],
@@ -2783,11 +3284,33 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "",
+                "file": "src/app/components/pages/jobDone/jobDone.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 198
+            },
+            {
+                "name": "SortableKey",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "",
                 "file": "src/app/components/pages/mainPage/mainPage.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 198
+            },
+            {
+                "name": "SortDirection",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"asc\" | \"desc\"",
+                "file": "src/app/services/tableData.service.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 192
             }
         ],
         "enumerations": [],
@@ -2820,6 +3343,19 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "src/app/components/pages/jobDone/jobDone.component.ts": [
+                {
+                    "name": "SortableKey",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "",
+                    "file": "src/app/components/pages/jobDone/jobDone.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 198
+                }
+            ],
             "src/app/components/pages/mainPage/mainPage.component.ts": [
                 {
                     "name": "SortableKey",
@@ -2831,6 +3367,19 @@
                     "deprecationMessage": "",
                     "description": "",
                     "kind": 198
+                }
+            ],
+            "src/app/services/tableData.service.ts": [
+                {
+                    "name": "SortDirection",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"asc\" | \"desc\"",
+                    "file": "src/app/services/tableData.service.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 192
                 }
             ]
         }
@@ -2856,7 +3405,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -3062,9 +3611,19 @@
                 "filePath": "src/app/components/pages/jobDone/jobDone.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "JobDonePageComponent",
+                "name": "JobDoneComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/16",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/pages/jobDone/jobDone.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "SortableKey",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -3073,7 +3632,7 @@
                 "linktype": "component",
                 "name": "MainPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/14",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {
@@ -3092,16 +3651,35 @@
                 "linktype": "component",
                 "name": "MainGroupTemplateComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/templates/toDo/toDo.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ToDoTemplateComponent",
+                "filePath": "src/app/services/tableData.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "TableDataService",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/tableData.service.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TableRow",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/tableData.service.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "SortDirection",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             }
         ]
