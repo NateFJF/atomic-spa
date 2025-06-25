@@ -31,14 +31,10 @@ This project is a technical demonstration of building a modular and scalable Sin
 * `CheckboxComponent`: Custom checkbox
 * `TabComponent`: Single tab item
 
-![Atoms](./assets/Atoms.png)
-
 ### 🔸 Molecules - Combinations of atoms
 
 * `StatCardComponent`: Label + value stat cards
 * `TableHeaderComponent`: Sortable column headers
-
-![Molecules](./assets/Molecules.png)
 
 ### 🧩 Organisms - Groups of molecules that form distinct sections
 
@@ -46,21 +42,14 @@ This project is a technical demonstration of building a modular and scalable Sin
 * `TableRowGroupComponent`: Table data rows
 * `FilterActionGroupComponent`: Checkbox + export
 
-![Organisms](./assets/Organisms.png)
 
 ### 🖼 Templates - Page layout containers
 
 * `MainTemplateComponent`: Wraps page-level structure
 
-![Templates](./assets/Templates.png)
-
 ### 📄 Pages - Fully rendered pages
 
 * `DashboardPageComponent`: The SPA’s main interface
-
-### Router - Routing different pages
-
-![Router](./assets/Router.png)
 
 ---
 
@@ -151,6 +140,8 @@ Below are the visual depictions that correspond to each level in Atomic Design:
 ![Templates](./assets/Templates.png)
 
 #### 📄 Pages (e.g., Routed application views)
+
+![Page](./assets/Page.png)
 
 ![Router](./assets/Router.png)
 
