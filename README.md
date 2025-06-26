@@ -1,6 +1,6 @@
 # Atomic SPA – Angular Single Page Application
 
-![Angular](https://img.shields.io/badge/Angular-17-red)
+![Angular](https://img.shields.io/badge/Angular-20-red)
 ![SCSS](https://img.shields.io/badge/SCSS-styled-purple)
 ![Storybook](https://img.shields.io/badge/Storybook-integrated-orange)
 
@@ -12,7 +12,7 @@ This project is a technical demonstration of building a modular and scalable Sin
 
 ## 📆 Features
 
-* ✅ Built with **Angular 17** using **Standalone Components**
+* ✅ Built with **Angular 20** using **Standalone Components**
 * ✅ Atomic Design structure: **Atoms**, **Molecules**, **Organisms**, **Templates**, **Pages**
 * ✅ **Sorting** by File Number
 * ✅ **Filtering** by State via tab navigation
